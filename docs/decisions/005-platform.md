@@ -1,6 +1,6 @@
 # 005: 提供形態と作り方
 
-- Status: PROPOSED（提供形態は DECIDED、作り方と Google Play の方針は PROPOSED）
+- Status: PROPOSED（提供形態・開業届なしは DECIDED、作り方と Android の提供方法は PROPOSED）
 - Date: 2026-09-28
 - Area: Technical
 - Related: [multiplatform-approach](../research/2026-09-28-multiplatform-approach.md), [platform-options](../research/2026-09-28-platform-options.md), [mvp](../product/mvp.md), [004](004-product-strategy.md)
@@ -47,19 +47,32 @@ Web・iOS・Android の 3 つで提供する（開発者の決定）。
 - Web の出力品質（ログインなしで見る投稿ページなど）が不十分なら、Web だけ C に切り替える。
   - その場合も、データ取得や型などの共有部分は残る。
 
-## Google Play の 12 人・14 日テスト [PROPOSED]
+## Android の提供方法
+
+### 前提 [DECIDED]
+
+- 開業届は出さない（税務の手続きを避けたい。開発者の決定、2026-09-28）。
+- そのため、Google Play は個人アカウントになる。本番公開には 12 人 × 14 日間のクローズドテストが必要。
+
+### Options considered
 
 | Option | 内容 | メリット | デメリット |
 |---|---|---|---|
-| G1. 個人事業主として組織アカウントを作る | 開業届を出し、D-U-N-S 番号を取得して組織アカウントを作る（約 1 週間、無料〜3,300 円） | テスト要件が免除される。ストアに屋号を表示でき、実名や自宅住所を出さずに済む可能性 | 開業届などの手続き。税務上の影響は要確認 |
-| G2. 個人アカウントで 12 人を集める | 友人・知人の Android ユーザー 12 人に 14 日間使ってもらう | 手続きが不要 | 友人の多くは iPhone。実際に使ってもらう必要があり、「MVP は開発者だけで評価する」方針と衝突する |
-| G3. Android は後から出す | 先に Web と iOS で公開し、Android の友人は当面 Web 版を使う。その間に G1 または G2 を進める | 公開を Google の手続きで止めない | 開発者自身（Android）が最初はネイティブ版を使えない |
-| G4. テスター募集サービスを使う | 有料・相互のテスター集めサービス | 早い | 規約上グレーで、却下されるおそれ。推奨しない |
+| AN1. Android は諦める（iOS と Web のみ） | ― | 手間なし | Android 利用者は Web 版のみ。開発者自身も Android |
+| AN2. 当面は Web 版（インストールできる Web アプリ）で提供し、Android 利用者が 12 人集まったら Google Play へ | Web 版で公開し、Android の利用者にクローズドテストへの参加を頼む。14 日後に Google Play で公開 | Expo なので Android 版のコードは追加でほぼ不要。Android の Web アプリはインストール・通知の体験が iPhone より良い。公開を Google の手続きで止めない | Google Play 公開の時期は、Android 利用者の集まり方次第 |
+| AN3. APK を直接配る（限定配布アカウント、最大 20 台） | Google Play を通さずに友人へ配る | 無料・12 人不要 | 友人が「提供元不明のアプリ」の警告を越える必要がある。誰でも登録できる公開には向かない |
+| AN4. 公開前に 12 人を集める | 友人以外（家族・同僚など）も含めて集める | 公開時から 3 つ揃う | 「MVP は開発者だけで評価する」方針と衝突する。集まらないと公開が止まる |
 
-- 推奨: **G1**。
-- 開業届の手続きや税務面に抵抗があれば、**G3 ＋ G2**（公開後に Android の友人・知人を集める）。
+### Decision [PROPOSED]
+
+AN2。Android は諦めず、「公開時は Web 版、条件がそろったら Google Play」の 2 段階にする。
+
+- 開発者自身の Android 端末での MVP 評価は、開発用のビルドを直接インストールして行う（ストア不要）。
+- Google Play 公開の条件: Android の利用者（Web 版の利用者を含む）から、クローズドテストに 14 日間参加してくれる人が 12 人集まったとき。
 
 ## Revisit when
 
 - Expo の Web 出力が、ログインなし閲覧やホーム画面での利用に耐えないと分かったとき（→ Web を C に）
 - Expo でネイティブ機能の壁に当たったとき
+- Android の Web 版で不満が多い、または Android の利用者が 12 人に届く見込みが立たないとき（→ AN3 や、開業届の再検討）
+- 日本で Android の開発者確認が始まるとき（2027 年以降の見込み）

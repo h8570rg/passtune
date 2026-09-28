@@ -50,3 +50,24 @@
 - [OPEN] D-U-N-S 番号の取得費用（無料か 3,300 円か）と、個人事業主の開業届による税務上の影響
 - [OPEN] Expo の Web 出力の品質（ログインなしで見る投稿ページ、ホーム画面追加）の実地確認
 - [OPEN] EAS（Expo のビルド・配布サービス）の無料枠
+
+## 追加調査: 開業届なしで Android を提供する方法（2026-09-28）
+
+### Facts（出典あり）
+
+- Android の開発者確認（Developer Verification）の予定。[Android Developers Blog](https://android-developers.googleblog.com/2026/03/android-developer-verification-rolling-out-to-all-developers.html), [Android Developer Console Help](https://support.google.com/android-developer-console/answer/16561738?hl=en)（確認日 2026-09-28）
+  - 2026-09-30 から、ブラジル・インドネシア・シンガポール・タイで、認証済みの Android 端末には確認済みの開発者のアプリしか入れられなくなる。
+  - 世界全体への展開は 2027 年以降。日本の時期は明記なし。
+- 学生・趣味の開発者向けに「限定配布アカウント」がある（2026-08 から世界で提供）。同上
+  - 無料で、身分証が不要（メールアドレスのみ）。
+  - 最大 20 台の端末に配布できる。
+- ADB（ケーブルでつないでインストールする開発者向けの方法）での自分の端末へのインストールは、確認の対象外。同上
+- Android の Chrome では、Web アプリをホーム画面に追加しなくてもプッシュ通知を受け取れる。
+  - Web アプリを本物のアプリのようにインストール（WebAPK）させるには、Service Worker に fetch ハンドラーが必要。[MobiLoud](https://www.mobiloud.com/blog/pwa-push-notifications/), [roibest](https://www.roibest.com/resources/blog/pwa-push-notifications-android/)（二次情報、確認日 2026-09-28）
+
+### Inferences（推測）
+
+- **Android では、Web アプリの弱点が iPhone より小さい。** Chrome がインストールを促し、ホーム画面・アプリ一覧に並び、通知もホーム画面への追加なしで届く。
+- Google Play を使わずに APK を直接配る方法（限定配布アカウント、最大 20 台）もある。ただし、配布を受ける友人は「提供元不明のアプリ」の警告を越える必要がある。「誰でも登録できる公開」には向かない。
+- 開発者自身の Android 端末で MVP を試すのは、ADB などで自由にできる（ストアは不要）。
+- Web 版で公開すれば、Android の利用者（友人の友人を含む）が集まる。その人たちに Google Play のクローズドテストへ参加してもらえば、12 人の要件を満たせる可能性がある。
