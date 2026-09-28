@@ -58,3 +58,24 @@
 - [Spotify February 2026 Migration Guide](https://developer.spotify.com/documentation/web-api/tutorials/february-2026-migration-guide) — 確認日 2026-09-28
 - [Apple Performance Partners: iTunes Search API](https://performance-partners.apple.com/search-api) — 確認日 2026-09-28
 - [Podchaser: iTunes Search API Rate Limit](https://www.podchaser.com/articles/api/itunes-search-api-rate-limit) — 確認日 2026-09-28
+
+## 追加調査: iTunes Search API の利用条件と保存の可否（2026-09-28）
+
+### Facts（出典: [Apple 公式（アーカイブ文書、Copyright 2022）](https://developer.apple.com/library/archive/documentation/AudioVideo/Conceptual/iTuneSearchAPI/index.html), [Apple Performance Partners: Search API](https://performance-partners.apple.com/search-api)、確認日 2026-09-28）
+
+- 「Promo Content」の定義: 曲とミュージックビデオの試聴、アルバムアート、アプリのアイコン。
+- Promo Content の利用条件:
+  - (i) その Promo Content の元になったコンテンツを宣伝するページにのみ置く
+  - (ii) Apple が承認したバッジの近くに置く。バッジは、その曲を購入できる Apple のページへの直接のリンクにする
+  - (iii) 試聴には「provided courtesy of iTunes」と表記する
+  - (iv) 試聴はストリーミングのみ。ダウンロード・保存・キャッシュをしない
+  - (v) 宣伝目的と切り離した、それ自体の娯楽価値のために使わない
+  - (vi) 他の商品やサービスの宣伝に使わない
+- 検索・lookup の結果については、「大規模なサイトはキャッシュの仕組みを設けるべき」とされている。
+
+### Inferences（推測）
+
+- 曲名・アーティスト名・曲 ID は Promo Content に含まれない。保存しても条件に反しない（Apple 自身が検索結果のキャッシュを勧めている）。
+- アルバムアートは Promo Content だが、「保存・キャッシュをしない」（iv）の対象は試聴のみ。したがって画像の保存も明示的には禁止されていない。ただし、保存する必要がないため保存しない。
+- **新たな論点:** 条件 (vi)「他の商品やサービスの宣伝に使わない」と、Apple の試聴の横に「Spotify で開く」「YouTube Music で開く」を置く設計が衝突する可能性がある。
+- この文書は 2022 年のアーカイブで、現行の条件と同一かは確認できていない。

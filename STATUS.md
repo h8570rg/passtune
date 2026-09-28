@@ -32,8 +32,9 @@ MVP を作るための技術方針を決める。提供形態（Web）は決定�
 - [PROPOSED] 全体構成・データ設計・アクセスのルール・環境（[architecture](docs/technical/architecture.md)）
 - [DECIDED] 投稿は曲名検索のみ（Spotify / Apple Music のリンクからの投稿は後で検討）
 - [DECIDED] GitHub の非公開リポジトリは AI が作成する。作成前に必ず開発者に確認する
-- [OPEN] 曲名・アーティスト名を DB に保存するか
-- [OPEN] Supabase の環境の分け方（開発者は無料枠の 2 プロジェクトを使用済み）
+- [DECIDED] DB には曲 ID・曲名・アーティスト名を保存。試聴音源と画像は保存しない
+- [DECIDED] Supabase はクラウドに本番用 1 つ（既存を 1 つ一時停止）、開発は手元の PC で動かす
+- [OPEN] Apple の試聴の横に Spotify 等で開くボタンを置くことが、iTunes の利用条件と衝突しないか（[risks](docs/product/risks.md) R3a）
 - [OPEN] 友人の中に YouTube Music やサブスクなしの人がいるか
 
 ## Blockers
@@ -42,5 +43,5 @@ MVP を作るための技術方針を決める。提供形態（Web）は決定�
 
 ## Next Actions
 
-1. 開発者: 曲名の保存と Supabase の環境について回答する
+1. 開発者: R3a（iTunes の利用条件）への対応方針を決める
 2. AI: Phase 9 を締め、Phase 10（ロードマップ・タスク分解）へ

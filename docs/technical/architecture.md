@@ -44,7 +44,7 @@
 1. 利用者が曲名（＋アーティスト名）を入力する。
 2. ブラウザから iTunes Search API で候補を取得する。
 3. 候補を試聴しながら、投稿者が 1 曲を選ぶ（取り違えの防止: R4）。
-4. 一言を添えて投稿する。DB には Apple の曲 ID を保存する（曲名・アーティスト名も保存するかは [OPEN]、下記 5.）。
+4. 一言を添えて投稿する。DB には Apple の曲 ID・曲名・アーティスト名を保存する（試聴音源とジャケット画像は保存しない）。
 
 ### 試聴と再生回数
 
@@ -75,7 +75,7 @@
 |---|---|---|
 | profiles | id（Auth のユーザー ID）、handle（一意）、display_name、preferred_service（spotify / apple_music / youtube_music）、invited_by、created_at | 利用者の公開情報 |
 | follows | follower_id、followee_id、created_at | 2 つの ID の組が一意 |
-| posts | id、user_id、apple_track_id、（title、artist_name は [OPEN]）、comment（一言）、created_at | 試聴音源 URL と画像は保存しない |
+| posts | id、user_id、apple_track_id、title、artist_name、comment（一言）、created_at | 試聴音源と画像は保存しない |
 | likes | user_id、post_id、created_at | 組が一意 |
 | comments | id、post_id、user_id、body、created_at | 返信機能なし |
 | post_stats | post_id、play_count | 投稿者だけが読める。増やすのは専用の関数経由のみ |
@@ -100,7 +100,7 @@
 
 | 項目 | 案 |
 |---|---|
-| 環境 | [OPEN] 開発者は Supabase の無料枠（有効なプロジェクト 2 つ）を別プロジェクトで使用済み。下記 5. |
+| 環境 | 開発は手元の PC で Supabase を動かす（Supabase CLI ＋ Docker）。クラウドの Supabase は本番用の 1 つだけ（既存のプロジェクトを 1 つ一時停止して枠を空ける）。Vercel はプレビュー環境と本番環境 |
 | ソースコード | GitHub の非公開リポジトリ。AI が作成する（作成前に必ず開発者に確認する） |
 | バックアップ | GitHub Actions で週 1 回、本番 DB を書き出す |
 | PWA | Web アプリの設定ファイル（manifest）と Service Worker（Android のインストールに fetch ハンドラーが必要） |
@@ -108,10 +108,6 @@
 
 ## 5. 未確定の点
 
-- [OPEN] 曲名・アーティスト名を DB に保存するか。
-  - 保存しない場合: 表示のたびに iTunes Lookup API で取得する（複数 ID を 1 回で取得可）。
-  - 保存する場合: iTunes の利用条件上問題ないかを確認する（音声と画像は保存しない）。
-- [OPEN] Supabase の環境の分け方。
-  - 無料プランの有効なプロジェクトは、Owner / Admin であるすべての組織を合わせて 2 つまで。一時停止中のプロジェクトは数えない。[Supabase Billing FAQ](https://supabase.com/docs/guides/platform/billing-faq)
-  - 開発は、手元の PC で Supabase をまるごと動かせる（Docker が必要）。[Supabase Local Development](https://supabase.com/docs/guides/local-development)
+- [OPEN] 公開前に開発者が端末で MVP を評価する場所。案: 本番の Supabase を公開前は評価用として使い、公開の直前にデータを消す。
 - [OPEN] ログインなしの閲覧者に見せる範囲。個別の投稿ページとプロフィールは見せる。タイムライン（フォロー中の投稿）はログインが必要。
+- [OPEN] Apple の試聴の横に、他のサービス（Spotify・YouTube Music）で開くボタンを置いてよいか。iTunes の利用条件「他の商品やサービスの宣伝に使わない」と衝突する可能性がある（[song-matching](../research/2026-09-28-song-matching.md) 追加調査、R3）。
