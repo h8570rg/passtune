@@ -1,9 +1,9 @@
-# 006: バックエンド・ログイン方式・ホスティング
+# 007: BaaS・ログイン方式
 
-- Status: PROPOSED
+- Status: OPEN（BaaS を改めて比較中。下記はたたき台）
 - Date: 2026-09-28
 - Area: Technical
-- Related: [backend-auth-hosting](../research/2026-09-28-backend-auth-hosting.md), [005](005-platform.md), [mvp](../product/mvp.md)
+- Related: [backend-auth-hosting](../research/2026-09-28-backend-auth-hosting.md), [005](005-platform.md), [006](006-hosting.md), [mvp](../product/mvp.md)
 
 ## Context
 
@@ -36,14 +36,7 @@
 | LINE ログイン | 友人が全員使っている。LINE 内で完結 | Supabase ではそのままでは動かないという報告あり。実装が重い |
 | メール＋パスワード | 一般的 | パスワード管理の手間とリスク（R8） |
 
-### ホスティング（フロントエンド）
-
-| Option | メリット | デメリット |
-|---|---|---|
-| Vercel（Hobby） | Next.js と相性が最も良い。無料 | 非商用のみ。広告・アフィリエイト・課金はすべて「商用」（寄付は例外）。収益化するなら月 20 USD か移行（[monetization](../research/2026-09-28-monetization.md)） |
-| Cloudflare（Workers / 静的配信） | 無料枠が広く、商用も可 | Next.js を載せるには変換用の仕組みが必要で、ひと手間増える |
-
-## Decision [PROPOSED]
+## たたき台（BaaS 比較の前の案）
 
 - バックエンド: **Supabase（無料プラン）**。
   - 停止対策: 開発中に停止したら、管理画面から再開する。
@@ -51,7 +44,6 @@
 - ログイン: **メールの 6 桁コード ＋ Google ログイン**。
   - 招待リンクには `openExternalBrowser=1` を付け、外部ブラウザで開かせる。
   - メール送信は Resend の無料枠を使う。
-- ホスティング: フロントエンドの技術（開発者の得意なもの）に合わせて選ぶ。Next.js なら Vercel（Hobby）で始める。
 - 独自ドメインを取得する（メールの送信元と PWA に必要）。
 
 ## Why
@@ -63,11 +55,9 @@
 ## Tradeoffs / Consequences
 
 - Supabase 無料プランの制約（停止・バックアップなし）を運用で補う。
-- Vercel Hobby は非商用に限られる。収益化する場合は移行か有料化が必要。
 - 固定費: ドメイン代のみ（年 数千円）。
 
 ## Revisit when
 
 - 利用者が増え、無料枠（DB 500MB、転送 5GB、メール 1 日 100 通）に近づいたとき
-- 収益化を始めるとき（Vercel の規約）
 - データを失うリスクが許容できなくなったとき（→ Supabase Pro の日次バックアップ）

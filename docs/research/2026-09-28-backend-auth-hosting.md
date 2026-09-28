@@ -3,7 +3,7 @@
 - Date: 2026-09-28
 - Phase: 9
 - Question: Web のみ・1 人保守・年 1 万円で、BaaS・ログイン方式・ホスティングは何が合うか
-- Related: [005](../decisions/005-platform.md), [006](../decisions/006-backend-auth-hosting.md), [ios-pwa-adoption](2026-09-28-ios-pwa-adoption.md)
+- Related: [005](../decisions/005-platform.md), [006](../decisions/006-hosting.md), [007](../decisions/007-baas-auth.md), [ios-pwa-adoption](2026-09-28-ios-pwa-adoption.md)
 
 ## TL;DR
 

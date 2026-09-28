@@ -3,7 +3,7 @@
 - Date: 2026-09-28
 - Phase: 4 の再調査（Phase 9 のホスティング選定の前提として）
 - Question: 将来どんな収益化の方法があるか。利用者数に対してどれくらいの収益が見込めるか。収益化によって開発にどんな制限がかかるか
-- Related: [business-model](../business/business-model.md), [006](../decisions/006-backend-auth-hosting.md)
+- Related: [business-model](../business/business-model.md), [006](../decisions/006-hosting.md), [007](../decisions/007-baas-auth.md)
 - 注意: 税金・法律の部分は一般的な情報の整理で、専門家の助言ではない。
 
 ## TL;DR
