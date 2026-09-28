@@ -25,8 +25,8 @@ MVP を作るための技術方針を決める。提供形態（Web）は決定�
 
 ## Open Questions
 
-- [OPEN] バックエンド（BaaS）の選定。Supabase 無料プランは 1 週間無操作で停止、Pro は月 25 USD
-- [OPEN] ログイン方式。LINE のアプリ内ブラウザでは Google ログインが失敗する
+- [PROPOSED] Supabase 無料プラン、メールの 6 桁コード＋Google ログイン、Resend、独自ドメイン（[006](docs/decisions/006-backend-auth-hosting.md)）
+- [OPEN] フロントエンドのフレームワーク（開発者の得意なもの）とホスティング
 - [OPEN] 友人の中に YouTube Music やサブスクなしの人がいるか
 - [OPEN] Git のリモート（GitHub private 等）を置くか（急がない）
 
@@ -36,5 +36,5 @@ MVP を作るための技術方針を決める。提供形態（Web）は決定�
 
 ## Next Actions
 
-1. AI: バックエンド・ログイン方式・ホスティングの候補を比較する
-2. 開発者: 比較を見て選ぶ
+1. 開発者: 006 を確認し、フロントエンドのフレームワークの希望を伝える
+2. AI: 006 を確定し、アーキテクチャ概要（docs/technical/）を作る
