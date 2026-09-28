@@ -45,7 +45,7 @@
 
 **推奨 [DECIDED]**
 - C1。
-- 2026-09-28 変更（開発者の要望）: Apple Music・Spotify・YouTube Music・LINE MUSIC などのロゴボタンを並べ、押すとその曲のページへ移動する形にする。C1（選んだサービスを大きく出す）との関係は [OPEN]。リンク先の作り方とロゴの条件は [music-terms](../research/2026-09-28-music-terms.md) 追加調査。
+- 2026-09-28 変更（開発者の要望）: Apple Music・Spotify・YouTube Music・LINE MUSIC などのロゴボタンを並べ、押すとその曲のページへ移動する形にする。「使っているサービス」の設定（C1）は当面なし（開発者の決定）。リンク先の作り方とロゴの条件は [music-terms](../research/2026-09-28-music-terms.md) 追加調査。
 - Spotify の曲ページの特定には、API で検索して完全一致させる方法もある。ただし、まずは API 不要の「検索画面へのリンク」で十分か確かめる（外部依存を増やさない。原則 6）。
 
 ## D. 登録直後にタイムラインが空になる問題

@@ -82,7 +82,7 @@
 
 | テーブル | 主な項目 | 備考 |
 |---|---|---|
-| profiles | id（Auth のユーザー ID）、handle（一意）、display_name、preferred_service（spotify / apple_music / youtube_music）、invited_by、created_at | 利用者の公開情報 |
+| profiles | id（Auth のユーザー ID）、handle（一意）、display_name、invited_by、created_at | 利用者の公開情報 |
 | follows | follower_id、followee_id、created_at | 2 つの ID の組が一意 |
 | posts | id、user_id、apple_track_id、title、artist_name、comment（一言）、created_at | 試聴音源と画像は保存しない |
 | likes | user_id、post_id、created_at | 組が一意 |

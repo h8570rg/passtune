@@ -39,7 +39,8 @@ MVP を作るための技術方針を決める。提供形態（Web）は決定�
 - [PROPOSED] 利用条件・ブランドガイドラインに沿った表示ルール（[music-terms](docs/research/2026-09-28-music-terms.md)）
 - [DECIDED] 各サービス（Apple Music・Spotify・YouTube Music・LINE MUSIC など）のロゴボタンを並べ、その曲のページへ移動する
 - [PROPOSED] Apple Music 以外は、各サービス内の検索結果へ移動する（API・費用なし）
-- [OPEN] 「使っているサービス」の設定を残すか
+- [DECIDED] 「使っているサービス」の設定は当面なし
+- [OPEN] Apple Music 以外のリンク先（検索結果で妥協するか、Spotify だけでも曲ページを特定するか）
 - [OPEN] 友人の中に YouTube Music やサブスクなしの人がいるか
 
 ## Blockers

@@ -94,3 +94,22 @@
 
 - 曲ページに直接飛ばせるのは、追加の費用・依存なしでは Apple Music だけ。他の 3 つは、まず「そのサービス内での曲名検索の結果」に飛ばすのが現実的。利用者は結果から 1 タップで曲を開く。
 - 小さな正方形のアイコンを並べるデザインは、LINE MUSIC（シンボル単独の原則禁止）や Apple（提供バッジをそのまま使う）の条件と合わない可能性がある。各社の公式バッジやロゴタイプを使う形が安全。
+
+## 追加調査: 共通の曲 ID（ISRC）で各サービスの曲ページへ移動できるか（2026-09-28）
+
+### Facts
+
+- 録音ごとに付く国際標準の番号 ISRC がある。ただし、各サービスの曲ページの URL は各サービス独自の曲 ID でできている。ISRC をそのまま URL に使うことはできない。
+- 必要な変換（ISRC → 各サービスの曲 ID）と、その手段:
+  - Apple Music: Apple Music API で ISRC から曲を引ける。Web から使うには Apple Developer Program（年 約 12,980 円）への登録が必要。[Apple Developer: Generating Developer Tokens](https://developer.apple.com/documentation/applemusicapi/generating-developer-tokens), [MusicKit JS](https://js-cdn.music.apple.com/musickit/v1/index.html)
+    - 無料の iTunes Search API は ISRC を返さない（2026-09-28 に実際のリクエストで確認）。
+  - Spotify: 検索 API で `isrc:` による絞り込みができる。ログイン不要の方式（Client Credentials）で使える。[Spotify Web API: Search](https://developer.spotify.com/documentation/web-api/reference/search)
+  - YouTube Music・LINE MUSIC: ISRC から曲を引ける公開 API はない。
+  - 複数サービスの対応をまとめて引ける有料 API（Musicfetch 等）はある。月 50 USD から。
+
+### Inferences
+
+- 「共通 ID で全サービスの曲ページへ」は、無料の範囲では実現できない。
+  - 起点になる ISRC を無料で取れない（iTunes Search API が返さない）。
+  - YouTube Music と LINE MUSIC には変換手段がない。
+- Spotify だけなら、曲名＋アーティスト名（または ISRC）で Spotify API を検索し、曲ページを特定できる。
