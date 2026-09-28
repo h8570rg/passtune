@@ -10,10 +10,11 @@ Phase 9: Technical Strategy / Architecture
 
 ## Current Goal
 
-MVP を作るための技術方針を決める。まず提供形態（Web / ネイティブ）、次に技術スタック・ホスティング・認証。
+MVP を作るための技術方針を決める。提供形態（Web）は決定済み。次にバックエンド（BaaS）・ログイン方式・ホスティング・フロントエンドの技術。
 
 ## Recently Decided
 
+- [DECIDED] 提供形態は Web のみ（PWA）。ネイティブアプリ・ストア公開はしない（[005](docs/decisions/005-platform.md)）
 - [DECIDED] Phase 8 完了。MVP は完成に近い形で作り開発者自身で評価。誰でも登録可、通報・ブロックなし（管理者の削除手段と問い合わせ先で代替）、通知なし（[mvp](docs/product/mvp.md)）
 - [DECIDED] Phase 7 完了。投稿の入り口・試聴・各自のサービスで開く・招待で自動フォロー・いいねのみ・延べ再生回数・コメント返信なし（[solutions](docs/product/solutions.md)）
 - [DECIDED] Phase 6 完了。プロダクト戦略を確定（[004](docs/decisions/004-product-strategy.md), [strategy](docs/product/strategy.md)）
@@ -41,11 +42,6 @@ MVP を作るための技術方針を決める。まず提供形態（Web / ネ�
 ## Open Questions
 
 - [HYPOTHESIS] Spotify の曲の試聴は、Apple 側で同じ曲を探して使う（開発者の意向。Phase 7 / 9 で決定）
-- [DECIDED] Web・iOS・Android の 3 つで使えるようにする。Apple Developer Program の費用は許容（[005](docs/decisions/005-platform.md)）
-- [DECIDED] 開業届は出さない（Google Play は個人アカウント）
-- [DECIDED] Google Play での公開は当面しない
-- [PROPOSED] Android は Web 版（PWA）で提供
-- [OPEN] iOS をネイティブ（Expo）にするか PWA にするか。これにより技術スタックが決まる（[005](docs/decisions/005-platform.md)）
 - [OPEN] バックエンド（BaaS）の選定。Supabase 無料プランは 1 週間無操作で停止、Pro は月 25 USD
 - [OPEN] 友人の中に YouTube Music やサブスクなしの人がいるか
 - [OPEN] Git のリモート（GitHub private 等）を置くか（急がない）
@@ -56,5 +52,5 @@ MVP を作るための技術方針を決める。まず提供形態（Web / ネ�
 
 ## Next Actions
 
-1. 開発者: iOS をネイティブにするか PWA にするかを決める
-2. AI: BaaS・認証・ホスティングの候補を比較する
+1. AI: バックエンド・ログイン方式・ホスティングの候補を比較する
+2. 開発者: 比較を見て選ぶ

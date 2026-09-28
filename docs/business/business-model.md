@@ -25,7 +25,7 @@
 ## 2. Cost
 
 - [DECIDED] ランニングコストの目安は年 10,000 円（月 約 830 円）。サービスの質が落ちるなら増額してよい。
-- [DECIDED] Apple Developer Program（年 約 12,980 円）の費用は許容する（2026-09-28、[005](../decisions/005-platform.md)）。
+- [DEPRECATED] ~~Apple Developer Program の費用は許容する~~ → Web のみで提供することになり、不要（2026-09-28、[005](../decisions/005-platform.md)）。
 
 ### 費用の種類（推測。具体的なサービスと価格は Phase 9 で確認する）
 
