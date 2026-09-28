@@ -41,9 +41,11 @@ MVP を作るための技術方針を決める。まず提供形態（Web / ネ�
 ## Open Questions
 
 - [HYPOTHESIS] Spotify の曲の試聴は、Apple 側で同じ曲を探して使う（開発者の意向。Phase 7 / 9 で決定）
-- [DECIDED] Web・iOS・Android の 3 つで提供する。Apple Developer Program の費用は許容（[005](docs/decisions/005-platform.md)）
+- [DECIDED] Web・iOS・Android の 3 つで使えるようにする。Apple Developer Program の費用は許容（[005](docs/decisions/005-platform.md)）
 - [DECIDED] 開業届は出さない（Google Play は個人アカウント）
-- [PROPOSED] Expo で 3 つを 1 つのコードで作る。Android は公開時は Web 版、利用者が 12 人集まったら Google Play へ（[005](docs/decisions/005-platform.md)）
+- [DECIDED] Google Play での公開は当面しない
+- [PROPOSED] Android は Web 版（PWA）で提供
+- [OPEN] iOS をネイティブ（Expo）にするか PWA にするか。これにより技術スタックが決まる（[005](docs/decisions/005-platform.md)）
 - [OPEN] バックエンド（BaaS）の選定。Supabase 無料プランは 1 週間無操作で停止、Pro は月 25 USD
 - [OPEN] 友人の中に YouTube Music やサブスクなしの人がいるか
 - [OPEN] Git のリモート（GitHub private 等）を置くか（急がない）
@@ -54,5 +56,5 @@ MVP を作るための技術方針を決める。まず提供形態（Web / ネ�
 
 ## Next Actions
 
-1. 開発者: 005 の作り方と Android の提供方法を確認する
+1. 開発者: iOS をネイティブにするか PWA にするかを決める
 2. AI: BaaS・認証・ホスティングの候補を比較する

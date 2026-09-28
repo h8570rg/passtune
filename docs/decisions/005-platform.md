@@ -1,6 +1,6 @@
 # 005: 提供形態と作り方
 
-- Status: PROPOSED（提供形態・開業届なしは DECIDED、作り方と Android の提供方法は PROPOSED）
+- Status: PROPOSED（開業届なし・Google Play 当面なしは DECIDED。Android の提供方法は PROPOSED、iOS をネイティブにするかは OPEN）
 - Date: 2026-09-28
 - Area: Technical
 - Related: [multiplatform-approach](../research/2026-09-28-multiplatform-approach.md), [platform-options](../research/2026-09-28-platform-options.md), [mvp](../product/mvp.md), [004](004-product-strategy.md)
@@ -63,12 +63,22 @@ Web・iOS・Android の 3 つで提供する（開発者の決定）。
 | AN3. APK を直接配る（限定配布アカウント、最大 20 台） | Google Play を通さずに友人へ配る | 無料・12 人不要 | 友人が「提供元不明のアプリ」の警告を越える必要がある。誰でも登録できる公開には向かない |
 | AN4. 公開前に 12 人を集める | 友人以外（家族・同僚など）も含めて集める | 公開時から 3 つ揃う | 「MVP は開発者だけで評価する」方針と衝突する。集まらないと公開が止まる |
 
-### Decision [PROPOSED]
+### Decision
 
-AN2。Android は諦めず、「公開時は Web 版、条件がそろったら Google Play」の 2 段階にする。
+- [DECIDED] Google Play での公開は当面しない。Android の利用者が 12 人集まる見込みがなく、集まってもテストへの協力を頼むのは現実的でない（開発者の判断、2026-09-28）。
+- [PROPOSED] Android は Web 版（インストールできる Web アプリ = PWA）で提供する。
+  - Android の Chrome は、インストールの提案・ホーム画面とアプリ一覧への表示・通知に対応しており、Web アプリでも体験の差が小さい。
+- [OPEN] iOS をネイティブアプリにするか、PWA にするか（下記）。
 
-- 開発者自身の Android 端末での MVP 評価は、開発用のビルドを直接インストールして行う（ストア不要）。
-- Google Play 公開の条件: Android の利用者（Web 版の利用者を含む）から、クローズドテストに 14 日間参加してくれる人が 12 人集まったとき。
+## iOS をネイティブにするか [OPEN]
+
+Android を PWA にすると、ネイティブアプリの対象は iOS だけになる。
+
+| Option | 内容 | メリット | デメリット |
+|---|---|---|---|
+| I1. iOS はネイティブ（Expo）、Android と PC は Web 版 | Expo で iOS と Web を 1 つのコードで作る | 友人に多い iPhone で、App Store から入れてすぐ使える（アクセスのハードルという当初の懸念に直接答える）。通知も確実 | Apple 年 約 12,980 円と審査。Web 版は React Native の部品で作るため自由度が下がる |
+| I2. すべて PWA | iOS も Web 版。Safari の共有メニューから「ホーム画面に追加」してもらう | 最も安く単純。Web の専門性をフルに生かせる（通常の Web 技術で作れる）。審査なし | iPhone にはインストールの提案が出ず、手順の案内が必要。通知はホーム画面に追加した人のみ。開発者が懸念した「指示しないとやってくれない」がそのまま残る |
+| I3. まず PWA で公開し、必要なら後から iOS ネイティブ | I2 で始め、ホーム画面に追加されない問題が実際に起きたら I1 へ | 最初は最速・最安 | 通常の Web 技術で作った場合、iOS ネイティブ化は画面の作り直しになる。最初から Expo で作れば作り直しは避けられるが、今度は Web の自由度が下がる |
 
 ## Revisit when
 
