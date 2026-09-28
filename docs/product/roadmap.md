@@ -2,7 +2,7 @@
 
 - Phase: 10
 - Last updated: 2026-09-28
-- 状態: [PROPOSED]
+- 状態: [DECIDED]（2026-09-28 開発者が了承。タスクの進み具合はチェックボックスで管理）
 - 根拠: [mvp](mvp.md), [architecture](../technical/architecture.md), [risks](risks.md)
 
 ## 進め方
@@ -33,7 +33,7 @@
 
 ### M0 技術選定と開発の準備
 
-**技術選定**（候補の比較 → 開発者が選ぶ）
+**技術選定**（候補の比較 → 開発者が選ぶ。記録: [tech-stack](../technical/tech-stack.md)）
 
 - [ ] パッケージマネージャー
 - [ ] スタイリングの方法（Tailwind CSS、CSS Modules など）

@@ -6,14 +6,15 @@ Last updated: 2026-09-28
 
 ## Current Phase
 
-Phase 10: Roadmap / Task Breakdown
+Phase 11: Prototype / Development（M0 技術選定と開発の準備）
 
 ## Current Goal
 
-MVP を作るためのマイルストーンとタスクを決め、開発（Phase 11）を始められる状態にする。
+M0 を終える: 技術選定（3 回に分けて決める）と、開発環境の準備。
 
 ## Recently Decided
 
+- [DECIDED] Phase 10 完了。ロードマップ M0〜M7（[roadmap](docs/product/roadmap.md)）。GitHub リポジトリ h8570rg/passtune を作成
 - [DECIDED] Phase 9 完了。Web のみ（PWA）・Next.js・Vercel Hobby・Supabase・メールの 6 桁コード＋Google・Resend（[005](docs/decisions/005-platform.md)〜[007](docs/decisions/007-baas-auth.md)、[architecture](docs/technical/architecture.md)）
 - [DECIDED] 各サービスのロゴボタン: Apple Music・Spotify は曲ページ（Spotify は押された時点でサーバーが検索して転送）、YouTube Music・LINE MUSIC は検索結果
 - [DECIDED] MVP は完成に近い形で、開発者が PC のみで評価（[mvp](docs/product/mvp.md)）
@@ -27,8 +28,8 @@ MVP を作るためのマイルストーンとタスクを決め、開発（Phas
 
 ## Open Questions
 
-- [PROPOSED] マイルストーンとタスク（[roadmap](docs/product/roadmap.md)）
-- [OPEN] ドメインの取得先（Vercel か、お名前.com 等か）。取得は開発者が行う
+- [PROPOSED] 技術選定 第 1 回: pnpm、Tailwind CSS v4、shadcn/ui（Base UI 版）、Lucide（[tech-stack](docs/technical/tech-stack.md)）
+- ドメインは開発者が取得する（進行中）
 - [OPEN] Spotify の開発モードで、ログイン不要の方式がユーザー数の上限に数えられないか（アプリ登録後に確認）
 - [OPEN] YouTube Music を曲ページへ直接飛ばす改善（YouTube Data API）の可否
 - [OPEN] 友人の中に YouTube Music・LINE MUSIC の利用者やサブスクなしの人がいるか
@@ -39,6 +40,5 @@ MVP を作るためのマイルストーンとタスクを決め、開発（Phas
 
 ## Next Actions
 
-1. 開発者: roadmap を確認する
-2. 開発者: passtune.com を取得する
-3. AI: M0 の技術選定を始める（Phase 11）
+1. 開発者: 技術選定 第 1 回を確認する。ドメインを取得する
+2. AI: 技術選定 第 2 回（データまわり）を比較する
