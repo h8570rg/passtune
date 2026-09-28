@@ -1,6 +1,6 @@
 # 007: BaaS・ログイン方式
 
-- Status: PROPOSED
+- Status: DECIDED（メール送信サービスのみ PROPOSED）
 - Date: 2026-09-28
 - Area: Technical
 - Related: [baas-comparison](../research/2026-09-28-baas-comparison.md), [backend-auth-hosting](../research/2026-09-28-backend-auth-hosting.md), [005](005-platform.md), [006](006-hosting.md), [mvp](../product/mvp.md)
@@ -40,14 +40,16 @@
 | LINE ログイン | 友人が全員使っている。LINE 内で完結 | Supabase ではそのままでは動かないという報告あり。実装が重い |
 | メール＋パスワード | 一般的 | パスワード管理の手間とリスク（R8） |
 
-## Decision [PROPOSED]
+## Decision
+
+開発者の決定（2026-09-28）。
 
 - バックエンド: **Supabase（無料プラン）**。
   - 停止対策: 開発中に停止したら、管理画面から再開する。
   - バックアップ: GitHub Actions で DB を定期的に書き出す。
 - ログイン: **メールの 6 桁コード ＋ Google ログイン**。
   - 招待リンクには `openExternalBrowser=1` を付け、外部ブラウザで開かせる。
-  - メール送信は Resend の無料枠を使う。
+  - [PROPOSED] メール送信は Resend の無料枠を使う。Supabase 標準のメール送信は 1 時間 2 通まで・チームメンバー宛てのみで、本番には使えないため（[Supabase Docs](https://supabase.com/docs/guides/auth/auth-smtp)）。
 - 独自ドメインを取得する（メールの送信元と PWA に必要）。
 
 ## Why

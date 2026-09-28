@@ -27,7 +27,8 @@ MVP を作るための技術方針を決める。提供形態（Web）は決定�
 
 - [DECIDED] フロントエンドは Next.js（開発者の希望）
 - [DECIDED] ホスティングは Vercel Hobby で始め、収益化前に移行または Pro（[006](docs/decisions/006-hosting.md)）
-- [PROPOSED] BaaS は Supabase 無料プラン。ログインはメールの 6 桁コード＋Google、メール送信は Resend、独自ドメインを取得（[007](docs/decisions/007-baas-auth.md)）
+- [DECIDED] BaaS は Supabase 無料プラン。ログインはメールの 6 桁コード＋Google。独自ドメインを取得（[007](docs/decisions/007-baas-auth.md)）
+- [PROPOSED] メール送信は Resend の無料枠
 - [OPEN] 友人の中に YouTube Music やサブスクなしの人がいるか
 - [OPEN] Git のリモート（GitHub private 等）を置くか（急がない）
 
@@ -37,5 +38,5 @@ MVP を作るための技術方針を決める。提供形態（Web）は決定�
 
 ## Next Actions
 
-1. 開発者: 007 を確認する
+1. 開発者: メール送信サービス（Resend）を確認する
 2. AI: 007 確定後、アーキテクチャ概要とデータ設計を docs/technical/ に作り、Phase 10 へ
