@@ -6,14 +6,15 @@ Last updated: 2026-09-28
 
 ## Current Phase
 
-Phase 7: Solution Exploration
+Phase 8: MVP Definition
 
 ## Current Goal
 
-戦略を実現する体験・仕組みの候補を比べ、方向を決める（技術選定はしない）。
+友人約 20 人に使ってもらう最小の形と、そこで確かめることを決める。
 
 ## Recently Decided
 
+- [DECIDED] Phase 7 完了。投稿の入り口・試聴・各自のサービスで開く・招待で自動フォロー・いいねのみ・延べ再生回数・コメント返信なし（[solutions](docs/product/solutions.md)）
 - [DECIDED] Phase 6 完了。プロダクト戦略を確定（[004](docs/decisions/004-product-strategy.md), [strategy](docs/product/strategy.md)）
 - [DECIDED] Phase 5 完了。リスク対応の方向性を了承。DM 機能は持たない（[risks](docs/product/risks.md)）
 - [DECIDED] Phase 4 完了。収益化の道を塞がないルールと、画像・音声アップロードを当面持たないことを決定（[business](docs/business/business-model.md)）
@@ -39,7 +40,7 @@ Phase 7: Solution Exploration
 ## Open Questions
 
 - [HYPOTHESIS] Spotify の曲の試聴は、Apple 側で同じ曲を探して使う（開発者の意向。Phase 7 / 9 で決定）
-- [PROPOSED] 投稿の入り口・試聴・各自のサービスで開く・登録直後の空タイムライン・反応などの推奨案（[solutions](docs/product/solutions.md)）
+- [PROPOSED] MVP の範囲、Stage 1 は招待制で始める、Spotify リンクはまず API なしで対応（[mvp](docs/product/mvp.md)）
 - [OPEN] 友人の中に YouTube Music やサブスクなしの人がいるか
 - [OPEN] Git のリモート（GitHub private 等）を置くか（急がない）
 
@@ -49,5 +50,5 @@ Phase 7: Solution Exploration
 
 ## Next Actions
 
-1. 開発者: solutions.md の推奨案を確認する
-2. AI: Phase 7 を締め、Phase 8（MVP Definition）へ
+1. 開発者: mvp.md の PROPOSED を確認する
+2. AI: Phase 8 を締め、Phase 9（Technical Strategy / Architecture）へ
