@@ -40,7 +40,7 @@
 
 | Option | メリット | デメリット |
 |---|---|---|
-| Vercel（Hobby） | Next.js と相性が最も良い。無料 | 非商用のみ。収益化するなら月 20 USD か移行 |
+| Vercel（Hobby） | Next.js と相性が最も良い。無料 | 非商用のみ。広告・アフィリエイト・課金はすべて「商用」（寄付は例外）。収益化するなら月 20 USD か移行（[monetization](../research/2026-09-28-monetization.md)） |
 | Cloudflare（Workers / 静的配信） | 無料枠が広く、商用も可 | Next.js を載せるには変換用の仕組みが必要で、ひと手間増える |
 
 ## Decision [PROPOSED]

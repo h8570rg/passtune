@@ -26,7 +26,7 @@ MVP を作るための技術方針を決める。提供形態（Web）は決定�
 ## Open Questions
 
 - [PROPOSED] Supabase 無料プラン、メールの 6 桁コード＋Google ログイン、Resend、独自ドメイン（[006](docs/decisions/006-backend-auth-hosting.md)）
-- [OPEN] フロントエンドのフレームワーク（開発者の得意なもの）とホスティング
+- [OPEN] フロントエンドのフレームワーク（開発者の得意なもの）とホスティング。将来の収益化を見込むなら、最初から商用可のホスティングにするか（[monetization](docs/research/2026-09-28-monetization.md)）
 - [OPEN] 友人の中に YouTube Music やサブスクなしの人がいるか
 - [OPEN] Git のリモート（GitHub private 等）を置くか（急がない）
 
