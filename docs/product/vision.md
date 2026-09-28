@@ -34,6 +34,7 @@
 - [DECIDED] 最初のユーザー: 開発者本人と友人 約 20 人。
 - [DECIDED] 友人以外（不特定多数）にも公開する。
 - [ASSUMPTION] 友人は Apple Music 利用者が多い（開発者の印象。未確認）。
+- [DECIDED] 端末: 開発者は Android。友人は iPhone が多く、Android もいる。
 - [DECIDED] 開発者本人は Spotify を使っている。→ 開発者（Spotify）と友人（Apple Music が多い）の間でサービスが違うこと自体が、H1 の実例になっている。
 - [DECIDED] 公開の形は「知り合い中心で、誰でも参加できる」。まず友人 20 人の体験を優先する（[002](../decisions/002-audience-and-openness.md)）。
 

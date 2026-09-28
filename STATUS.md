@@ -36,7 +36,7 @@ Phase 6: Product Strategy
 ## Open Questions
 
 - [HYPOTHESIS] Spotify の曲の試聴は、Apple 側で同じ曲を探して使う（開発者の意向。Phase 7 / 9 で決定）
-- [PROPOSED] 戦略・Core Loop・プロダクト原則・やる/やらない・段階（[strategy](docs/product/strategy.md)）
+- [PROPOSED] 戦略・Core Loop・プロダクト原則・やる/やらない・対象端末・段階（[strategy](docs/product/strategy.md)）。開発者の回答（暇なときに開く、通知は設定次第、片方向フォロー、iPhone と Android の両方）を反映済み
 - [OPEN] 友人の中に YouTube Music やサブスクなしの人がいるか
 - [OPEN] Git のリモート（GitHub private 等）を置くか（急がない）
 
