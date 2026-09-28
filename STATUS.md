@@ -6,14 +6,15 @@ Last updated: 2026-09-28
 
 ## Current Phase
 
-Phase 4: Business Model / Monetization
+Phase 5: Risk Analysis
 
 ## Current Goal
 
-収益化しない前提で、年 1 万円で運営できる条件と、将来の収益化の道を塞がないためのルールを確認する。
+プロダクトを殺しうるリスクと一般公開に伴う義務を洗い出し、対応の方向性を決める。
 
 ## Recently Decided
 
+- [DECIDED] Phase 4 完了。収益化の道を塞がないルールと、画像・音声アップロードを当面持たないことを決定（[business](docs/business/business-model.md)）
 - [DECIDED] Phase 3 完了。競合アプリは試さない。差別化の仮説 3 つに同意（[vision](docs/product/vision.md)）
 - [DECIDED] Phase 2 完了
 - [DECIDED] ユーザー調査は行わず、開発者本人へのヒアリングで代える（[003](docs/decisions/003-user-research-approach.md)）
@@ -34,8 +35,7 @@ Phase 4: Business Model / Monetization
 ## Open Questions
 
 - [HYPOTHESIS] Spotify の曲の試聴は、Apple 側で同じ曲を探して使う（開発者の意向。Phase 7 / 9 で決定）
-- [PROPOSED] 収益化の道を塞がないためのルール、ユーザーによる画像・音声アップロードを当面持たない（[business](docs/business/business-model.md)）
-- [OPEN] タイムラインが空になるリスク（開発者も認識。Phase 5 で扱う）
+- [PROPOSED] リスク一覧と対応の方向性、DM 機能を持たない（[risks](docs/product/risks.md)）
 - [OPEN] 友人の中に YouTube Music やサブスクなしの人がいるか
 - [OPEN] Git のリモート（GitHub private 等）を置くか（急がない）
 
@@ -45,5 +45,5 @@ Phase 4: Business Model / Monetization
 
 ## Next Actions
 
-1. 開発者: business-model.md の PROPOSED を確認する
-2. AI: Phase 4 を締め、Phase 5（リスク分析）へ
+1. 開発者: risks.md の PROPOSED を確認する
+2. AI: Phase 5 を締め、Phase 6（Product Strategy）へ
