@@ -1,0 +1,113 @@
+# PROJECT.md
+
+> このプロジェクトの入口。新しいセッションや新しいAIは、まずこのファイルと [STATUS.md](STATUS.md) を読む。
+> 比較的安定した情報だけを置く。詳細は `docs/` 配下へ。目安 150 行以内。
+
+## 1. Overview
+
+音楽共有SNSの個人開発プロジェクト。
+現在は Product Discovery 前の段階で、プロダクトの中身・対象ユーザー・技術構成・マネタイズはすべて未決定。
+
+## 2. Vision / Problem
+
+[OPEN] Phase 1 で定義する。
+
+## 3. Project Goals & Constraints
+
+プロダクトの目標とは別に、「このプロジェクトを何のためにやるか」。成功の定義や撤退の判断に使う。
+
+| 項目 | 状態 | 内容 |
+|---|---|---|
+| プロジェクトの目的（学習 / 収益 / 自分が使いたい / ポートフォリオ 等の優先順位） | [OPEN] | Phase 1 で決める |
+| 使える時間（週あたり） | [OPEN] | |
+| ランニングコストの上限（月あたり） | [OPEN] | |
+| 期限・マイルストーン | [OPEN] | |
+| 開発体制 | [DECIDED] | 開発者1人 + AI Agent |
+
+## 4. Principles
+
+### Project principles [DECIDED]
+
+- 有限資源は **開発者の時間・集中力・意思決定コスト・ランニングコスト・保守コスト・作り直しコスト**。人件費は考えない。
+- 「無料だが複雑」より「多少費用がかかっても単純で保守しやすい」を選ぶことがある。
+- 必要になったときに必要な複雑さを追加する。将来必要かもしれないだけの設計・プロセス・ドキュメントは作らない。
+- **Why → Who → Problem → Business → What → How** の順で考える。Solution / Technology を早く決めない。
+- 「調査」と「決定」を分ける。How に関する調査は早い段階でもしてよいが、決定はしない。
+
+### Product principles
+
+[OPEN] Phase 1〜7 で定義する。
+
+## 5. Status labels
+
+情報には次のラベルを付ける。未検証の考えを事実や決定として扱わない。
+
+| Label | 意味 |
+|---|---|
+| `[DECIDED]` | ユーザー（開発者）が確定した。根拠は Decision Log にある |
+| `[PROPOSED]` | 決定案。AI または開発者が起案し、確定待ち |
+| `[HYPOTHESIS]` | 検証すべき仮説。検証方法と判定基準を持つ |
+| `[ASSUMPTION]` | 検証せずに前提として置いたもの。崩れたら影響範囲を見直す |
+| `[OPEN]` | 未解決の問い |
+| `[DEPRECATED]` | 廃止。何に置き換わったかを併記する |
+
+- HYPOTHESIS と ASSUMPTION の違い: HYPOTHESIS は「確かめにいく」、ASSUMPTION は「今は確かめずに進む」。
+- AI は `[DECIDED]` を付けない。確定するのは開発者のみ（→ [AGENTS.md](AGENTS.md)）。
+
+## 6. Process / Roadmap
+
+各 Phase は厳密なゲートではなく「今の主な関心事」。後の Phase で分かったことで前の Phase に戻ってよい。
+各 Phase は「完了の目安」を満たしたら次へ進む（完璧を目指さない）。
+
+| Phase | 名前 | 完了の目安 |
+|---|---|---|
+| 0 | Project Setup | 運用ルール・入口ドキュメント・テンプレートが揃い、開発者が承認 |
+| 1 | Product Vision / Problem Definition | プロジェクトの目的、Vision、解きたい問題の仮説が書かれている |
+| 2 | User Research | 想定ユーザーと問題の仮説を、実在の人（自分含む）で確かめた記録がある |
+| 3 | Market / Competitor Research | 主要な競合・代替手段と、その空白地帯の整理 |
+| 4 | Business Model / Monetization | 収益化の方針（しない、も含む）とランニングコスト許容範囲 |
+| 5 | Risk Analysis | プロダクトを殺しうるリスク（規約・API・法務・需要）の一覧と対処方針 |
+| 6 | Product Strategy | 何をやり、何をやらないか |
+| 7 | Solution Exploration | 解決策の候補と比較 |
+| 8 | MVP Definition | 最小の検証対象と、成功/失敗の判定基準 |
+| 9 | Technical Strategy / Architecture | 技術選定の Decision Log |
+| 10 | Roadmap / Task Breakdown | 着手可能なタスク一覧 |
+| 11 | Prototype / Development | 動くもの |
+| 12 | User Testing | 実ユーザーからの学び |
+| 13 | Launch | 公開 |
+| 14 | Measurement / Iteration | 指標に基づく改善サイクル |
+
+## 7. Key Decisions
+
+| # | Decision | Status |
+|---|---|---|
+| [001](docs/decisions/001-project-management.md) | プロジェクト管理の方法 | DECIDED |
+
+## 8. Documentation Structure
+
+```
+/
+├─ AGENTS.md          AI Agent の運用ルール（CLAUDE.md から読み込む）
+├─ CLAUDE.md          Claude Code 用の入口（AGENTS.md / PROJECT.md / STATUS.md を読み込むだけ）
+├─ PROJECT.md         安定した全体像（このファイル）
+├─ STATUS.md          今の状態
+└─ docs/
+   ├─ decisions/      Decision Log（NNN-slug.md）。テンプレート: _template.md
+   └─ research/       調査記録（YYYY-MM-DD-slug.md）。テンプレート: _template.md
+```
+
+以下は **必要になった時点で** 作る（空のディレクトリを先に作らない）。
+
+- `docs/product/` — Vision、ペルソナ、仮説一覧、MVP定義など
+- `docs/business/` — ビジネスモデル、コスト試算
+- `docs/technical/` — アーキテクチャ概要
+
+情報の流れ（圧縮）: `research/`（根拠・生データ） → `decisions/`（判断と理由） → `PROJECT.md` / `STATUS.md`（結論だけ）
+
+## 9. Operating Rules（要約）
+
+- 正本は Git リポジトリ内の Markdown。Chat の履歴や AI の記憶に依存しない。
+- 重要な結論が出たら Chat だけに残さず、research → decisions → PROJECT / STATUS の順に反映する。
+- 既存 Decision と矛盾する提案は「既存 Decision の変更提案」と明示する。
+- AI はドキュメントの変更を自由にコミットしてよい。
+- 詳細は [AGENTS.md](AGENTS.md)。
