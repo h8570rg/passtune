@@ -39,9 +39,16 @@
 - **Why → Who → Problem → Business → What → How** の順で考える。Solution / Technology を早く決めない。
 - 「調査」と「決定」を分ける。How に関する調査は早い段階でもしてよいが、決定はしない。
 
-### Product principles
+### Product principles [PROPOSED]
 
-[OPEN] Phase 1〜7 で定義する。
+詳細: [docs/product/strategy.md](docs/product/strategy.md)。上ほど優先する。
+
+1. 聴くまでの手間を最小にする
+2. サービスの違いを意識させない
+3. 参加する前に価値が伝わる（登録なしで試聴できる）
+4. 投稿は軽く（1 曲＋一言）
+5. 聴く側に負担をかけない
+6. 小さく、安く、保守しやすく
 
 ## 5. Status labels
 

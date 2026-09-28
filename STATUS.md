@@ -6,14 +6,15 @@ Last updated: 2026-09-28
 
 ## Current Phase
 
-Phase 5: Risk Analysis
+Phase 6: Product Strategy
 
 ## Current Goal
 
-プロダクトを殺しうるリスクと一般公開に伴う義務を洗い出し、対応の方向性を決める。
+ここまでの結果をまとめ、何をやり何をやらないか・プロダクト原則・段階的な広げ方を決める。
 
 ## Recently Decided
 
+- [DECIDED] Phase 5 完了。リスク対応の方向性を了承。DM 機能は持たない（[risks](docs/product/risks.md)）
 - [DECIDED] Phase 4 完了。収益化の道を塞がないルールと、画像・音声アップロードを当面持たないことを決定（[business](docs/business/business-model.md)）
 - [DECIDED] Phase 3 完了。競合アプリは試さない。差別化の仮説 3 つに同意（[vision](docs/product/vision.md)）
 - [DECIDED] Phase 2 完了
@@ -35,7 +36,7 @@ Phase 5: Risk Analysis
 ## Open Questions
 
 - [HYPOTHESIS] Spotify の曲の試聴は、Apple 側で同じ曲を探して使う（開発者の意向。Phase 7 / 9 で決定）
-- [PROPOSED] リスク一覧と対応の方向性、DM 機能を持たない（[risks](docs/product/risks.md)）
+- [PROPOSED] 戦略・Core Loop・プロダクト原則・やる/やらない・段階（[strategy](docs/product/strategy.md)）
 - [OPEN] 友人の中に YouTube Music やサブスクなしの人がいるか
 - [OPEN] Git のリモート（GitHub private 等）を置くか（急がない）
 
@@ -45,5 +46,5 @@ Phase 5: Risk Analysis
 
 ## Next Actions
 
-1. 開発者: risks.md の PROPOSED を確認する
-2. AI: Phase 5 を締め、Phase 6（Product Strategy）へ
+1. 開発者: strategy.md の PROPOSED を確認する
+2. AI: Phase 6 を締め、Phase 7（Solution Exploration）へ
