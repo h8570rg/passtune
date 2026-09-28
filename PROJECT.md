@@ -23,10 +23,10 @@
 |---|---|---|
 | プロジェクトの目的 | [DECIDED] | 友人間の狭いコミュニティで、自分が使いたいものを作る |
 | マネタイズ | [DECIDED] | 今は目標にしない。将来できる余地は残す（取り返しのつかない選択を避ける） |
-| 対象・公開範囲 | [DECIDED] | 友人約 20 人から始め、不特定多数にも公開する。ユーザーは増やしたい |
-| 使える時間（週あたり） | [OPEN] | |
+| 対象・公開範囲 | [DECIDED] | 友人約 20 人から始め、誰でも参加できる形で公開する。体験の中心は知り合い同士（[002](docs/decisions/002-audience-and-openness.md)） |
+| 使える時間 | [DECIDED] | 週 約 10 時間 |
 | ランニングコストの上限 | [DECIDED] | 目安は年 10,000 円以内。質が落ちるなら増額してよい |
-| 期限・マイルストーン | [OPEN] | |
+| 期限 | [DECIDED] | なし |
 | 開発体制 | [DECIDED] | 開発者1人 + AI Agent |
 
 ## 4. Principles
@@ -87,6 +87,7 @@
 | # | Decision | Status |
 |---|---|---|
 | [001](docs/decisions/001-project-management.md) | プロジェクト管理の方法 | DECIDED |
+| [002](docs/decisions/002-audience-and-openness.md) | 対象ユーザーと公開の形（知り合い中心・誰でも参加可） | DECIDED |
 
 ## 8. Documentation Structure
 

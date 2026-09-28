@@ -6,26 +6,28 @@ Last updated: 2026-09-28
 
 ## Current Phase
 
-Phase 1: Product Vision / Problem Definition
+Phase 2: User Research（開始前。進め方を相談中）
 
 ## Current Goal
 
-1. プロジェクト自体の目的と制約（目的の優先順位・時間・予算・期限）を明文化する
-2. 「なぜ音楽共有SNSか」の原体験から、Vision と解きたい問題の仮説を書く
+問題仮説 H1〜H8 を、開発者本人以外（友人）でも確かめる。
 
 ## Recently Decided
 
-- [DECIDED] 友人約 20 人から始め、不特定多数にも公開する。ユーザーは増やしたい（当初の「スケールは目標外」から変更）
-- [DECIDED] ランニングコストの目安は年 10,000 円以内。質が落ちるなら増額してよい
-- [DECIDED] Vision 文案、「将来の余地」＝取り返しのつかない選択を避ける（[vision](docs/product/vision.md)）
-- [DECIDED] プロジェクトの目的: 友人間で自分が使いたいものを作る。マネタイズは今は目標にしない
+- [DECIDED] Phase 1 完了（[vision](docs/product/vision.md)）
+- [DECIDED] 公開の形は「知り合い中心・誰でも参加可」。まず友人約 20 人を優先（[002](docs/decisions/002-audience-and-openness.md)）
+- [DECIDED] 開発者は Spotify 利用。使える時間は週約 10 時間、期限なし
+- [DECIDED] 予算の目安は年 1 万円（質が落ちるなら増額可）
+
+## Key Findings
+
+- Spotify のユーザー連携は 5 人まで、API ではプレビュー不可。Apple の iTunes Search API はキーなしでプレビュー取得可。Apple Developer Program は約 1.3 万円/年（[research](docs/research/2026-09-28-music-api-feasibility.md)）
 
 ## Open Questions
 
-- [OPEN] 公開の形: 知り合い同士が中心か、知らない人の投稿も流れる発見型か。友人 20 人と友人以外への広がりの優先順位
-- [OPEN] 開発者本人が使っている音楽サービス
-- [OPEN] X への投稿や口頭での共有で、具体的に何が物足りないか（H6〜H8 の確認）
-- [OPEN] 使える時間（週あたり）、期限
+- [PROPOSED] 成功基準: 友人 10 人が公開 3 か月後も週 1 回以上使っている
+- [OPEN] Phase 2 の進め方（誰に・何を・どう聞くか）
+- [OPEN] 友人の中に YouTube Music やサブスクなしの人がいるか
 - [OPEN] Git のリモート（GitHub private 等）を置くか（急がない）
 
 ## Blockers
@@ -34,6 +36,6 @@ Phase 1: Product Vision / Problem Definition
 
 ## Next Actions
 
-1. 開発者: vision.md の PROPOSED を確認し、Open Questions に回答する
-2. AI: 回答を反映し、Phase 1 を締める（Vision・問題仮説・成功基準）
-3. AI: 外部リスク（音楽 API のプレビュー・ユーザー数制限・規約）を一次情報で調査し docs/research に記録（決定しない）
+1. 開発者: 成功基準案と Phase 2 の進め方を確認する
+2. 開発者: 友人に話を聞く（Phase 2）
+3. AI: 聞き取り結果を docs/research に記録し、仮説を更新する
