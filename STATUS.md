@@ -15,16 +15,17 @@ Phase 1: Product Vision / Problem Definition
 
 ## Recently Decided
 
-- [DECIDED] プロジェクトの目的: 友人間の狭いコミュニティで自分が使いたいものを作る。マネタイズ・スケールは今は目標にしない（[vision](docs/product/vision.md)）
-- [DECIDED] Phase 0 完了。プロジェクト管理の方法と追加ルールを確定（[001](docs/decisions/001-project-management.md)）
-- [DECIDED] AI はドキュメントの変更を自由にコミットしてよい（[001](docs/decisions/001-project-management.md)）
+- [DECIDED] 友人約 20 人から始め、不特定多数にも公開する。ユーザーは増やしたい（当初の「スケールは目標外」から変更）
+- [DECIDED] ランニングコストの目安は年 10,000 円以内。質が落ちるなら増額してよい
+- [DECIDED] Vision 文案、「将来の余地」＝取り返しのつかない選択を避ける（[vision](docs/product/vision.md)）
+- [DECIDED] プロジェクトの目的: 友人間で自分が使いたいものを作る。マネタイズは今は目標にしない
 
 ## Open Questions
 
-- [PROPOSED] Vision 文案、「将来の余地」の解釈（可逆性を保つ）、Non-goals（[vision](docs/product/vision.md)）
-- [OPEN] 今の共有方法とその不満（問題仮説 H1〜H5 の根拠になる原体験）
-- [OPEN] 対象の友人の人数と、使っているサブスクの分布
-- [OPEN] 使える時間（週あたり）、ランニングコストの具体的な上限、期限
+- [OPEN] 公開の形: 知り合い同士が中心か、知らない人の投稿も流れる発見型か。友人 20 人と友人以外への広がりの優先順位
+- [OPEN] 開発者本人が使っている音楽サービス
+- [OPEN] X への投稿や口頭での共有で、具体的に何が物足りないか（H6〜H8 の確認）
+- [OPEN] 使える時間（週あたり）、期限
 - [OPEN] Git のリモート（GitHub private 等）を置くか（急がない）
 
 ## Blockers
