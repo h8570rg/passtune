@@ -99,7 +99,7 @@
 | [004](docs/decisions/004-product-strategy.md) | プロダクト戦略（1 曲を勧める・直接の声かけで広げる・片方向フォロー・iPhone と Android） | DECIDED |
 | [005](docs/decisions/005-platform.md) | 提供形態は Web のみ（PWA） | DECIDED |
 | [006](docs/decisions/006-hosting.md) | ホスティングは Vercel Hobby（収益化前に移行または Pro） | DECIDED |
-| [007](docs/decisions/007-baas-auth.md) | BaaS は Supabase、ログインはメールの 6 桁コード＋Google、独自ドメイン取得 | DECIDED |
+| [007](docs/decisions/007-baas-auth.md) | BaaS は Supabase、ログインはメールの 6 桁コード＋Google、メール送信は Resend、独自ドメイン取得 | DECIDED |
 
 ## 8. Documentation Structure
 
@@ -112,13 +112,12 @@
 └─ docs/
    ├─ decisions/      Decision Log（NNN-slug.md）。テンプレート: _template.md
    ├─ research/       調査記録（YYYY-MM-DD-slug.md）。テンプレート: _template.md
-   ├─ product/        Vision・問題仮説・MVP 定義など
-   └─ business/       ビジネスモデル・コスト
+   ├─ product/        Vision・問題仮説・戦略・MVP 定義など
+   ├─ business/       ビジネスモデル・コスト
+   └─ technical/      アーキテクチャ・データ設計
 ```
 
-以下は **必要になった時点で** 作る（空のディレクトリを先に作らない）。
-
-- `docs/technical/` — アーキテクチャ概要
+新しいディレクトリは **必要になった時点で** 作る（空のディレクトリを先に作らない）。
 
 情報の流れ（圧縮）: `research/`（根拠・生データ） → `decisions/`（判断と理由） → `PROJECT.md` / `STATUS.md`（結論だけ）
 
