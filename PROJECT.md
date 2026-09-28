@@ -68,7 +68,7 @@
 |---|---|---|
 | 0 | Project Setup | 運用ルール・入口ドキュメント・テンプレートが揃い、開発者が承認 |
 | 1 | Product Vision / Problem Definition | プロジェクトの目的、Vision、解きたい問題の仮説が書かれている |
-| 2 | User Research | 想定ユーザーと問題の仮説を、実在の人（自分含む）で確かめた記録がある |
+| 2 | User Research | 開発者本人へのヒアリングで、利用場面と欲しい体験が具体化されている（[003](docs/decisions/003-user-research-approach.md)） |
 | 3 | Market / Competitor Research | 主要な競合・代替手段と、その空白地帯の整理 |
 | 4 | Business Model / Monetization | 収益化の方針（しない、も含む）とランニングコスト許容範囲 |
 | 5 | Risk Analysis | プロダクトを殺しうるリスク（規約・API・法務・需要）の一覧と対処方針 |
@@ -88,6 +88,7 @@
 |---|---|---|
 | [001](docs/decisions/001-project-management.md) | プロジェクト管理の方法 | DECIDED |
 | [002](docs/decisions/002-audience-and-openness.md) | 対象ユーザーと公開の形（知り合い中心・誰でも参加可） | DECIDED |
+| [003](docs/decisions/003-user-research-approach.md) | ユーザー調査は行わず、開発者本人へのヒアリングで代える | DECIDED |
 
 ## 8. Documentation Structure
 

@@ -6,14 +6,16 @@ Last updated: 2026-09-28
 
 ## Current Phase
 
-Phase 2: User Research（開始前。進め方を相談中）
+Phase 2: User Research（開発者本人へのヒアリング中）
 
 ## Current Goal
 
-問題仮説 H1〜H8 を、開発者本人以外（友人）でも確かめる。
+開発者本人へのヒアリングで、音楽を共有する場面・欲しい体験・大事にしたいことを具体化する。
 
 ## Recently Decided
 
+- [DECIDED] ユーザー調査は行わず、開発者本人へのヒアリングで代える（[003](docs/decisions/003-user-research-approach.md)）
+- [DECIDED] 成功基準: 友人 10 人が公開 3 か月後も週 1 回以上使っている
 - [DECIDED] Phase 1 完了（[vision](docs/product/vision.md)）
 - [DECIDED] 公開の形は「知り合い中心・誰でも参加可」。まず友人約 20 人を優先（[002](docs/decisions/002-audience-and-openness.md)）
 - [DECIDED] 開発者は Spotify 利用。使える時間は週約 10 時間、期限なし
@@ -25,8 +27,6 @@ Phase 2: User Research（開始前。進め方を相談中）
 
 ## Open Questions
 
-- [PROPOSED] 成功基準: 友人 10 人が公開 3 か月後も週 1 回以上使っている
-- [OPEN] Phase 2 の進め方（誰に・何を・どう聞くか）
 - [OPEN] 友人の中に YouTube Music やサブスクなしの人がいるか
 - [OPEN] Git のリモート（GitHub private 等）を置くか（急がない）
 
@@ -36,6 +36,5 @@ Phase 2: User Research（開始前。進め方を相談中）
 
 ## Next Actions
 
-1. 開発者: 成功基準案と Phase 2 の進め方を確認する
-2. 開発者: 友人に話を聞く（Phase 2）
-3. AI: 聞き取り結果を docs/research に記録し、仮説を更新する
+1. 開発者: ヒアリングの質問に回答する
+2. AI: 回答を docs/research に記録し、問題仮説と vision を更新する
