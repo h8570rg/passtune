@@ -6,14 +6,15 @@ Last updated: 2026-09-28
 
 ## Current Phase
 
-Phase 8: MVP Definition
+Phase 9: Technical Strategy / Architecture
 
 ## Current Goal
 
-友人約 20 人に使ってもらう最小の形と、そこで確かめることを決める。
+MVP を作るための技術方針を決める。まず提供形態（Web / ネイティブ）、次に技術スタック・ホスティング・認証。
 
 ## Recently Decided
 
+- [DECIDED] Phase 8 完了。MVP は完成に近い形で作り開発者自身で評価。誰でも登録可、通報・ブロックなし（管理者の削除手段と問い合わせ先で代替）、通知なし（[mvp](docs/product/mvp.md)）
 - [DECIDED] Phase 7 完了。投稿の入り口・試聴・各自のサービスで開く・招待で自動フォロー・いいねのみ・延べ再生回数・コメント返信なし（[solutions](docs/product/solutions.md)）
 - [DECIDED] Phase 6 完了。プロダクト戦略を確定（[004](docs/decisions/004-product-strategy.md), [strategy](docs/product/strategy.md)）
 - [DECIDED] Phase 5 完了。リスク対応の方向性を了承。DM 機能は持たない（[risks](docs/product/risks.md)）
@@ -40,8 +41,8 @@ Phase 8: MVP Definition
 ## Open Questions
 
 - [HYPOTHESIS] Spotify の曲の試聴は、Apple 側で同じ曲を探して使う（開発者の意向。Phase 7 / 9 で決定）
-- [DECIDED] MVP は完成に近い形で作り、開発者自身で評価。誰でも登録可、通報・ブロックなし、通知なし、反応の確認画面あり、ログインなし閲覧は Web の場合のみ（[mvp](docs/product/mvp.md)）
-- [PROPOSED] 通報・ブロックの代わりに、管理者による削除手段と問い合わせ先を用意する
+- [PROPOSED] 提供形態は Web（[005](docs/decisions/005-platform.md)）
+- [OPEN] 開発者の技術的な経験（技術スタック選定の前提）
 - [OPEN] 友人の中に YouTube Music やサブスクなしの人がいるか
 - [OPEN] Git のリモート（GitHub private 等）を置くか（急がない）
 
@@ -51,5 +52,5 @@ Phase 8: MVP Definition
 
 ## Next Actions
 
-1. 開発者: 管理者による削除手段の案を確認する
-2. AI: Phase 8 を締め、Phase 9（Technical Strategy / Architecture）へ
+1. 開発者: 005 の案を確認し、技術的な経験を回答する
+2. AI: 技術スタック・ホスティング・認証の候補を比較する

@@ -97,6 +97,7 @@
 | [002](docs/decisions/002-audience-and-openness.md) | 対象ユーザーと公開の形（知り合い中心・誰でも参加可） | DECIDED |
 | [003](docs/decisions/003-user-research-approach.md) | ユーザー調査は行わず、開発者本人へのヒアリングで代える | DECIDED |
 | [004](docs/decisions/004-product-strategy.md) | プロダクト戦略（1 曲を勧める・直接の声かけで広げる・片方向フォロー・iPhone と Android） | DECIDED |
+| [005](docs/decisions/005-platform.md) | 提供形態（Web） | PROPOSED |
 
 ## 8. Documentation Structure
 
