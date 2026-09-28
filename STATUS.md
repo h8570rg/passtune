@@ -40,7 +40,8 @@ MVP を作るための技術方針を決める。提供形態（Web）は決定�
 - [DECIDED] 各サービス（Apple Music・Spotify・YouTube Music・LINE MUSIC など）のロゴボタンを並べ、その曲のページへ移動する
 - [PROPOSED] Apple Music 以外は、各サービス内の検索結果へ移動する（API・費用なし）
 - [DECIDED] 「使っているサービス」の設定は当面なし
-- [OPEN] Apple Music 以外のリンク先（検索結果で妥協するか、Spotify だけでも曲ページを特定するか）
+- [OPEN] Apple Music 以外のリンク先。Spotify は押された時点で API 検索して転送、YouTube Music は投稿時に API 検索、LINE MUSIC は検索結果のみ、が無料での上限（[service-deeplinks](docs/research/2026-09-28-service-deeplinks.md)）
+- [OPEN] 開発者が Spotify Premium か（Spotify 開発モードの必須条件）
 - [OPEN] 友人の中に YouTube Music やサブスクなしの人がいるか
 
 ## Blockers
