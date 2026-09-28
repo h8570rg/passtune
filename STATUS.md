@@ -28,9 +28,13 @@ Phase 3: Market / Competitor Research
 
 - 開発者ヒアリング第 1 回: 試聴できるかどうかが体験の核。反応（いいね・コメント・聴いた表示）が欲しい。共有は 1 曲＋一言。再生回数は投稿者だけが見る。投稿は不定期（[research](docs/research/2026-09-28-developer-interview-1.md)）
 
+- 競合: 同コンセプトの海外アプリ（Wullup、Soundscape）はあるが小規模・iPhone のみ・日本語非対応。大手は自社サービス内に閉じている（[research](docs/research/2026-09-28-competitors.md)）
+
 ## Open Questions
 
 - [HYPOTHESIS] Spotify の曲の試聴は、Apple 側で同じ曲を探して使う（開発者の意向。Phase 7 / 9 で決定）
+- [OPEN] 開発者が Wullup / Soundscape を試すか（試した場合の不足点）
+- [OPEN] 差別化の仮説（インストール不要・日本の楽曲に強い照合・意図して 1 曲を勧める）の確認
 - [OPEN] 投稿が不定期なため、タイムラインが空きやすいリスク
 - [OPEN] 友人の中に YouTube Music やサブスクなしの人がいるか
 - [OPEN] Git のリモート（GitHub private 等）を置くか（急がない）
@@ -41,5 +45,5 @@ Phase 3: Market / Competitor Research
 
 ## Next Actions
 
-1. AI: 競合・代替手段を調べ、docs/research に記録する
-2. 開発者: 調査結果を確認し、差別化の方向を相談する
+1. 開発者: 競合調査を確認し、差別化の仮説と競合アプリを試すかどうかを決める
+2. AI: Phase 3 を締め、Phase 4（ビジネスモデル・コスト）へ
