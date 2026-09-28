@@ -40,7 +40,8 @@ Phase 8: MVP Definition
 ## Open Questions
 
 - [HYPOTHESIS] Spotify の曲の試聴は、Apple 側で同じ曲を探して使う（開発者の意向。Phase 7 / 9 で決定）
-- [PROPOSED] MVP の範囲、Stage 1 は招待制で始める、Spotify リンクはまず API なしで対応（[mvp](docs/product/mvp.md)）
+- [DECIDED] MVP は完成に近い形で作り、開発者自身で評価。誰でも登録可、通報・ブロックなし、通知なし、反応の確認画面あり、ログインなし閲覧は Web の場合のみ（[mvp](docs/product/mvp.md)）
+- [PROPOSED] 通報・ブロックの代わりに、管理者による削除手段と問い合わせ先を用意する
 - [OPEN] 友人の中に YouTube Music やサブスクなしの人がいるか
 - [OPEN] Git のリモート（GitHub private 等）を置くか（急がない）
 
@@ -50,5 +51,5 @@ Phase 8: MVP Definition
 
 ## Next Actions
 
-1. 開発者: mvp.md の PROPOSED を確認する
+1. 開発者: 管理者による削除手段の案を確認する
 2. AI: Phase 8 を締め、Phase 9（Technical Strategy / Architecture）へ
