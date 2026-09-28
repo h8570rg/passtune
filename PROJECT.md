@@ -98,7 +98,7 @@
 | [003](docs/decisions/003-user-research-approach.md) | ユーザー調査は行わず、開発者本人へのヒアリングで代える | DECIDED |
 | [004](docs/decisions/004-product-strategy.md) | プロダクト戦略（1 曲を勧める・直接の声かけで広げる・片方向フォロー・iPhone と Android） | DECIDED |
 | [005](docs/decisions/005-platform.md) | 提供形態は Web のみ（PWA） | DECIDED |
-| [006](docs/decisions/006-hosting.md) | ホスティング（Next.js） | PROPOSED |
+| [006](docs/decisions/006-hosting.md) | ホスティングは Vercel Hobby（収益化前に移行または Pro） | DECIDED |
 | [007](docs/decisions/007-baas-auth.md) | BaaS・ログイン方式 | OPEN |
 
 ## 8. Documentation Structure

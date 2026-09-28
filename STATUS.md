@@ -26,7 +26,7 @@ MVP を作るための技術方針を決める。提供形態（Web）は決定�
 ## Open Questions
 
 - [DECIDED] フロントエンドは Next.js（開発者の希望）
-- [PROPOSED] ホスティングは Vercel Hobby で始め、収益化前に移行または Pro（[006](docs/decisions/006-hosting.md)）
+- [DECIDED] ホスティングは Vercel Hobby で始め、収益化前に移行または Pro（[006](docs/decisions/006-hosting.md)）
 - [OPEN] BaaS を改めて比較する（Supabase は未確定）。ログイン方式も合わせて（[007](docs/decisions/007-baas-auth.md)）
 - [OPEN] 友人の中に YouTube Music やサブスクなしの人がいるか
 - [OPEN] Git のリモート（GitHub private 等）を置くか（急がない）
@@ -37,5 +37,5 @@ MVP を作るための技術方針を決める。提供形態（Web）は決定�
 
 ## Next Actions
 
-1. 開発者: 006 を確認する
-2. AI: BaaS を比較する（007）
+1. AI: BaaS を比較する（007）
+2. 開発者: BaaS を選ぶ

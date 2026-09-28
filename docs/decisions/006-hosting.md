@@ -1,6 +1,6 @@
 # 006: ホスティング（Next.js）
 
-- Status: PROPOSED
+- Status: DECIDED
 - Date: 2026-09-28
 - Area: Technical
 - Related: [nextjs-hosting](../research/2026-09-28-nextjs-hosting.md), [monetization](../research/2026-09-28-monetization.md), [005](005-platform.md), [007](007-baas-auth.md)
@@ -24,9 +24,9 @@
 | D. Netlify Free | 0 円 | 可 | 小 | 可 |
 | E. 静的に書き出して Cloudflare 等 | 0 円 | 可 | 小 | 可（ただし BaaS 中心の構成になる） |
 
-## Decision [PROPOSED]
+## Decision
 
-A. Vercel Hobby で始める。次の 2 つを守る。
+A. Vercel Hobby で始める（開発者の決定、2026-09-28）。次の 2 つを守る。
 
 - Vercel 独自のサービス（KV、Blob、Edge Config など）を使わず、他のホスティングへ移せる状態を保つ。
 - 収益化（広告・アフィリエイト・課金）を始める前に、Vercel Pro か別のホスティングへ移る。寄付だけなら Hobby のままでよい。
