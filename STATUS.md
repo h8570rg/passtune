@@ -25,8 +25,11 @@ Phase 2: User Research（開発者本人へのヒアリング中）
 
 - Spotify のユーザー連携は 5 人まで、API ではプレビュー不可。Apple の iTunes Search API はキーなしでプレビュー取得可。Apple Developer Program は約 1.3 万円/年（[research](docs/research/2026-09-28-music-api-feasibility.md)）
 
+- 開発者ヒアリング第 1 回: 試聴できるかどうかが体験の核。反応（いいね・コメント・聴いた表示）が欲しい。共有は 1 曲＋一言（[research](docs/research/2026-09-28-developer-interview-1.md)）
+
 ## Open Questions
 
+- [OPEN] ヒアリング残り: 「聴いた」表示のプライバシー感覚、投稿頻度、X での反応の実際
 - [OPEN] 友人の中に YouTube Music やサブスクなしの人がいるか
 - [OPEN] Git のリモート（GitHub private 等）を置くか（急がない）
 
@@ -36,5 +39,5 @@ Phase 2: User Research（開発者本人へのヒアリング中）
 
 ## Next Actions
 
-1. 開発者: ヒアリングの質問に回答する
-2. AI: 回答を docs/research に記録し、問題仮説と vision を更新する
+1. 開発者: ヒアリングの残りの質問に回答する
+2. AI: Phase 2 を締め、Phase 3（競合・代替手段の調査）へ
