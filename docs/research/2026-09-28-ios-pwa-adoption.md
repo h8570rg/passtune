@@ -37,3 +37,29 @@
 ## Open / Next
 
 - [OPEN] 実際の友人（iPhone）が、LINE で手順を送られただけで追加してくれるか
+
+## 追加調査: 友人から友人へ広げるとき、Web リンクとストアリンクの違い（2026-09-28）
+
+### Facts（出典あり）
+
+- LINE で送られたリンクは、LINE アプリ内のブラウザで開く。URL に `openExternalBrowser=1` を付けると、外部ブラウザ（Safari 等）で開かせられる。[LINE for Business](https://help.linebiz.com/lineadshelp/s/article/L000001427?language=ja), [DevelopersIO](https://dev.classmethod.jp/articles/line-open-uri-in-external-browser/)（確認日 2026-09-28）
+- Google は、アプリ内ブラウザ（WebView）での Google ログインを拒否する（403 disallowed_useragent）。LINE・Instagram などのアプリ内ブラウザで「Google でログイン」が失敗する。[Google Developers Blog](https://developers.googleblog.com/upcoming-security-changes-to-googles-oauth-20-authorization-endpoint-in-embedded-webviews/), [TrueLink](https://truelink-group.com/en/blog/why-google-login-fails-in-line-facebook-in-app-browsers-2026/)（確認日 2026-09-28）
+- Firebase Dynamic Links は 2025-08-25 に終了した。これは「アプリ未インストールの人がリンクから入り、ストアでインストールした後も、リンクの情報（招待者など）を引き継ぐ」仕組み（遅延ディープリンク）の定番だった。代替は有料サービス（Branch、AppsFlyer など）か自作。[Firebase FAQ](https://firebase.google.com/support/dynamic-links-faq), [Airbridge](https://www.airbridge.io/en/blog/firebase-dynamic-links-alternatives)（確認日 2026-09-28）
+
+### Inferences（推測）
+
+**Web リンクのデメリット**
+- LINE のアプリ内ブラウザで開かれると、そこではホーム画面に追加できず、Google ログインも失敗する。
+  - 対策: 招待リンクに `openExternalBrowser=1` を付ける。アプリ内ブラウザでも使えるログイン方式を選ぶ（Phase 9 後半）。
+- 友人の友人は開発者が直接手伝えないため、iPhone での「ホーム画面に追加」は、人づてに広がるほど実行されにくくなる。
+- 見慣れないドメインへのリンクは、ストアのリンクより怪しく見える可能性がある（友人経由なら影響は小さい）。
+
+**ストアリンクのデメリット**
+- インストールしないと中身が見えない。
+- Android と PC の人には使えない。
+- 招待情報（招待者の自動フォロー）がインストールの間に途切れる。引き継ぐには遅延ディープリンクが必要で、Firebase Dynamic Links の終了後は有料サービスか自作になる。
+
+**まとめ**
+- 共有するリンクは、ネイティブアプリの有無にかかわらず Web リンクにするのが合理的。どの端末でも開け、招待情報も確実に渡る。
+- iOS ネイティブアプリがある場合は、Web のページから iOS アプリへ誘導できる（Smart App Banner、Universal Links。Apple の標準機能）。
+- したがって、「Web リンクかストアリンクか」は選択の問題ではない。残る論点は、引き続き「iPhone でホーム画面に追加してもらえるか」。
