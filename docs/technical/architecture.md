@@ -59,6 +59,14 @@
 - Spotify: 曲名＋アーティスト名で Spotify の検索画面へ。
 - YouTube Music: 曲名＋アーティスト名で検索画面へ。
 
+### 表示のルール（利用条件・ブランドガイドライン）[PROPOSED]
+
+根拠: [music-terms](../research/2026-09-28-music-terms.md)
+
+- 試聴プレーヤーの近くに、公式の「Listen on Apple Music」バッジ（その曲への直接リンク）と「provided courtesy of iTunes」の表記を置く。
+- 各サービスで開くボタンを並べるときは、Apple Music を先頭にする。
+- Spotify・YouTube Music は、ロゴを使わず文字のボタンにする。
+
 ### 招待とログイン
 
 1. 招待リンクは `https://<ドメイン>/i/<招待した人のID>?openExternalBrowser=1`。
