@@ -28,6 +28,7 @@ MVP を作るためのマイルストーンとタスクを決め、開発（Phas
 ## Open Questions
 
 - [PROPOSED] マイルストーンとタスク（[roadmap](docs/product/roadmap.md)）
+- [OPEN] ドメインの取得先（Vercel か、お名前.com 等か）。取得は開発者が行う
 - [OPEN] Spotify の開発モードで、ログイン不要の方式がユーザー数の上限に数えられないか（アプリ登録後に確認）
 - [OPEN] YouTube Music を曲ページへ直接飛ばす改善（YouTube Data API）の可否
 - [OPEN] 友人の中に YouTube Music・LINE MUSIC の利用者やサブスクなしの人がいるか
@@ -39,4 +40,5 @@ MVP を作るためのマイルストーンとタスクを決め、開発（Phas
 ## Next Actions
 
 1. 開発者: roadmap を確認する
-2. AI: GitHub リポジトリの作成（作成前に確認）から M0 を始める（Phase 11）
+2. 開発者: passtune.com を取得する
+3. AI: M0 の技術選定を始める（Phase 11）

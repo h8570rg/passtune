@@ -120,6 +120,8 @@ Discovery と技術方針の検討（Phase 1〜9）を終え、開発の計画�
 
 新しいディレクトリは **必要になった時点で** 作る（空のディレクトリを先に作らない）。
 
+リポジトリ: https://github.com/h8570rg/passtune （非公開）
+
 情報の流れ（圧縮）: `research/`（根拠・生データ） → `decisions/`（判断と理由） → `PROJECT.md` / `STATUS.md`（結論だけ）
 
 ## 9. Operating Rules（要約）
