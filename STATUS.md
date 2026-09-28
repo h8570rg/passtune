@@ -17,6 +17,7 @@ MVP を作るためのマイルストーンとタスクを決め、開発（Phas
 - [DECIDED] Phase 9 完了。Web のみ（PWA）・Next.js・Vercel Hobby・Supabase・メールの 6 桁コード＋Google・Resend（[005](docs/decisions/005-platform.md)〜[007](docs/decisions/007-baas-auth.md)、[architecture](docs/technical/architecture.md)）
 - [DECIDED] 各サービスのロゴボタン: Apple Music・Spotify は曲ページ（Spotify は押された時点でサーバーが検索して転送）、YouTube Music・LINE MUSIC は検索結果
 - [DECIDED] MVP は完成に近い形で、開発者が PC のみで評価（[mvp](docs/product/mvp.md)）
+- [DECIDED] サービス名は Passtune、コードネームは passtune（[008](docs/decisions/008-service-name.md)）
 - Phase 1〜8 の決定は PROJECT.md の Key Decisions と docs/product/ を参照
 
 ## Key Findings

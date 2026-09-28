@@ -1,4 +1,4 @@
-# PROJECT.md
+# PROJECT.md — Passtune
 
 > このプロジェクトの入口。新しいセッションや新しいAIは、まずこのファイルと [STATUS.md](STATUS.md) を読む。
 > 比較的安定した情報だけを置く。詳細は `docs/` 配下へ。目安 150 行以内。
@@ -100,6 +100,7 @@ Discovery と技術方針の検討（Phase 1〜9）を終え、開発の計画�
 | [005](docs/decisions/005-platform.md) | 提供形態は Web のみ（PWA） | DECIDED |
 | [006](docs/decisions/006-hosting.md) | ホスティングは Vercel Hobby（収益化前に移行または Pro） | DECIDED |
 | [007](docs/decisions/007-baas-auth.md) | BaaS は Supabase、ログインはメールの 6 桁コード＋Google、メール送信は Resend、独自ドメイン取得 | DECIDED |
+| [008](docs/decisions/008-service-name.md) | サービス名は Passtune、コードネームは passtune | DECIDED |
 
 ## 8. Documentation Structure
 
