@@ -2,14 +2,14 @@
 
 - Phase: 6
 - Last updated: 2026-09-28
-- 状態: 起案中（[PROPOSED]）。2026-09-28 改訂: 広げ方は「リンク共有」ではなく「開発者が友人に直接声をかけて登録してもらう」（開発者の回答）
+- 状態: [DECIDED]（2026-09-28、開発者が承認。Core Loop のみ HYPOTHESIS）。2026-09-28 改訂: 広げ方は「リンク共有」ではなく「開発者が友人に直接声をかけて登録してもらう」（開発者の回答）
 - 根拠: [vision](vision.md), [risks](risks.md), [business](../business/business-model.md), [競合調査](../research/2026-09-28-competitors.md), [開発者ヒアリング](../research/2026-09-28-developer-interview-1.md)
 
-## 1. Strategy in one line [PROPOSED]
+## 1. Strategy in one line [DECIDED]
 
 > 知り合い同士が「意図して 1 曲を勧める」ことに絞り、サービスの違いを気にせず、すぐ試聴して反応できる場をつくる。
 
-## 2. Where to play / How to win [PROPOSED]
+## 2. Where to play / How to win [DECIDED]
 
 | | 内容 |
 |---|---|
@@ -40,7 +40,7 @@
   - 投稿があったときの通知は、各自が設定で選べればよい。
 - そのため、タイムラインの過疎（R1）への対策は「暇なときに開いて、見るものがある」ことにかかる。新しい投稿が少ない日にも見る価値があるか（→ Phase 7）。
 
-## 4. Product Principles [PROPOSED]
+## 4. Product Principles [DECIDED]
 
 判断に迷ったときの優先順位。上ほど優先する。
 
@@ -51,7 +51,7 @@
 5. **聴く側に負担をかけない。** 誰が聴いたかは見せない。毎日開くことを求めない。
 6. **小さく、安く、保守しやすく。** DM・アップロードなし。外部 API への依存は曲の検索・情報・試聴に限る。
 
-## 5. Do / Don't [PROPOSED]
+## 5. Do / Don't [DECIDED]
 
 | やる | やらない（当面） |
 |---|---|
@@ -71,14 +71,14 @@
   - 一方、フォロー制の弱点は、新しく登録した人が友人を 1 人ずつフォローしないとタイムラインが空になること（R1）。
   - この弱点は、グループを作らなくても、登録時の工夫で和らげられる可能性がある（例: 誘ってくれた人や、その人がフォローしている人をまとめてフォローできる。Phase 7 で比較）。
 
-## 6. Target Devices [PROPOSED]
+## 6. Target Devices [DECIDED]
 
 - iPhone と Android の両方で使えること。
   - 理由: 開発者は Android、友人は iPhone が多く Android もいる（2026-09-28 回答）。
 - どう実現するか（Web / ネイティブ等）は Phase 9 で決める。
   - 費用（Apple Developer Program）と、通知の実現方法が主な比較軸になる。
 
-## 7. Stages [PROPOSED]
+## 7. Stages [DECIDED]
 
 | Stage | 対象 | 目標 | 次に進む条件 |
 |---|---|---|---|

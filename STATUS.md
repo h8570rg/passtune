@@ -6,14 +6,15 @@ Last updated: 2026-09-28
 
 ## Current Phase
 
-Phase 6: Product Strategy
+Phase 7: Solution Exploration
 
 ## Current Goal
 
-ここまでの結果をまとめ、何をやり何をやらないか・プロダクト原則・段階的な広げ方を決める。
+戦略を実現する体験・仕組みの候補を比べ、方向を決める（技術選定はしない）。
 
 ## Recently Decided
 
+- [DECIDED] Phase 6 完了。プロダクト戦略を確定（[004](docs/decisions/004-product-strategy.md), [strategy](docs/product/strategy.md)）
 - [DECIDED] Phase 5 完了。リスク対応の方向性を了承。DM 機能は持たない（[risks](docs/product/risks.md)）
 - [DECIDED] Phase 4 完了。収益化の道を塞がないルールと、画像・音声アップロードを当面持たないことを決定（[business](docs/business/business-model.md)）
 - [DECIDED] Phase 3 完了。競合アプリは試さない。差別化の仮説 3 つに同意（[vision](docs/product/vision.md)）
@@ -33,10 +34,12 @@ Phase 6: Product Strategy
 
 - 競合: 同コンセプトの海外アプリ（Wullup、Soundscape）はあるが小規模・iPhone のみ・日本語非対応。大手は自社サービス内に閉じている（[research](docs/research/2026-09-28-competitors.md)）
 
+- 曲の照合: Apple Music リンクからは試聴まで確実。曲名検索は日本語・ローマ字・英語で本家が先頭（カバー等も混ざる）。Spotify リンクはキーなしだと曲名のみ（[research](docs/research/2026-09-28-song-matching.md)）
+
 ## Open Questions
 
 - [HYPOTHESIS] Spotify の曲の試聴は、Apple 側で同じ曲を探して使う（開発者の意向。Phase 7 / 9 で決定）
-- [PROPOSED] 戦略・Core Loop・プロダクト原則・やる/やらない・対象端末・段階（[strategy](docs/product/strategy.md)）。開発者の回答（暇なときに開く、通知は設定次第、片方向フォロー、iPhone と Android の両方）を反映済み
+- [PROPOSED] 投稿の入り口・試聴・各自のサービスで開く・登録直後の空タイムライン・反応などの推奨案（[solutions](docs/product/solutions.md)）
 - [OPEN] 友人の中に YouTube Music やサブスクなしの人がいるか
 - [OPEN] Git のリモート（GitHub private 等）を置くか（急がない）
 
@@ -46,5 +49,5 @@ Phase 6: Product Strategy
 
 ## Next Actions
 
-1. 開発者: strategy.md の PROPOSED を確認する
-2. AI: Phase 6 を締め、Phase 7（Solution Exploration）へ
+1. 開発者: solutions.md の推奨案を確認する
+2. AI: Phase 7 を締め、Phase 8（MVP Definition）へ

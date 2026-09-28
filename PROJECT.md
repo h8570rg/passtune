@@ -39,7 +39,7 @@
 - **Why → Who → Problem → Business → What → How** の順で考える。Solution / Technology を早く決めない。
 - 「調査」と「決定」を分ける。How に関する調査は早い段階でもしてよいが、決定はしない。
 
-### Product principles [PROPOSED]
+### Product principles [DECIDED]
 
 詳細: [docs/product/strategy.md](docs/product/strategy.md)。上ほど優先する。
 
@@ -96,6 +96,7 @@
 | [001](docs/decisions/001-project-management.md) | プロジェクト管理の方法 | DECIDED |
 | [002](docs/decisions/002-audience-and-openness.md) | 対象ユーザーと公開の形（知り合い中心・誰でも参加可） | DECIDED |
 | [003](docs/decisions/003-user-research-approach.md) | ユーザー調査は行わず、開発者本人へのヒアリングで代える | DECIDED |
+| [004](docs/decisions/004-product-strategy.md) | プロダクト戦略（1 曲を勧める・直接の声かけで広げる・片方向フォロー・iPhone と Android） | DECIDED |
 
 ## 8. Documentation Structure
 
