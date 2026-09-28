@@ -100,7 +100,7 @@
 
 | 項目 | 案 |
 |---|---|
-| 環境 | 開発は手元の PC で Supabase を動かす（Supabase CLI ＋ Docker）。クラウドの Supabase は本番用の 1 つだけ（既存のプロジェクトを 1 つ一時停止して枠を空ける）。Vercel はプレビュー環境と本番環境 |
+| 環境 | MVP の評価は PC のみで、手元の Supabase を使う（スマホでは試さない。開発者の決定）。開発も手元の PC で Supabase を動かす（Supabase CLI ＋ Docker）。クラウドの Supabase は本番用の 1 つだけ（既存のプロジェクトを 1 つ一時停止して枠を空ける）。Vercel はプレビュー環境と本番環境 |
 | ソースコード | GitHub の非公開リポジトリ。AI が作成する（作成前に必ず開発者に確認する） |
 | バックアップ | GitHub Actions で週 1 回、本番 DB を書き出す |
 | PWA | Web アプリの設定ファイル（manifest）と Service Worker（Android のインストールに fetch ハンドラーが必要） |
@@ -108,6 +108,5 @@
 
 ## 5. 未確定の点
 
-- [OPEN] 公開前に開発者が端末で MVP を評価する場所。案: 本番の Supabase を公開前は評価用として使い、公開の直前にデータを消す。
 - [OPEN] ログインなしの閲覧者に見せる範囲。個別の投稿ページとプロフィールは見せる。タイムライン（フォロー中の投稿）はログインが必要。
-- [OPEN] Apple の試聴の横に、他のサービス（Spotify・YouTube Music）で開くボタンを置いてよいか。iTunes の利用条件「他の商品やサービスの宣伝に使わない」と衝突する可能性がある（[song-matching](../research/2026-09-28-song-matching.md) 追加調査、R3）。
+- [DECIDED] Apple の試聴の横に、他のサービス（Spotify・YouTube Music）で開くボタンを置く。iTunes の利用条件と衝突する可能性は承知のうえ（R3a）。
