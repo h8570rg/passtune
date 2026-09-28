@@ -76,7 +76,8 @@
 
 ## Open / Next
 
-- [OPEN] 開発者が Wullup / Soundscape を試して感じた不足点
+- ~~開発者が Wullup / Soundscape を試して感じた不足点~~ → 試さないことに決定（2026-09-28）
+- 差別化の仮説 3 つは開発者が同意（2026-09-28）。Phase 6 で戦略に落とす
 - [OPEN] Spotify Messages は日本で使えるか
 - [OPEN] Apple Music「Friends」プレイリストの詳細
 

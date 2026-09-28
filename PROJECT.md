@@ -100,13 +100,13 @@
 ├─ STATUS.md          今の状態
 └─ docs/
    ├─ decisions/      Decision Log（NNN-slug.md）。テンプレート: _template.md
-   └─ research/       調査記録（YYYY-MM-DD-slug.md）。テンプレート: _template.md
+   ├─ research/       調査記録（YYYY-MM-DD-slug.md）。テンプレート: _template.md
+   ├─ product/        Vision・問題仮説・MVP 定義など
+   └─ business/       ビジネスモデル・コスト
 ```
 
 以下は **必要になった時点で** 作る（空のディレクトリを先に作らない）。
 
-- `docs/product/` — Vision、ペルソナ、仮説一覧、MVP定義など
-- `docs/business/` — ビジネスモデル、コスト試算
 - `docs/technical/` — アーキテクチャ概要
 
 情報の流れ（圧縮）: `research/`（根拠・生データ） → `decisions/`（判断と理由） → `PROJECT.md` / `STATUS.md`（結論だけ）

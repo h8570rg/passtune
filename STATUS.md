@@ -6,14 +6,15 @@ Last updated: 2026-09-28
 
 ## Current Phase
 
-Phase 3: Market / Competitor Research
+Phase 4: Business Model / Monetization
 
 ## Current Goal
 
-似たサービスと、今の代わりの手段を調べ、このプロダクトが入り込む余地を整理する。
+収益化しない前提で、年 1 万円で運営できる条件と、将来の収益化の道を塞がないためのルールを確認する。
 
 ## Recently Decided
 
+- [DECIDED] Phase 3 完了。競合アプリは試さない。差別化の仮説 3 つに同意（[vision](docs/product/vision.md)）
 - [DECIDED] Phase 2 完了
 - [DECIDED] ユーザー調査は行わず、開発者本人へのヒアリングで代える（[003](docs/decisions/003-user-research-approach.md)）
 - [DECIDED] 成功基準: 友人 10 人が公開 3 か月後も週 1 回以上使っている
@@ -33,9 +34,8 @@ Phase 3: Market / Competitor Research
 ## Open Questions
 
 - [HYPOTHESIS] Spotify の曲の試聴は、Apple 側で同じ曲を探して使う（開発者の意向。Phase 7 / 9 で決定）
-- [OPEN] 開発者が Wullup / Soundscape を試すか（試した場合の不足点）
-- [OPEN] 差別化の仮説（インストール不要・日本の楽曲に強い照合・意図して 1 曲を勧める）の確認
-- [OPEN] 投稿が不定期なため、タイムラインが空きやすいリスク
+- [PROPOSED] 収益化の道を塞がないためのルール、ユーザーによる画像・音声アップロードを当面持たない（[business](docs/business/business-model.md)）
+- [OPEN] タイムラインが空になるリスク（開発者も認識。Phase 5 で扱う）
 - [OPEN] 友人の中に YouTube Music やサブスクなしの人がいるか
 - [OPEN] Git のリモート（GitHub private 等）を置くか（急がない）
 
@@ -45,5 +45,5 @@ Phase 3: Market / Competitor Research
 
 ## Next Actions
 
-1. 開発者: 競合調査を確認し、差別化の仮説と競合アプリを試すかどうかを決める
-2. AI: Phase 3 を締め、Phase 4（ビジネスモデル・コスト）へ
+1. 開発者: business-model.md の PROPOSED を確認する
+2. AI: Phase 4 を締め、Phase 5（リスク分析）へ
