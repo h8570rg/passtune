@@ -30,7 +30,10 @@ MVP を作るための技術方針を決める。提供形態（Web）は決定�
 - [DECIDED] BaaS は Supabase 無料プラン。ログインはメールの 6 桁コード＋Google。独自ドメインを取得（[007](docs/decisions/007-baas-auth.md)）
 - [DECIDED] メール送信は Resend の無料枠
 - [PROPOSED] 全体構成・データ設計・アクセスのルール・環境（[architecture](docs/technical/architecture.md)）
-- [OPEN] GitHub の非公開リポジトリを作るか（Vercel と自動バックアップに必要）
+- [DECIDED] 投稿は曲名検索のみ（Spotify / Apple Music のリンクからの投稿は後で検討）
+- [DECIDED] GitHub の非公開リポジトリは AI が作成する。作成前に必ず開発者に確認する
+- [OPEN] 曲名・アーティスト名を DB に保存するか
+- [OPEN] Supabase の環境の分け方（開発者は無料枠の 2 プロジェクトを使用済み）
 - [OPEN] 友人の中に YouTube Music やサブスクなしの人がいるか
 
 ## Blockers
@@ -39,5 +42,5 @@ MVP を作るための技術方針を決める。提供形態（Web）は決定�
 
 ## Next Actions
 
-1. 開発者: architecture.md を確認し、GitHub リポジトリについて回答する
+1. 開発者: 曲名の保存と Supabase の環境について回答する
 2. AI: Phase 9 を締め、Phase 10（ロードマップ・タスク分解）へ

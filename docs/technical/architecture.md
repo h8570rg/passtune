@@ -17,10 +17,10 @@
                                                                    │
   ┌──────────── Vercel ────────────┐                               ▼
   │ Next.js（サーバー側）           │                 ┌──────── Supabase ────────┐
-  │  ├─ 公開ページの描画（投稿・     │ ──データ取得──→ │ Postgres ＋ 行ごとの      │
-  │  │   プロフィール。ログインなし  │                 │ アクセス制御（RLS）       │
-  │  │   でも見られる）             │                 │ Auth（メールの 6 桁コード │
-  │  └─ Spotify リンクの曲名取得 ──→ Spotify oEmbed    │  ・Google）              │
+  │  └─ 公開ページの描画（投稿・     │ ──データ取得──→ │ Postgres ＋ 行ごとの      │
+  │      プロフィール。ログインなし  │                 │ アクセス制御（RLS）       │
+  │      でも見られる）             │                 │ Auth（メールの 6 桁コード │
+  │                                │                 │  ・Google）              │
   └────────────────────────────────┘                 └──────────┬───────────────┘
                                                                 │ ログイン用メール
                                                                 ▼
@@ -34,18 +34,17 @@
   - どちらもブラウザからの呼び出しが許可されている（2026-09-28 に確認: `access-control-allow-origin: *`）。
   - 呼び出し回数の上限（約 20 回/分）は IP ごとなので、利用者ごとに分散される。
   - サーバーを経由しないので、Vercel の実行回数も使わない。
-- **Spotify の oEmbed（リンクから曲名を取る）は、Next.js のサーバー側から呼ぶ。** ブラウザからも呼べるが、将来 Spotify API に切り替える場合にキーを隠す必要があるため。
+- **Spotify の API や oEmbed は使わない。** 投稿は曲名検索だけ（開発者の決定、2026-09-28）。Spotify へは検索画面へのリンクで誘導する。
 - **試聴音源と、Apple のジャケット画像は保存しない。** 表示や再生のたびに Apple から直接取得する（利用条件: キャッシュ禁止）。
 
 ## 2. 主な流れ
 
 ### 投稿
 
-1. 利用者が曲名を入力する（または Apple Music / Spotify のリンクを貼る）。
+1. 利用者が曲名（＋アーティスト名）を入力する。
 2. ブラウザから iTunes Search API で候補を取得する。
-   - Spotify のリンクの場合は、先にサーバー側で oEmbed から曲名を取る。
 3. 候補を試聴しながら、投稿者が 1 曲を選ぶ（取り違えの防止: R4）。
-4. 一言を添えて投稿する。DB には、Apple の曲 ID と表示用の最小限の情報（曲名・アーティスト名）を保存する。
+4. 一言を添えて投稿する。DB には Apple の曲 ID を保存する（曲名・アーティスト名も保存するかは [OPEN]、下記 5.）。
 
 ### 試聴と再生回数
 
@@ -57,7 +56,7 @@
 ### 各自のサービスで開く
 
 - Apple Music: 曲 ID から曲のページへ。
-- Spotify: Spotify のリンクから投稿された曲はその曲のページへ。それ以外は、曲名＋アーティスト名で Spotify の検索画面へ。
+- Spotify: 曲名＋アーティスト名で Spotify の検索画面へ。
 - YouTube Music: 曲名＋アーティスト名で検索画面へ。
 
 ### 招待とログイン
@@ -76,7 +75,7 @@
 |---|---|---|
 | profiles | id（Auth のユーザー ID）、handle（一意）、display_name、preferred_service（spotify / apple_music / youtube_music）、invited_by、created_at | 利用者の公開情報 |
 | follows | follower_id、followee_id、created_at | 2 つの ID の組が一意 |
-| posts | id、user_id、apple_track_id、title、artist_name、spotify_url（任意）、comment（一言）、created_at | 試聴音源 URL と画像は保存しない |
+| posts | id、user_id、apple_track_id、（title、artist_name は [OPEN]）、comment（一言）、created_at | 試聴音源 URL と画像は保存しない |
 | likes | user_id、post_id、created_at | 組が一意 |
 | comments | id、post_id、user_id、body、created_at | 返信機能なし |
 | post_stats | post_id、play_count | 投稿者だけが読める。増やすのは専用の関数経由のみ |
@@ -101,13 +100,18 @@
 
 | 項目 | 案 |
 |---|---|
-| 環境 | Supabase の無料プロジェクト 2 つを「開発・MVP 評価用」と「本番」に分ける。Vercel はプレビュー環境と本番環境 |
-| ソースコード | GitHub の非公開リポジトリ（Vercel と GitHub Actions に必要） |
+| 環境 | [OPEN] 開発者は Supabase の無料枠（有効なプロジェクト 2 つ）を別プロジェクトで使用済み。下記 5. |
+| ソースコード | GitHub の非公開リポジトリ。AI が作成する（作成前に必ず開発者に確認する） |
 | バックアップ | GitHub Actions で週 1 回、本番 DB を書き出す |
 | PWA | Web アプリの設定ファイル（manifest）と Service Worker（Android のインストールに fetch ハンドラーが必要） |
 | 固定費 | ドメイン代のみ（年 数千円） |
 
 ## 5. 未確定の点
 
-- [OPEN] iTunes の利用条件で、曲名・アーティスト名・曲 ID を DB に保存してよいか。音声と画像は保存しない方針だが、文字情報の扱いは要確認。
+- [OPEN] 曲名・アーティスト名を DB に保存するか。
+  - 保存しない場合: 表示のたびに iTunes Lookup API で取得する（複数 ID を 1 回で取得可）。
+  - 保存する場合: iTunes の利用条件上問題ないかを確認する（音声と画像は保存しない）。
+- [OPEN] Supabase の環境の分け方。
+  - 無料プランの有効なプロジェクトは、Owner / Admin であるすべての組織を合わせて 2 つまで。一時停止中のプロジェクトは数えない。[Supabase Billing FAQ](https://supabase.com/docs/guides/platform/billing-faq)
+  - 開発は、手元の PC で Supabase をまるごと動かせる（Docker が必要）。[Supabase Local Development](https://supabase.com/docs/guides/local-development)
 - [OPEN] ログインなしの閲覧者に見せる範囲。個別の投稿ページとプロフィールは見せる。タイムライン（フォロー中の投稿）はログインが必要。
