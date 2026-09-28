@@ -64,7 +64,7 @@
 
 ## Open / Next
 
-- [OPEN] 開発者が Spotify Premium を契約しているか（開発モードの必須条件）
+- 開発者は Spotify Premium（個人）を契約済み（2026-09-28 回答）。Premium が切れるとアプリが動かなくなる点に注意。
 - [OPEN] Spotify の開発モードで、ログイン不要の方式の呼び出しがクォータにどう数えられるか
 - [OPEN] YouTube API のデータ保存の条件と、Topic チャンネルの音源を選ぶ精度
-- [OPEN] 各サービスの検索 URL と曲ページ URL を実機で開いたときの挙動（特に LINE MUSIC）
+- [OPEN] 各サービスの検索 URL と曲ページ URL を実機で開いたときの挙動。LINE MUSIC は開発者の端末に入っておらず、確認できない（2026-09-28）
