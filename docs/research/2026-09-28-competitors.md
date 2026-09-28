@@ -29,6 +29,11 @@
   - 評価 4.9（9 件）。英語のみ。
 - **Songstamp**: 毎日 1 曲と気分・メモを記録する音楽日記。友人のフィードもある。[App Store](https://apps.apple.com/app/id6758682448)（確認日 2026-09-28。詳細は未確認）
 
+- **Tunedrop**（tunedrop.org）。[Tunedrop](https://www.tunedrop.org/)（2026-09-28 の名前調査で発見。検索結果の要約による。詳細は未確認）
+  - 投稿・友人のフォロー・1 曲を 30 秒の試聴つきで投稿する機能がある。
+  - Spotify・Apple Music・YouTube Music と連携する。
+  - コンセプトが非常に近い。
+
 **大手サービスの共有機能**
 - **Spotify Messages**。[Spotify Newsroom](https://newsroom.spotify.com/2025-08-26/introducing-messages-a-new-way-to-share-what-you-love-on-spotify-with-friends-and-family/), [2026-01 更新](https://newsroom.spotify.com/2026-01-07/listening-activity-request-to-jam-messages-updates/)（確認日 2026-09-28）
   - 2025-08 に開始したアプリ内 DM。16 歳以上、無料・有料どちらでも使える。
