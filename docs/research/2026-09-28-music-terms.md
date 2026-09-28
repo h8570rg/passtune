@@ -62,3 +62,35 @@
 
 - [OPEN] 利用者の選んだサービスを大きく表示する設計（C1）と、「Apple Music を先頭に」のガイドラインをどう両立するか
 - [OPEN] Apple Music の埋め込みプレーヤーの利用規約の詳細（今回の範囲では見つからず）
+
+## 追加調査: 4 サービスのロゴボタンと、曲ページへのリンク（2026-09-28）
+
+開発者の要望: Apple Music・Spotify・YouTube Music・LINE MUSIC などのロゴボタンを並べ、押すとその曲のページ（各サービスで聴けるページ）へ移動する。
+
+### Facts（確認日 2026-09-28）
+
+**ロゴの使用条件**
+- LINE MUSIC: ガイドラインに従えば誰でも使える。[LINE MUSIC ロゴの使用について](https://music.line.me/top/logo/)
+  - データの変形・加工、色の変更、クリアスペース内への他の情報の表示は禁止。最小サイズ未満での使用も禁止。
+  - シンボル（アイコン）単独の使用は、SNS のアイコン等の既存フォーマットを除き、原則として認められない。
+- YouTube Music: 公式のバッジ（「Listen on」等）があり、提供されたデザインをそのまま使う（変形禁止、デジタルで高さ 20px 以上、周囲に高さの 1/10 以上の余白）。[YouTube Music Help（ポッドキャストのバッジ）](https://support.google.com/youtubemusic/answer/13379217?hl=en)
+  - ロゴ自体の利用には YouTube Music の許可が必要、という記載もある（二次情報、要確認）。
+- Apple Music と Spotify: 上記 Findings のとおり（Apple は提供されたバッジをそのまま使い、並べるときは先頭に置く。Spotify はロゴの最小サイズや配色などの決まり）。
+
+**曲ページへのリンクの作り方**
+- Apple Music: 保存している曲 ID から、その曲のページへ直接リンクできる。
+- Spotify・YouTube Music・LINE MUSIC の検索画面の URL は、いずれも応答した（HTTP 200、2026-09-28 に確認）。
+  - `open.spotify.com/search/<語>`
+  - `music.youtube.com/search?q=<語>`
+  - `music.line.me/webapp/search?query=<語>`
+  - 実際に検索結果が表示されるか（特に LINE MUSIC）は、実機での確認が必要。
+- LINE MUSIC は公開 API がない。[Musicfetch](https://musicfetch.io/services/line-music/api)
+- 複数サービスの曲ページをまとめて取得できる有料 API がある。[Musicfetch](https://musicfetch.io/)
+  - 40 以上のサービスに対応し、LINE MUSIC も含む。
+  - 料金は月 50 USD から。予算の目安を大きく超える。
+- Spotify の曲ページを特定するには、Spotify API（ログイン不要の方式）で曲名とアーティスト名から検索できる（[音楽 API 調査](2026-09-28-music-api-feasibility.md)）。ただし、Spotify の開発者向け規約の対象になる。
+
+### Inferences（推測）
+
+- 曲ページに直接飛ばせるのは、追加の費用・依存なしでは Apple Music だけ。他の 3 つは、まず「そのサービス内での曲名検索の結果」に飛ばすのが現実的。利用者は結果から 1 タップで曲を開く。
+- 小さな正方形のアイコンを並べるデザインは、LINE MUSIC（シンボル単独の原則禁止）や Apple（提供バッジをそのまま使う）の条件と合わない可能性がある。各社の公式バッジやロゴタイプを使う形が安全。

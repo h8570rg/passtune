@@ -37,7 +37,9 @@ MVP を作るための技術方針を決める。提供形態（Web）は決定�
 - [DECIDED] Apple の試聴の横に Spotify 等で開くボタンを置く設計のまま進める（R3a はリスクを承知）
 - [DECIDED] MVP の評価は PC のみ（スマホ実機での確認は公開時）
 - [PROPOSED] 利用条件・ブランドガイドラインに沿った表示ルール（[music-terms](docs/research/2026-09-28-music-terms.md)）
-- [OPEN] 利用者が選んだサービスを大きく表示する設計と、「Apple Music を先頭に」のガイドラインの両立
+- [DECIDED] 各サービス（Apple Music・Spotify・YouTube Music・LINE MUSIC など）のロゴボタンを並べ、その曲のページへ移動する
+- [PROPOSED] Apple Music 以外は、各サービス内の検索結果へ移動する（API・費用なし）
+- [OPEN] 「使っているサービス」の設定を残すか
 - [OPEN] 友人の中に YouTube Music やサブスクなしの人がいるか
 
 ## Blockers
@@ -46,5 +48,5 @@ MVP を作るための技術方針を決める。提供形態（Web）は決定�
 
 ## Next Actions
 
-1. 開発者: 表示ルールの案と、C1 との両立方法を確認する
+1. 開発者: リンク先の作り方と、「使っているサービス」の設定の要否を決める
 2. AI: Phase 9 を締め、Phase 10（ロードマップ・タスク分解）へ

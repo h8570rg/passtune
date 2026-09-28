@@ -55,9 +55,10 @@
 
 ### 各自のサービスで開く
 
-- Apple Music: 曲 ID から曲のページへ。
-- Spotify: 曲名＋アーティスト名で Spotify の検索画面へ。
-- YouTube Music: 曲名＋アーティスト名で検索画面へ。
+各サービスのロゴボタンを並べる（開発者の要望、2026-09-28）。
+
+- Apple Music: 曲 ID から曲のページへ（直接）。
+- Spotify・YouTube Music・LINE MUSIC: [PROPOSED] 曲名＋アーティスト名で、各サービスの検索画面へ（API・費用なし）。
 
 ### 表示のルール（利用条件・ブランドガイドライン）[PROPOSED]
 
@@ -65,7 +66,7 @@
 
 - 試聴プレーヤーの近くに、公式の「Listen on Apple Music」バッジ（その曲への直接リンク）と「provided courtesy of iTunes」の表記を置く。
 - 各サービスで開くボタンを並べるときは、Apple Music を先頭にする。
-- Spotify・YouTube Music は、ロゴを使わず文字のボタンにする。
+- 各サービスのボタンは、各社の公式バッジやロゴタイプを、それぞれのガイドラインどおりに使う（LINE MUSIC はシンボル単独の使用が原則不可）。
 
 ### 招待とログイン
 
