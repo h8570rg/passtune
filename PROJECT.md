@@ -6,7 +6,7 @@
 ## 1. Overview
 
 友人間でお互いに好きな音楽を共有するための SNS を個人開発する。最初は友人約 20 人から始め、不特定多数にも公開する。
-現在は Product Discovery 中。プロダクトの中身・技術構成は未決定。
+Discovery と技術方針の検討（Phase 1〜9）を終え、開発の計画中。技術構成は Web のみ（PWA）・Next.js・Vercel・Supabase（[architecture](docs/technical/architecture.md)）。
 
 ## 2. Vision / Problem
 

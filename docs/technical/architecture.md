@@ -2,7 +2,7 @@
 
 - Phase: 9
 - Last updated: 2026-09-28
-- 状態: [PROPOSED]（採用済みの技術は [005](../decisions/005-platform.md) / [006](../decisions/006-hosting.md) / [007](../decisions/007-baas-auth.md) で DECIDED。このファイルは、それらをどう組み合わせるかの設計案）
+- 状態: [DECIDED]（2026-09-28、Phase 9 完了時に開発者が了承。採用済みの技術は [005](../decisions/005-platform.md) / [006](../decisions/006-hosting.md) / [007](../decisions/007-baas-auth.md) で DECIDED。このファイルは、それらの組み合わせ方の設計）
 - 根拠: [mvp](../product/mvp.md), [solutions](../product/solutions.md), [song-matching](../research/2026-09-28-song-matching.md)
 
 ## 1. 全体構成
@@ -17,10 +17,10 @@
                                                                    │
   ┌──────────── Vercel ────────────┐                               ▼
   │ Next.js（サーバー側）           │                 ┌──────── Supabase ────────┐
-  │  └─ 公開ページの描画（投稿・     │ ──データ取得──→ │ Postgres ＋ 行ごとの      │
-  │      プロフィール。ログインなし  │                 │ アクセス制御（RLS）       │
-  │      でも見られる）             │                 │ Auth（メールの 6 桁コード │
-  │                                │                 │  ・Google）              │
+  │  ├─ 公開ページの描画（投稿・     │ ──データ取得──→ │ Postgres ＋ 行ごとの      │
+  │  │   プロフィール。ログインなし  │                 │ アクセス制御（RLS）       │
+  │  │   でも見られる）             │                 │ Auth（メールの 6 桁コード │
+  │  └─ Spotify ボタンの転送 ─────→ Spotify Web API    │  ・Google）              │
   └────────────────────────────────┘                 └──────────┬───────────────┘
                                                                 │ ログイン用メール
                                                                 ▼
@@ -34,7 +34,8 @@
   - どちらもブラウザからの呼び出しが許可されている（2026-09-28 に確認: `access-control-allow-origin: *`）。
   - 呼び出し回数の上限（約 20 回/分）は IP ごとなので、利用者ごとに分散される。
   - サーバーを経由しないので、Vercel の実行回数も使わない。
-- **Spotify の API や oEmbed は使わない。** 投稿は曲名検索だけ（開発者の決定、2026-09-28）。Spotify へは検索画面へのリンクで誘導する。
+- **投稿は曲名検索だけ**（開発者の決定、2026-09-28）。Spotify の oEmbed は使わない。
+- **Spotify API は「Spotify で開く」ボタンの転送にだけ使う。** ボタンが押された時点で Next.js のサーバー側（Route Handler）が Spotify を検索し、曲ページへ転送する。秘密の鍵はサーバーにのみ置く。Spotify から取ったデータは保存しない（キャッシュ禁止の条件）。
 - **試聴音源と、Apple のジャケット画像は保存しない。** 表示や再生のたびに Apple から直接取得する（利用条件: キャッシュ禁止）。
 
 ## 2. 主な流れ
@@ -53,14 +54,17 @@
 2. 再生が始まったら、DB の関数を呼んで延べ再生回数を 1 増やす。
 3. 再生回数は、投稿者本人だけが読める（RLS）。
 
-### 各自のサービスで開く
+### 各サービスで開く
 
 各サービスのロゴボタンを並べる（開発者の要望、2026-09-28）。
 
 - Apple Music: 曲 ID から曲のページへ（直接）。
-- Spotify・YouTube Music・LINE MUSIC: [PROPOSED] 曲名＋アーティスト名で、各サービスの検索画面へ（API・費用なし）。
+- Spotify: ボタンは `/go/spotify/<投稿ID>` へのリンク。サーバーが Spotify API（Client Credentials、ログイン不要）で「曲名＋アーティスト名、日本向け」を検索する。曲名・アーティスト名・曲の長さ（Apple の値と数秒以内）で 1 曲を選び、`open.spotify.com/track/…` へ転送する。見つからなければ Spotify の検索結果へ転送する。
+  - 前提: 開発者の Spotify Premium（開発モードの必須条件）。切れた場合は検索結果への転送になる。
+- YouTube Music・LINE MUSIC: 曲名＋アーティスト名で、各サービスの検索画面へ（API・費用なし）。YouTube Music は、YouTube Data API での改善を後で検討する。
+- 根拠: [service-deeplinks](../research/2026-09-28-service-deeplinks.md)
 
-### 表示のルール（利用条件・ブランドガイドライン）[PROPOSED]
+### 表示のルール（利用条件・ブランドガイドライン）
 
 根拠: [music-terms](../research/2026-09-28-music-terms.md)
 
@@ -84,7 +88,7 @@
 |---|---|---|
 | profiles | id（Auth のユーザー ID）、handle（一意）、display_name、invited_by、created_at | 利用者の公開情報 |
 | follows | follower_id、followee_id、created_at | 2 つの ID の組が一意 |
-| posts | id、user_id、apple_track_id、title、artist_name、comment（一言）、created_at | 試聴音源と画像は保存しない |
+| posts | id、user_id、apple_track_id、title、artist_name、duration_ms（Spotify の照合用）、comment（一言）、created_at | 試聴音源と画像は保存しない。すべて Apple 由来の情報 |
 | likes | user_id、post_id、created_at | 組が一意 |
 | comments | id、post_id、user_id、body、created_at | 返信機能なし |
 | post_stats | post_id、play_count | 投稿者だけが読める。増やすのは専用の関数経由のみ |

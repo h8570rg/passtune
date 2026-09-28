@@ -6,17 +6,18 @@ Last updated: 2026-09-28
 
 ## Current Phase
 
-Phase 9: Technical Strategy / Architecture
+Phase 10: Roadmap / Task Breakdown
 
 ## Current Goal
 
-MVP を作るための技術方針を決める。提供形態（Web）は決定済み。次にバックエンド（BaaS）・ログイン方式・ホスティング・フロントエンドの技術。
+MVP を作るためのマイルストーンとタスクを決め、開発（Phase 11）を始められる状態にする。
 
 ## Recently Decided
 
-- [DECIDED] 提供形態は Web のみ（PWA）。ネイティブアプリ・ストア公開はしない（[005](docs/decisions/005-platform.md)）
-- [DECIDED] MVP は完成に近い形で作り開発者自身で評価。誰でも登録可、通報・ブロックなし（管理者の削除手段と問い合わせ先で代替）、通知なし（[mvp](docs/product/mvp.md)）
-- Phase 1〜7 の決定は PROJECT.md の Key Decisions と docs/product/ を参照
+- [DECIDED] Phase 9 完了。Web のみ（PWA）・Next.js・Vercel Hobby・Supabase・メールの 6 桁コード＋Google・Resend（[005](docs/decisions/005-platform.md)〜[007](docs/decisions/007-baas-auth.md)、[architecture](docs/technical/architecture.md)）
+- [DECIDED] 各サービスのロゴボタン: Apple Music・Spotify は曲ページ（Spotify は押された時点でサーバーが検索して転送）、YouTube Music・LINE MUSIC は検索結果
+- [DECIDED] MVP は完成に近い形で、開発者が PC のみで評価（[mvp](docs/product/mvp.md)）
+- Phase 1〜8 の決定は PROJECT.md の Key Decisions と docs/product/ を参照
 
 ## Key Findings
 
@@ -25,25 +26,10 @@ MVP を作るための技術方針を決める。提供形態（Web）は決定�
 
 ## Open Questions
 
-- [DECIDED] フロントエンドは Next.js（開発者の希望）
-- [DECIDED] ホスティングは Vercel Hobby で始め、収益化前に移行または Pro（[006](docs/decisions/006-hosting.md)）
-- [DECIDED] BaaS は Supabase 無料プラン。ログインはメールの 6 桁コード＋Google。独自ドメインを取得（[007](docs/decisions/007-baas-auth.md)）
-- [DECIDED] メール送信は Resend の無料枠
-- [PROPOSED] 全体構成・データ設計・アクセスのルール・環境（[architecture](docs/technical/architecture.md)）
-- [DECIDED] 投稿は曲名検索のみ（Spotify / Apple Music のリンクからの投稿は後で検討）
-- [DECIDED] GitHub の非公開リポジトリは AI が作成する。作成前に必ず開発者に確認する
-- [DECIDED] DB には曲 ID・曲名・アーティスト名を保存。試聴音源と画像は保存しない
-- [DECIDED] Supabase はクラウドに本番用 1 つ（既存を 1 つ一時停止）、開発は手元の PC で動かす
-- [DECIDED] Apple の試聴の横に Spotify 等で開くボタンを置く設計のまま進める（R3a はリスクを承知）
-- [DECIDED] MVP の評価は PC のみ（スマホ実機での確認は公開時）
-- [PROPOSED] 利用条件・ブランドガイドラインに沿った表示ルール（[music-terms](docs/research/2026-09-28-music-terms.md)）
-- [DECIDED] 各サービス（Apple Music・Spotify・YouTube Music・LINE MUSIC など）のロゴボタンを並べ、その曲のページへ移動する
-- [PROPOSED] Apple Music 以外は、各サービス内の検索結果へ移動する（API・費用なし）
-- [DECIDED] 「使っているサービス」の設定は当面なし
-- [OPEN] Apple Music 以外のリンク先。Spotify は押された時点で API 検索して転送、YouTube Music は投稿時に API 検索、LINE MUSIC は検索結果のみ、が無料での上限（[service-deeplinks](docs/research/2026-09-28-service-deeplinks.md)）
-- 開発者は Spotify Premium（個人）を契約済み
-- [PROPOSED] Spotify は押された時点でサーバーから API 検索して曲ページへ転送。YouTube Music・LINE MUSIC は当面検索結果
-- [OPEN] 友人の中に YouTube Music やサブスクなしの人がいるか
+- [PROPOSED] マイルストーンとタスク（[roadmap](docs/product/roadmap.md)）
+- [OPEN] Spotify の開発モードで、ログイン不要の方式がユーザー数の上限に数えられないか（アプリ登録後に確認）
+- [OPEN] YouTube Music を曲ページへ直接飛ばす改善（YouTube Data API）の可否
+- [OPEN] 友人の中に YouTube Music・LINE MUSIC の利用者やサブスクなしの人がいるか
 
 ## Blockers
 
@@ -51,5 +37,5 @@ MVP を作るための技術方針を決める。提供形態（Web）は決定�
 
 ## Next Actions
 
-1. 開発者: リンク先の作り方と、「使っているサービス」の設定の要否を決める
-2. AI: Phase 9 を締め、Phase 10（ロードマップ・タスク分解）へ
+1. 開発者: roadmap を確認する
+2. AI: GitHub リポジトリの作成（作成前に確認）から M0 を始める（Phase 11）
