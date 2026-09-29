@@ -2,7 +2,7 @@
 
 > 今の状態だけを書く。過去の経緯は Git 履歴と Decision Log に任せる。目安 60 行以内。
 
-Last updated: 2026-09-29
+Last updated: 2026-09-30
 
 ## Current Phase
 
@@ -36,11 +36,15 @@ M0 を終える: 残りの技術選定と、開発環境の準備。
 - [OPEN] YouTube Music を曲ページへ直接飛ばす改善（YouTube Data API）の可否
 - [OPEN] 友人の中に YouTube Music・LINE MUSIC の利用者やサブスクなしの人がいるか
 
+## In Review
+
+- [PR #1](https://github.com/h8570rg/passtune/pull/1) M0: Next.js と手元の Supabase の土台（jankiroku と同じ構成。手元の Supabase はポート 544xx）
+
 ## Blockers
 
 なし
 
 ## Next Actions
 
-1. AI: M0 の準備（Next.js・手元の Supabase・設定一式を jankiroku に倣って作る）
-2. AI: 残りの技術選定を、該当する M に入る前に比較する
+1. 開発者: PR #1 を確認してマージする。Vercel にプロジェクトを作り GitHub と連携する。Spotify アプリを登録する（M3 までに）
+2. AI: M1（ログインとプロフィール）に入る前に、ログイン画面と profiles の設計を示す
