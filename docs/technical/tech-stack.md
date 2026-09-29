@@ -1,67 +1,45 @@
 # Tech Stack
 
 - Phase: 11（M0 技術選定）
-- Last updated: 2026-09-28
+- Last updated: 2026-09-29
 - 前提（決定済み）: Web のみ（PWA）、Next.js、Vercel Hobby、Supabase、メールの 6 桁コード＋Google ログイン、Resend（[005](../decisions/005-platform.md)〜[008](../decisions/008-service-name.md)）
-- 進め方: AI が候補を比較し、開発者が選ぶ。3 回に分けて決める。
-  - 第 1 回: 土台（パッケージマネージャー、スタイリング、UI コンポーネント、アイコン）
-  - 第 2 回: データまわり（データ取得・状態管理、フォーム・入力チェック、DB アクセス・型、マイグレーション）
-  - 第 3 回: その他（試聴プレーヤー、PWA、フォーマッター・リンター、テスト、CI、エラー監視）
+- **方針 [DECIDED]:** 開発者の別アプリ [jankiroku](https://github.com/h8570rg/jankiroku)（公開リポジトリ）と基本的に同じ技術スタックにする。UI ライブラリも同じ HeroUI（開発者の決定、2026-09-29）。
+  - 理由: 開発者が使い慣れており、設定や書き方を流用できる。保守と意思決定のコストが最小（Project principles）。
+  - 当初の比較（shadcn/ui 等）は、この方針により不要になった。
+- 下記のバージョンは、2026-09-29 時点の jankiroku の package.json の値。着手時に最新の安定版へ揃える。
 
 ## 一覧
 
-| 項目 | 状態 | 選択 |
+| 分類 | 採用 | jankiroku との差 |
 |---|---|---|
-| Next.js のバージョン | [PROPOSED] | 16 系の最新安定版（2026-09 時点で 16.3 系）。App Router |
-| パッケージマネージャー | [PROPOSED] | pnpm |
-| スタイリング | [PROPOSED] | Tailwind CSS v4 |
-| UI コンポーネント | [PROPOSED] | shadcn/ui（Base UI 版） |
-| アイコン | [PROPOSED] | Lucide（shadcn/ui の標準）。音楽サービスのロゴは各社の公式素材 |
-| （第 2 回・第 3 回の項目） | [OPEN] | ― |
+| 実行環境 | Node.js 24（mise で管理） | 同じ |
+| パッケージマネージャー | pnpm（`save-exact=true`） | 同じ |
+| フレームワーク | Next.js 16.3 系（App Router）、React 19.3、TypeScript 7 | 同じ |
+| スタイリング | Tailwind CSS v4 | 同じ |
+| UI コンポーネント | HeroUI v3（`@heroui/react`、`@heroui/styles`）。AI 向けに HeroUI の MCP サーバーを設定 | 同じ |
+| アイコン | Lucide（`lucide-react`）、Iconify（`@iconify/react`） | 同じ。ただし音楽サービスのロゴは各社の公式素材を使う（[music-terms](../research/2026-09-28-music-terms.md)） |
+| アニメーション | Motion | 同じ |
+| テーマ（ダークモード） | next-themes | 同じ |
+| フォームと入力チェック | Conform ＋ Zod | 同じ |
+| データの取得・更新 | Server Components から `lib/data/` の関数（`server-only`）で取得。更新は Server Actions | 同じ |
+| DB アクセス・型 | `@supabase/supabase-js` ＋ `@supabase/ssr`。型は `supabase gen types` で自動生成 | 同じ |
+| マイグレーション | Supabase CLI（`supabase/migrations`、`schema.sql`、`db diff`） | 同じ |
+| 日付・その他 | dayjs、use-debounce（曲の検索の入力に使える） | recharts は不要 |
+| アクセス解析 | Vercel Analytics・Speed Insights | 同じ。外部送信規律の公表対象としてプライバシーポリシーに記載する |
+| リンター・フォーマッター | oxlint（＋ oxlint-tailwindcss）、oxfmt、cspell | 同じ |
+| Git フック | lefthook（コミット前にチェック・型・テスト・スペル） | 同じ |
+| テスト | Vitest（単体）、Playwright（E2E、スマホ端末のエミュレーション） | 同じ |
+| CI / CD | GitHub Actions: main への push で本番 DB にマイグレーションを適用。Supabase の停止を防ぐ定期アクセス | **本番の Supabase のみ**（開発用のクラウドプロジェクトは持たない。開発は手元の Supabase） |
+| 依存関係の更新 | Renovate（マイナー更新は自動マージ） | 同じ |
 
-## 第 1 回: 土台
+## jankiroku から分かったこと
 
-### Next.js のバージョン
+- jankiroku は、Supabase の無料プランの「1 週間無操作で停止」を、GitHub Actions からの毎日の定期アクセスで防いでいる（`keep-supabase-alive.yml`）。
+  - Passtune でも同じ方法をとる。[007](../decisions/007-baas-auth.md) の「停止対策」はこれで具体化される。
 
-- Next.js 16.3 は 2026-06-26 に公開。2026-09-22 に 16.3.6（上流の依存関係の重大なセキュリティ問題の修正）が出ており、2026-09-30 に 16.3.7 の予定。[Next.js Blog](https://nextjs.org/blog), [Security Update](https://nextjs.org/blog/upcoming-nextjs-security-release-september-22-2026)（確認日 2026-09-28）
-- [PROPOSED] 開始時点の 16 系の最新安定版を使い、セキュリティ更新にはすぐ追従する。
+## まだ決めていないこと（第 3 回で扱う）
 
-### パッケージマネージャー
-
-| Option | メリット | デメリット |
-|---|---|---|
-| npm | 追加の導入が不要。互換性が最も高い | 遅め。依存関係の管理が緩い |
-| **pnpm** | 速い。依存関係の管理が厳密。Vercel が設定なしで認識する | 導入が 1 つ増える |
-| Bun | 最も速い | Vercel での Bun ビルドは新しく、一部で不安定との報告 |
-
-- 出典: [Vercel Docs: Package Managers](https://vercel.com/docs/package-managers), [Vercel Changelog: Bun](https://vercel.com/changelog/bun-install-is-now-supported-with-zero-configuration)
-- [PROPOSED] pnpm。開発者が普段使っているものがあれば、それを優先する。
-
-### スタイリング
-
-| Option | メリット | デメリット |
-|---|---|---|
-| **Tailwind CSS v4** | CSS だけで設定でき、v3 より大幅に速い。shadcn/ui の前提。AI の支援を受けやすい | クラス名が長くなりやすい |
-| CSS Modules | 素の CSS に近く、Next.js 標準 | コンポーネントライブラリとの組み合わせを自分で整える必要 |
-| CSS-in-JS（ランタイム型） | 柔軟 | Server Components と相性が悪い |
-
-- 出典: [Tailwind CSS v4.0](https://tailwindcss.com/blog/tailwindcss-v4), [shadcn/ui: Tailwind v4](https://ui.shadcn.com/docs/tailwind-v4)
-- [PROPOSED] Tailwind CSS v4。
-
-### UI コンポーネント
-
-| Option | 仕組み | メリット | デメリット |
-|---|---|---|---|
-| **shadcn/ui** | 部品のソースコードを自分のリポジトリにコピーして使う | 見た目を自由に変えられる（音楽アプリらしい独自の見た目にしやすい）。依存が少ない。Next.js ＋ Tailwind の定番 | 部品のコードを自分で持つので、更新は自分で取り込む |
-| Mantine | npm の 1 パッケージで 100 以上の部品とフック | すぐ揃う。フォーム等のフックも付属 | 独自の見た目に寄せるのに手間。バンドルが大きめ |
-| Chakra UI v3 | Panda CSS と Ark UI が土台 | 型安全なスタイル | Tailwind と別系統になる |
-| 使わない | すべて自作 | 自由 | ダイアログやメニューなど、アクセシビリティ込みで作るのは重い |
-
-- shadcn/ui は 2026-07 から Base UI を標準の土台にした（Radix も引き続き対応）。[shadcn/ui Changelog](https://ui.shadcn.com/docs/changelog/2026-07-base-ui-default)
-- 比較の出典: [Makers Den](https://makersden.io/blog/react-ui-libs-2025-comparing-shadcn-radix-mantine-mui-chakra), [DesignRevision](https://designrevision.com/blog/best-react-component-libraries)（二次情報）
-- [PROPOSED] shadcn/ui（Base UI 版）。
-
-### アイコン
-
-- [PROPOSED] Lucide（shadcn/ui の標準）。
-- Apple Music・Spotify・YouTube Music・LINE MUSIC のロゴは、アイコン集ではなく各社の公式素材を、各社のガイドラインどおりに使う（[music-terms](../research/2026-09-28-music-terms.md)）。
+- [OPEN] 試聴プレーヤーの作り方（標準の audio 要素か、ライブラリか）
+- [OPEN] PWA の Service Worker（jankiroku は `manifest.ts` のみ。Android のインストールには fetch ハンドラーを持つ Service Worker が必要）
+- [OPEN] 本番 DB のバックアップ（GitHub Actions）
+- [OPEN] エラーの監視（公開前までに）

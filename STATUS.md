@@ -2,7 +2,7 @@
 
 > 今の状態だけを書く。過去の経緯は Git 履歴と Decision Log に任せる。目安 60 行以内。
 
-Last updated: 2026-09-28
+Last updated: 2026-09-29
 
 ## Current Phase
 
@@ -10,10 +10,11 @@ Phase 11: Prototype / Development（M0 技術選定と開発の準備）
 
 ## Current Goal
 
-M0 を終える: 技術選定（3 回に分けて決める）と、開発環境の準備。
+M0 を終える: 残りの技術選定と、開発環境の準備。
 
 ## Recently Decided
 
+- [DECIDED] 技術スタックは開発者の別アプリ jankiroku と同じ（HeroUI、Conform＋Zod、oxlint/oxfmt、Vitest/Playwright、lefthook、Renovate 等）（[tech-stack](docs/technical/tech-stack.md)）
 - [DECIDED] Phase 10 完了。ロードマップ M0〜M7（[roadmap](docs/product/roadmap.md)）。GitHub リポジトリ h8570rg/passtune を作成
 - [DECIDED] Phase 9 完了。Web のみ（PWA）・Next.js・Vercel Hobby・Supabase・メールの 6 桁コード＋Google・Resend（[005](docs/decisions/005-platform.md)〜[007](docs/decisions/007-baas-auth.md)、[architecture](docs/technical/architecture.md)）
 - [DECIDED] 各サービスのロゴボタン: Apple Music・Spotify は曲ページ（Spotify は押された時点でサーバーが検索して転送）、YouTube Music・LINE MUSIC は検索結果
@@ -28,8 +29,9 @@ M0 を終える: 技術選定（3 回に分けて決める）と、開発環境�
 
 ## Open Questions
 
-- [PROPOSED] 技術選定 第 1 回: pnpm、Tailwind CSS v4、shadcn/ui（Base UI 版）、Lucide（[tech-stack](docs/technical/tech-stack.md)）
-- ドメインは開発者が取得する（進行中）
+- [OPEN] 残りの技術選定: 試聴プレーヤー、PWA の Service Worker、DB のバックアップ、エラー監視
+- [OPEN] コードの変更のコミット・レビューの進め方（main に直接か、ブランチと PR か）
+- ドメインは開発者が取得中。Supabase の本番用の枠は、開発者が既存プロジェクトを停止中（開発は手元の Supabase で進められる）
 - [OPEN] Spotify の開発モードで、ログイン不要の方式がユーザー数の上限に数えられないか（アプリ登録後に確認）
 - [OPEN] YouTube Music を曲ページへ直接飛ばす改善（YouTube Data API）の可否
 - [OPEN] 友人の中に YouTube Music・LINE MUSIC の利用者やサブスクなしの人がいるか
@@ -40,5 +42,6 @@ M0 を終える: 技術選定（3 回に分けて決める）と、開発環境�
 
 ## Next Actions
 
-1. 開発者: 技術選定 第 1 回を確認する。ドメインを取得する
-2. AI: 技術選定 第 2 回（データまわり）を比較する
+1. 開発者: コードの進め方（直接か PR か）を決める
+2. AI: M0 の準備（Next.js・手元の Supabase・設定一式を jankiroku に倣って作る）
+3. AI: 残りの技術選定を、該当する M に入る前に比較する
