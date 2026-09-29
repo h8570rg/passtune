@@ -54,8 +54,8 @@
 
 - [x] GitHub の非公開リポジトリを作る（h8570rg/passtune、2026-09-28）
 - [x] このリポジトリ（ドキュメント）をリモートに上げる
-- [ ] Next.js のプロジェクトを作る（最新の安定版。TypeScript）
-- [ ] 手元で Supabase を動かす（Supabase CLI ＋ Docker）
+- [x] Next.js のプロジェクトを作る（jankiroku に倣った設定一式。[development](../technical/development.md)）
+- [x] 手元で Supabase を動かす（Supabase CLI ＋ Docker。ポートは 544xx 番台）
 - [ ] Vercel にプロジェクトを作り、GitHub と連携する（プレビュー環境まで）
 - [ ] Spotify の開発者サイトでアプリを登録する（開発者本人が行う。秘密の鍵は環境変数に置き、チャットには貼らない）
 

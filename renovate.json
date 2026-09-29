@@ -1,0 +1,19 @@
+{
+  "$schema": "https://docs.renovatebot.com/renovate-schema.json",
+  "extends": ["config:best-practices", ":automergeMinor"],
+  "labels": ["renovate"],
+  "packageRules": [
+    {
+      "groupName": "heroui",
+      "matchPackageNames": ["@heroui/react", "@heroui/styles"]
+    },
+    {
+      "groupName": "react",
+      "matchPackageNames": ["react", "react-dom", "@types/react", "@types/react-dom"]
+    },
+    {
+      "groupName": "oxc",
+      "matchPackageNames": ["oxlint", "oxfmt", "oxlint-tailwindcss"]
+    }
+  ]
+}

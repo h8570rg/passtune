@@ -1,0 +1,12 @@
+pre-commit:
+  parallel: true
+  commands:
+    "check":
+      run: "pnpm run check"
+      stage_fixed: true
+    "typecheck":
+      run: "pnpm run type"
+    "test":
+      run: "pnpm run test"
+    "spell":
+      run: "pnpm run spell"
