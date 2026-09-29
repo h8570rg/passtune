@@ -14,6 +14,7 @@ M0 を終える: 残りの技術選定と、開発環境の準備。
 
 ## Recently Decided
 
+- [DECIDED] コードの変更はブランチと PR で進め、開発者がマージする。ドキュメントは main に直接（[AGENTS.md](AGENTS.md)）
 - [DECIDED] 技術スタックは開発者の別アプリ jankiroku と同じ（HeroUI、Conform＋Zod、oxlint/oxfmt、Vitest/Playwright、lefthook、Renovate 等）（[tech-stack](docs/technical/tech-stack.md)）
 - [DECIDED] Phase 10 完了。ロードマップ M0〜M7（[roadmap](docs/product/roadmap.md)）。GitHub リポジトリ h8570rg/passtune を作成
 - [DECIDED] Phase 9 完了。Web のみ（PWA）・Next.js・Vercel Hobby・Supabase・メールの 6 桁コード＋Google・Resend（[005](docs/decisions/005-platform.md)〜[007](docs/decisions/007-baas-auth.md)、[architecture](docs/technical/architecture.md)）
@@ -30,7 +31,6 @@ M0 を終える: 残りの技術選定と、開発環境の準備。
 ## Open Questions
 
 - [OPEN] 残りの技術選定: 試聴プレーヤー、PWA の Service Worker、DB のバックアップ、エラー監視
-- [OPEN] コードの変更のコミット・レビューの進め方（main に直接か、ブランチと PR か）
 - ドメインは開発者が取得中。Supabase の本番用の枠は、開発者が既存プロジェクトを停止中（開発は手元の Supabase で進められる）
 - [OPEN] Spotify の開発モードで、ログイン不要の方式がユーザー数の上限に数えられないか（アプリ登録後に確認）
 - [OPEN] YouTube Music を曲ページへ直接飛ばす改善（YouTube Data API）の可否
@@ -42,6 +42,5 @@ M0 を終える: 残りの技術選定と、開発環境の準備。
 
 ## Next Actions
 
-1. 開発者: コードの進め方（直接か PR か）を決める
-2. AI: M0 の準備（Next.js・手元の Supabase・設定一式を jankiroku に倣って作る）
-3. AI: 残りの技術選定を、該当する M に入る前に比較する
+1. AI: M0 の準備（Next.js・手元の Supabase・設定一式を jankiroku に倣って作る）
+2. AI: 残りの技術選定を、該当する M に入る前に比較する
