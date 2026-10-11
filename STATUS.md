@@ -25,7 +25,7 @@ Phase 11 完了間近: **手元（ローカル）でサービスが完成**（�
 
 ## Key Findings（開発中に分かったこと）
 
-- Docker なしの手元 Supabase はメールテンプレートのファイル指定に未対応 → 手元のメールにはコードが入らずリンクのみ。ログイン画面はコードとリンクの両方に対応した
+- Docker なしの手元 Supabase はメールテンプレートのファイル指定に未対応 → メール送信フックで、手元でも 6 桁コード入りのメールを送るようにした（[development](docs/technical/development.md)）
 - 手元の Supabase は git ブランチごとに別スタック。切り替え時は `pnpm supabase:stop --all`
 - GitHub のシークレット検知が手元 Supabase の既定キーも止める → E2E はキーを `supabase status` から読む
 
