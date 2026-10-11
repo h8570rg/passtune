@@ -44,11 +44,11 @@
 - [x] DB へのアクセス方法（supabase-js と型の自動生成、ORM を使うか）
 - [x] DB のマイグレーションの管理（Supabase CLI）
 - [x] 試聴プレーヤーの作り方（標準の audio 要素か、ライブラリか）
-- [ ] PWA の実現方法（ライブラリを使うか）
+- [x] PWA の実現方法（ライブラリを使うか）
 - [x] フォーマッター・リンター
 - [x] テストの方針（どこまで書くか、単体・E2E の道具）
 - [x] CI（GitHub Actions で何を回すか）
-- [ ] エラーの監視（公開前までに決めればよい）
+- [x] エラーの監視（公開前までに決めればよい）
 
 **準備**
 
@@ -96,18 +96,18 @@
 
 ### M5 招待リンクとログインなしの閲覧
 
-- [ ] 招待リンク `/i/<ID>?openExternalBrowser=1`
-- [ ] 招待リンクから登録すると、招待した人を自動でフォロー
-- [ ] ログインなしで、個別の投稿ページとプロフィールを見られる
+- [x] 招待リンク `/i/<ID>?openExternalBrowser=1`
+- [x] 招待リンクから登録すると、招待した人を自動でフォロー
+- [x] ログインなしで、個別の投稿ページとプロフィールを見られる
 
 ### M6 PWA・規約・計測・運用の仕上げ
 
-- [ ] PWA の設定（manifest、Service Worker に fetch ハンドラー）
-- [ ] iPhone で「ホーム画面に追加」の案内
-- [ ] 利用規約・プライバシーポリシー（問い合わせ先、外部送信の公表を含む）
-- [ ] 計測（daily_active）と、確認用の SQL を docs/technical/ に置く（記録は M4 で実装済み）
-- [ ] 管理者による削除の手順を docs/technical/ に書く
-- [ ] 本番 DB のバックアップ（GitHub Actions、週 1 回）
+- [x] PWA の設定（manifest、Service Worker に fetch ハンドラー）
+- [x] iPhone で「ホーム画面に追加」の案内
+- [x] 利用規約・プライバシーポリシー（問い合わせ先、外部送信の公表を含む）
+- [x] 計測（daily_active）と、確認用の SQL を docs/technical/ に置く（[admin](../technical/admin.md)）
+- [x] 管理者による削除の手順を docs/technical/ に書く
+- [x] 本番 DB のバックアップ（GitHub Actions、週 1 回）
 
 ### MVP 評価（Phase 12）
 

@@ -2,6 +2,7 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { after } from "next/server";
 import { AppNav } from "@/components/app-nav";
+import { AddToHomeScreenHint } from "@/components/pwa";
 import { UserAvatar } from "@/components/user-avatar";
 import { SERVICE_NAME } from "@/lib/config";
 import { getAuthUser, getMyProfile } from "@/lib/data/user";
@@ -50,7 +51,10 @@ export default async function AppLayout({ children }: LayoutProps<"/">) {
             <AppNav handle={profile.handle} variant="side" />
           </aside>
         ) : null}
-        <main className="w-full max-w-xl min-w-0 flex-1 py-4 pb-24 md:pb-8">{children}</main>
+        <main className="w-full max-w-xl min-w-0 flex-1 py-4 pb-24 md:pb-8">
+          {profile ? <AddToHomeScreenHint /> : null}
+          {children}
+        </main>
       </div>
       {profile ? <AppNav handle={profile.handle} variant="tabs" /> : null}
     </div>

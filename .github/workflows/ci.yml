@@ -1,0 +1,25 @@
+name: CI
+
+on:
+  pull_request:
+  push:
+    branches: [main]
+
+jobs:
+  check:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v5
+      # Node.js と pnpm のバージョンは .mise.toml と package.json の packageManager から決まる
+      - uses: jdx/mise-action@v3
+      - run: corepack enable
+      - run: pnpm install --frozen-lockfile
+      - run: pnpm exec oxlint
+      - run: pnpm exec oxfmt --check
+      - run: pnpm run type
+      - run: pnpm run test
+      - run: pnpm run spell
+      - run: pnpm run build
+        env:
+          NEXT_PUBLIC_SUPABASE_URL: http://127.0.0.1:54421
+          NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY: ci-dummy-key

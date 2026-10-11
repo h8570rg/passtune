@@ -1,5 +1,8 @@
-import type { Metadata } from "next";
-import { SERVICE_NAME } from "@/lib/config";
+import { Analytics } from "@vercel/analytics/next";
+import { SpeedInsights } from "@vercel/speed-insights/next";
+import type { Metadata, Viewport } from "next";
+import { ServiceWorkerRegistration } from "@/components/pwa";
+import { SERVICE_DESCRIPTION, SERVICE_NAME } from "@/lib/config";
 import { getURL } from "@/lib/utils/url";
 import "./globals.css";
 import { Providers } from "./providers";
@@ -10,11 +13,21 @@ export const metadata: Metadata = {
     template: `%s | ${SERVICE_NAME}`,
     default: SERVICE_NAME,
   },
-  description: "友人と好きな曲を 1 曲ずつ届け合う音楽共有 SNS",
+  description: SERVICE_DESCRIPTION,
+  applicationName: SERVICE_NAME,
+  appleWebApp: { capable: true, title: SERVICE_NAME, statusBarStyle: "default" },
   robots: {
     index: false,
     follow: false,
   },
+};
+
+export const viewport: Viewport = {
+  themeColor: [
+    { media: "(prefers-color-scheme: light)", color: "#ffffff" },
+    { media: "(prefers-color-scheme: dark)", color: "#0b0b12" },
+  ],
+  viewportFit: "cover",
 };
 
 export default function RootLayout({ children }: { children: React.ReactNode }) {
@@ -22,6 +35,9 @@ export default function RootLayout({ children }: { children: React.ReactNode }) 
     <html lang="ja" suppressHydrationWarning>
       <body className="bg-background text-foreground">
         <Providers>{children}</Providers>
+        <ServiceWorkerRegistration />
+        <Analytics />
+        <SpeedInsights />
       </body>
     </html>
   );
