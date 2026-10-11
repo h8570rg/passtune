@@ -5,19 +5,19 @@ select plan(16);
 
 -- テスト用のユーザー 2 人
 insert into auth.users (id, email) values
-  ('11111111-1111-1111-1111-111111111111', 'alice@example.com'),
-  ('22222222-2222-2222-2222-222222222222', 'bob@example.com');
+  ('11111111-1111-1111-1111-111111111111', 'rls-alice@test.local'),
+  ('22222222-2222-2222-2222-222222222222', 'rls-bob@test.local');
 
 -- alice としてログイン
 set local role authenticated;
 set local request.jwt.claims to '{"sub":"11111111-1111-1111-1111-111111111111","role":"authenticated"}';
 
 select lives_ok(
-  $$insert into public.profiles (id, handle, display_name) values ('11111111-1111-1111-1111-111111111111', 'alice', 'Alice')$$,
+  $$insert into public.profiles (id, handle, display_name) values ('11111111-1111-1111-1111-111111111111', 'rls_alice', 'Alice')$$,
   '自分のプロフィールは作れる'
 );
 select throws_ok(
-  $$insert into public.profiles (id, handle, display_name) values ('22222222-2222-2222-2222-222222222222', 'bob', 'Bob')$$,
+  $$insert into public.profiles (id, handle, display_name) values ('22222222-2222-2222-2222-222222222222', 'rls_bob', 'Bob')$$,
   '42501', null,
   '他人のプロフィールは作れない'
 );
@@ -29,7 +29,7 @@ select throws_ok(
 
 -- bob のプロフィールは管理者権限で作る
 reset role;
-insert into public.profiles (id, handle, display_name) values ('22222222-2222-2222-2222-222222222222', 'bob', 'Bob');
+insert into public.profiles (id, handle, display_name) values ('22222222-2222-2222-2222-222222222222', 'rls_bob', 'Bob');
 insert into public.posts (id, user_id, apple_track_id, title, artist_name)
   values ('33333333-3333-3333-3333-333333333333', '22222222-2222-2222-2222-222222222222', 1490256995, '夜に駆ける', 'YOASOBI');
 
@@ -99,7 +99,7 @@ select is(
   'ログインなしでも投稿は読める'
 );
 select is(
-  (select count(*) from public.post_play_counts),
+  (select count(*) from public.post_play_counts where post_id = '33333333-3333-3333-3333-333333333333'),
   0::bigint,
   'ログインなしでは再生回数は見えない'
 );

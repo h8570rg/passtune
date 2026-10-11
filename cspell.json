@@ -2,14 +2,15 @@
   "$schema": "https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json",
   "version": "0.2",
   "ignorePaths": [
-    "docs/**",
     "*.md",
-    "supabase/config.toml",
-    "supabase/migrations",
+    "docs/**",
     "lib/database.types.ts",
     "package.json",
     "pnpm-lock.yaml",
-    "pnpm-workspace.yaml"
+    "pnpm-workspace.yaml",
+    "supabase/config.toml",
+    "supabase/migrations",
+    "supabase/seed.sql"
   ],
   "words": [
     "apikey",
