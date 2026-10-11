@@ -1,9 +1,11 @@
 import Link from "next/link";
 import { redirect } from "next/navigation";
+import { after } from "next/server";
 import { AppNav } from "@/components/app-nav";
 import { UserAvatar } from "@/components/user-avatar";
 import { SERVICE_NAME } from "@/lib/config";
 import { getAuthUser, getMyProfile } from "@/lib/data/user";
+import { createClient } from "@/lib/supabase/server";
 
 /**
  * アプリの共通レイアウト。ログインなしでも投稿・プロフィールは見られる。
@@ -13,6 +15,13 @@ export default async function AppLayout({ children }: LayoutProps<"/">) {
   const user = await getAuthUser();
   const profile = user ? await getMyProfile() : null;
   if (user && !profile) redirect("/onboarding");
+  if (profile) {
+    // 計測: 今日の利用を記録する（「週に 1 回以上開く人の数」）。応答を待たせないよう、返したあとに行う
+    const supabase = await createClient();
+    after(async () => {
+      await supabase.rpc("record_daily_activity");
+    });
+  }
 
   return (
     <div className="min-h-dvh">
