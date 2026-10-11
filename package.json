@@ -14,12 +14,13 @@
     "type": "next typegen && tsc --noEmit",
     "test": "vitest run --passWithNoTests",
     "spell": "cspell . --gitignore",
-    "supabase:start": "supabase start",
+    "supabase:start": "supabase start --runtime native -x realtime,functions,analytics,pooler",
     "supabase:stop": "supabase stop",
     "supabase:reset": "supabase db reset",
     "supabase:migration": "supabase migration new",
-    "supabase:diff": "supabase db diff --local --schema public",
-    "supabase:type": "supabase gen types typescript --local > lib/database.types.ts"
+    "supabase:type": "supabase gen types typescript --local > lib/database.types.ts",
+    "supabase:test": "supabase test db",
+    "supabase:sync": "supabase db schema declarative sync --apply --name"
   },
   "dependencies": {
     "@heroui/react": "3.2.6",
@@ -44,7 +45,7 @@
     "oxfmt": "0.70.0",
     "oxlint": "1.85.0",
     "oxlint-tailwindcss": "1.13.0",
-    "supabase": "2.117.0",
+    "supabase": "2.120.0",
     "typescript": "7.0.2",
     "vitest": "5.0.2"
   },
