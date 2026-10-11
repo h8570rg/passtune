@@ -43,7 +43,7 @@
 - [x] フォームと入力チェック
 - [x] DB へのアクセス方法（supabase-js と型の自動生成、ORM を使うか）
 - [x] DB のマイグレーションの管理（Supabase CLI）
-- [ ] 試聴プレーヤーの作り方（標準の audio 要素か、ライブラリか）
+- [x] 試聴プレーヤーの作り方（標準の audio 要素か、ライブラリか）
 - [ ] PWA の実現方法（ライブラリを使うか）
 - [x] フォーマッター・リンター
 - [x] テストの方針（どこまで書くか、単体・E2E の道具）
@@ -69,21 +69,21 @@
 
 ### M2 曲を検索して投稿する
 
-- [ ] ブラウザから iTunes Search API で曲を検索する画面
-- [ ] 候補を試聴しながら 1 曲を選ぶ（取り違えの防止: R4）
-- [ ] 一言を添えて投稿する（posts テーブルと RLS）
-- [ ] 自分の投稿の削除
+- [x] ブラウザから iTunes Search API で曲を検索する画面
+- [x] 候補を試聴しながら 1 曲を選ぶ（取り違えの防止: R4）
+- [x] 一言を添えて投稿する（posts テーブルと RLS）
+- [x] 自分の投稿の削除
 
 ### M3 試聴・再生回数・各サービスで開く
 
 - [ ] 試聴プレーヤー（再生時に iTunes Lookup API で試聴音源を取得）
-- [ ] 表示のルール（Listen on Apple Music バッジ、「provided courtesy of iTunes」）
+- [x] 表示のルール（Listen on Apple Music バッジ、「provided courtesy of iTunes」）
 - [ ] 延べ再生回数（post_stats、増やす関数、投稿者だけが読める RLS）
-- [ ] 各サービスのロゴボタン（Apple Music を先頭、各社のガイドラインどおり）
-- [ ] Apple Music: 曲ページへ
-- [ ] Spotify: `/go/spotify/<投稿ID>` のサーバー側転送（曲名・アーティスト名・曲の長さで照合、見つからなければ検索結果へ）
-- [ ] YouTube Music・LINE MUSIC: 検索結果へ
-- [ ] Spotify の照合精度を、開発者がよく聴く曲で確かめる
+- [ ] 各サービスのロゴボタン（Apple Music を先頭。公式ロゴ素材への差し替えは公開前に。今は文字ボタン）
+- [x] Apple Music: 曲ページへ
+- [x] Spotify: `/go/spotify/<投稿ID>` のサーバー側転送（曲名・アーティスト名・曲の長さで照合、見つからなければ検索結果へ）
+- [x] YouTube Music・LINE MUSIC: 検索結果へ
+- [ ] Spotify の照合精度を、開発者がよく聴く曲で確かめる（Spotify の認証情報の設定待ち）
 
 ### M4 フォロー・タイムライン・いいね・コメント
 

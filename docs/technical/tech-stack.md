@@ -40,7 +40,7 @@
 
 ## まだ決めていないこと（第 3 回で扱う）
 
-- [OPEN] 試聴プレーヤーの作り方（標準の audio 要素か、ライブラリか）
+- [DECIDED by AI] 試聴プレーヤー: ライブラリを使わず標準の Audio 要素で、同時に 1 曲だけ再生する共通プレーヤー（`components/player-provider.tsx`）。30 秒の試聴に必要な機能は少ないため
 - [OPEN] PWA の Service Worker（jankiroku は `manifest.ts` のみ。Android のインストールには fetch ハンドラーを持つ Service Worker が必要）
 - [OPEN] 本番 DB のバックアップ（GitHub Actions）
 - [OPEN] エラーの監視（公開前までに）
