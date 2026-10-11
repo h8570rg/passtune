@@ -2,49 +2,47 @@
 
 > 今の状態だけを書く。過去の経緯は Git 履歴と Decision Log に任せる。目安 60 行以内。
 
-Last updated: 2026-09-30
+Last updated: 2026-10-11
 
 ## Current Phase
 
-Phase 11: Prototype / Development（M0 技術選定と開発の準備）
+Phase 11 完了間近: **手元（ローカル）でサービスが完成**（環境変数・外部サービスの認証情報を除く）。次は開発者の MVP 評価（Phase 12）と公開準備（M7 / Phase 13）。
 
 ## Current Goal
 
-M0 を終える: 残りの技術選定と、開発環境の準備。
+開発者が PC で MVP を評価し、公開に必要な認証情報・設定をそろえる（[launch-checklist](docs/technical/launch-checklist.md)）。
 
-## Recently Decided
+## Recently Done（2026-10-11、AI が開発者の指示で一気に実装）
 
-- [DECIDED] コードの変更はブランチと PR で進め、開発者がマージする。ドキュメントは main に直接（[AGENTS.md](AGENTS.md)）
-- [DECIDED] 技術スタックは開発者の別アプリ jankiroku と同じ（HeroUI、Conform＋Zod、oxlint/oxfmt、Vitest/Playwright、lefthook、Renovate 等）（[tech-stack](docs/technical/tech-stack.md)）
-- [DECIDED] Phase 10 完了。ロードマップ M0〜M7（[roadmap](docs/product/roadmap.md)）。GitHub リポジトリ h8570rg/passtune を作成
-- [DECIDED] Phase 9 完了。Web のみ（PWA）・Next.js・Vercel Hobby・Supabase・メールの 6 桁コード＋Google・Resend（[005](docs/decisions/005-platform.md)〜[007](docs/decisions/007-baas-auth.md)、[architecture](docs/technical/architecture.md)）
-- [DECIDED] 各サービスのロゴボタン: Apple Music・Spotify は曲ページ（Spotify は押された時点でサーバーが検索して転送）、YouTube Music・LINE MUSIC は検索結果
-- [DECIDED] MVP は完成に近い形で、開発者が PC のみで評価（[mvp](docs/product/mvp.md)）
-- [DECIDED] サービス名は Passtune、コードネームは passtune（[008](docs/decisions/008-service-name.md)）
-- Phase 1〜8 の決定は PROJECT.md の Key Decisions と docs/product/ を参照
+- M1 ログイン（メールの 6 桁コード / Google）とプロフィール（アイコン画像つき）: PR #7
+- M2・M3 投稿・試聴・再生回数・各サービスで開く・Spotify への転送: PR #8
+- M4 フォロー・タイムライン・いいね・コメント・反応: PR #9
+- M5・M6 招待リンク・PWA・ホーム画面追加の案内・規約・CI / バックアップ: PR #12、サンプルデータ: PR #13
+- DB 設計（Supabase のベストプラクティス）・RLS テスト: PR #6（[database](docs/technical/database.md)）
+- UI 設計（モデルベース UI デザイン）: [ui-design](docs/technical/ui-design.md)
+- 手元の Supabase を Docker なしに（Supabase CLI のネイティブ実行、アルファ版）: [development](docs/technical/development.md)
+- テスト: Vitest 10 件、pgTAP 16 件、Playwright 9 件、CI（GitHub Actions）
 
-## Key Findings
+## Key Findings（開発中に分かったこと）
 
-- Spotify のユーザー連携は 5 人まで、API ではプレビュー不可。Apple の iTunes Search API はキーなしでプレビュー取得可（[research](docs/research/2026-09-28-music-api-feasibility.md)）
-- 曲の照合: Apple Music リンクからは試聴まで確実。曲名検索は日本語・ローマ字・英語で本家が先頭（カバー等も混ざる）。Spotify リンクはキーなしだと曲名のみ（[research](docs/research/2026-09-28-song-matching.md)）
+- Docker なしの手元 Supabase はメールテンプレートのファイル指定に未対応 → 手元のメールにはコードが入らずリンクのみ。ログイン画面はコードとリンクの両方に対応した
+- 手元の Supabase は git ブランチごとに別スタック。切り替え時は `pnpm supabase:stop --all`
+- GitHub のシークレット検知が手元 Supabase の既定キーも止める → E2E はキーを `supabase status` から読む
 
-## Open Questions
+## Open Questions（開発者に確認したいこと）
 
-- [OPEN] 残りの技術選定: 試聴プレーヤー、PWA の Service Worker、DB のバックアップ、エラー監視
-- ドメインは開発者が取得中。Supabase の本番用の枠は、開発者が既存プロジェクトを停止中（開発は手元の Supabase で進められる）
+- [OPEN] 判断して進めた事項の確認（下記の一覧は、2026-10-11 の AI の報告を参照）
+- [OPEN] 問い合わせ先のメールアドレス
+- [OPEN] 音楽サービスの公式ロゴ素材の入手（今は文字ボタン）
 - [OPEN] Spotify の開発モードで、ログイン不要の方式がユーザー数の上限に数えられないか（アプリ登録後に確認）
 - [OPEN] YouTube Music を曲ページへ直接飛ばす改善（YouTube Data API）の可否
-- [OPEN] 友人の中に YouTube Music・LINE MUSIC の利用者やサブスクなしの人がいるか
-
-## In Review
-
-- [PR #1](https://github.com/h8570rg/passtune/pull/1) M0: Next.js と手元の Supabase の土台（jankiroku と同じ構成。手元の Supabase はポート 544xx）
 
 ## Blockers
 
-なし
+なし（公開には開発者の認証情報・設定が必要）
 
 ## Next Actions
 
-1. 開発者: PR #1 を確認してマージする。Vercel にプロジェクトを作り GitHub と連携する。Spotify アプリを登録する（M3 までに）
-2. AI: M1（ログインとプロフィール）に入る前に、ログイン画面と profiles の設計を示す
+1. 開発者: 手元で MVP を触って評価する（`pnpm dev` → http://localhost:3000、[development](docs/technical/development.md)）
+2. 開発者: [launch-checklist](docs/technical/launch-checklist.md) の認証情報・設定をそろえ、AI に値を渡す
+3. AI: 受け取った値で本番環境を設定し、公開前の確認を手伝う

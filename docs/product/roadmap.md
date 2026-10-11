@@ -2,7 +2,7 @@
 
 - Phase: 10
 - Last updated: 2026-09-28
-- 状態: [DECIDED]（2026-09-28 開発者が了承。タスクの進み具合はチェックボックスで管理）
+- 状態: [DECIDED]（2026-09-28 開発者が了承。タスクの進み具合はチェックボックスで管理）。2026-10-11 に M0〜M6 を完了（手元で完成）。M7 は [launch-checklist](../technical/launch-checklist.md) を参照
 - 根拠: [mvp](mvp.md), [architecture](../technical/architecture.md), [risks](risks.md)
 
 ## 進め方

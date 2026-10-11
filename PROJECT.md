@@ -6,7 +6,7 @@
 ## 1. Overview
 
 友人間でお互いに好きな音楽を共有するための SNS を個人開発する。最初は友人約 20 人から始め、不特定多数にも公開する。
-Discovery・技術方針・ロードマップ（Phase 1〜10）を終え、開発中（Phase 11）。技術構成は Web のみ（PWA）・Next.js・Vercel・Supabase（[architecture](docs/technical/architecture.md)）。
+Discovery・技術方針・ロードマップ（Phase 1〜10）を終え、2026-10-11 に手元（ローカル）でサービスが完成。公開準備中。技術構成は Web のみ（PWA）・Next.js・Vercel・Supabase（[architecture](docs/technical/architecture.md)）。
 
 ## 2. Vision / Problem
 
@@ -115,7 +115,7 @@ Discovery・技術方針・ロードマップ（Phase 1〜10）を終え、開�
    ├─ research/       調査記録（YYYY-MM-DD-slug.md）。テンプレート: _template.md
    ├─ product/        Vision・問題仮説・戦略・MVP 定義など
    ├─ business/       ビジネスモデル・コスト
-   └─ technical/      アーキテクチャ・データ設計・技術スタック
+   └─ technical/      アーキテクチャ・DB 設計・UI 設計・技術スタック・開発手順・運用・公開前チェックリスト
 ```
 
 新しいディレクトリは **必要になった時点で** 作る（空のディレクトリを先に作らない）。
