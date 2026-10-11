@@ -12,10 +12,12 @@
     "pnpm-workspace.yaml"
   ],
   "words": [
+    "apikey",
     "btrim",
     "devicon",
     "FBAN",
     "FBAV",
+    "fkey",
     "followee",
     "followees",
     "heroui",
@@ -38,6 +40,8 @@
     "turbopack",
     "upsert",
     "webp",
-    "YOASOBI"
-  ]
+    "YOASOBI",
+    "ＹＯＡＳＯＢＩ"
+  ],
+  "ignoreRegExpList": ["sb_(publishable|secret)_[A-Za-z0-9_-]+", "%2F\\w+"]
 }

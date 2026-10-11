@@ -26,13 +26,13 @@ function navItems(handle: string): NavItem[] {
   ];
 }
 
-/** ログイン後の主要ナビゲーション。スマホは画面下のタブ、PC は画面左の縦並び。 */
-export function AppNav({ handle }: { handle: string }) {
+/** ログイン後の主要ナビゲーション。スマホは画面下のタブ（variant="tabs"）、PC は画面左の縦並び（variant="side"）。 */
+export function AppNav({ handle, variant }: { handle: string; variant: "tabs" | "side" }) {
   const pathname = usePathname();
   const items = navItems(handle);
 
-  return (
-    <>
+  if (variant === "tabs") {
+    return (
       <nav
         aria-label="メイン"
         className="fixed inset-x-0 bottom-0 z-40 border-t border-border bg-background/90 pb-[env(safe-area-inset-bottom)] backdrop-blur md:hidden"
@@ -58,28 +58,31 @@ export function AppNav({ handle }: { handle: string }) {
           })}
         </ul>
       </nav>
-      <nav aria-label="メイン" className="sticky top-20 hidden md:block">
-        <ul className="space-y-1">
-          {items.map((item) => {
-            const active = item.match(pathname);
-            return (
-              <li key={item.href}>
-                <Link
-                  href={item.href}
-                  aria-current={active ? "page" : undefined}
-                  className={cn(
-                    "flex items-center gap-3 rounded-xl px-3 py-2 text-sm hover:bg-default",
-                    active ? "font-bold text-accent" : "text-foreground",
-                  )}
-                >
-                  <item.icon className="size-5" />
-                  {item.label}
-                </Link>
-              </li>
-            );
-          })}
-        </ul>
-      </nav>
-    </>
+    );
+  }
+
+  return (
+    <nav aria-label="メイン" className="sticky top-20">
+      <ul className="space-y-1">
+        {items.map((item) => {
+          const active = item.match(pathname);
+          return (
+            <li key={item.href}>
+              <Link
+                href={item.href}
+                aria-current={active ? "page" : undefined}
+                className={cn(
+                  "flex items-center gap-3 rounded-xl px-3 py-2 text-sm hover:bg-default",
+                  active ? "font-bold text-accent" : "text-foreground",
+                )}
+              >
+                <item.icon className="size-5" />
+                {item.label}
+              </Link>
+            </li>
+          );
+        })}
+      </ul>
+    </nav>
   );
 }

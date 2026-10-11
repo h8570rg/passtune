@@ -38,11 +38,12 @@ export default async function AppLayout({ children }: LayoutProps<"/">) {
       <div className="mx-auto flex max-w-4xl gap-8 px-4 md:py-6">
         {profile ? (
           <aside className="hidden w-48 shrink-0 md:block">
-            <AppNav handle={profile.handle} />
+            <AppNav handle={profile.handle} variant="side" />
           </aside>
         ) : null}
         <main className="w-full max-w-xl min-w-0 flex-1 py-4 pb-24 md:pb-8">{children}</main>
       </div>
+      {profile ? <AppNav handle={profile.handle} variant="tabs" /> : null}
     </div>
   );
 }

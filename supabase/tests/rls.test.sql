@@ -1,7 +1,7 @@
 -- RLS（行レベルセキュリティ）と関数のテスト。`pnpm supabase:test` で実行する。
 begin;
 create extension if not exists pgtap with schema extensions;
-select plan(14);
+select plan(16);
 
 -- テスト用のユーザー 2 人
 insert into auth.users (id, email) values
@@ -92,6 +92,16 @@ set local request.jwt.claims to '{"role":"anon"}';
 select lives_ok(
   $$select public.increment_play_count('33333333-3333-3333-3333-333333333333')$$,
   'ログインなしでも再生回数を増やせる'
+);
+select is(
+  (select count(*) from public.posts where id = '33333333-3333-3333-3333-333333333333'),
+  1::bigint,
+  'ログインなしでも投稿は読める'
+);
+select is(
+  (select count(*) from public.post_play_counts),
+  0::bigint,
+  'ログインなしでは再生回数は見えない'
 );
 
 -- bob として再生回数を確認

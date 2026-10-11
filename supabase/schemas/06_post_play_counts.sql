@@ -21,7 +21,8 @@ create policy "post owners can view play counts"
   );
 
 revoke all on public.post_play_counts from anon, authenticated;
-grant select on public.post_play_counts to authenticated;
+-- 投稿の取得で埋め込むため anon にも select 権限を付ける（anon 向けのポリシーがないので行は返らない）
+grant select on public.post_play_counts to anon, authenticated;
 
 -- 再生回数を 1 増やす。ログインなしの閲覧者の再生も数えるため SECURITY DEFINER で anon からも呼べるようにする。
 create or replace function public.increment_play_count(p_post_id uuid)
