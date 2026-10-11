@@ -43,9 +43,11 @@ pnpm dev              # http://localhost:3000
 ## 手元でのログイン
 
 - 手元の Supabase が送るメールは、メール確認ツール（http://127.0.0.1:54424）で受け取る。
-- Docker なしの実行方式は、メールテンプレートのファイル指定（`content_path`）に未対応。そのため手元のメールには 6 桁コードが入らず、**リンクだけ** が届く。
-  - ログインした同じブラウザでリンクを開けばログインできる（`/auth/callback` で処理）。
-  - 6 桁コードを試すときは、管理用 API でコードを発行する: `curl -X POST http://127.0.0.1:54421/auth/v1/admin/generate_link -H "apikey: <SECRET_KEY>" -H "Authorization: Bearer <SECRET_KEY>" -H "Content-Type: application/json" -d '{"type":"magiclink","email":"<メール>"}'` の `email_otp`。
+- 届くメールには 6 桁コードとリンクの両方が入っている。コードをログイン画面に入力するか、ログインした同じブラウザでリンクを開く（`/auth/callback` で処理）。
+- 仕組み: Docker なしの実行方式は、メールテンプレートのファイル指定（`content_path`）に未対応（CLI 2.120 で確認。テンプレートは Docker 版の中継サーバー経由で Auth に渡すため）。そこで手元では、Auth のメール送信フック（Send Email Hook。`config.toml` の `[auth.hook.send_email]`）から DB の関数 `local_dev.send_auth_email` を呼び、pg_net でメール確認ツールの送信 API に渡している。
+  - 関数は `supabase/seed.sql` にある（手元専用。マイグレーションに入れないので本番には入らない）。`pnpm supabase:reset` で作られる。
+  - メールが届かないときは、関数があるか（`pnpm supabase:reset` を実行したか）を確認する。
+  - E2E テストも、メール確認ツールの API から確認コードを読んでログインする（`e2e/helpers.ts`）。
 - 本番では、Supabase の管理画面で `supabase/templates/otp.html` の内容を「Magic Link」と「Confirm signup」のテンプレートに設定する（6 桁コードとリンクの両方を載せる）。
 - Google ログインは、手元では未設定（認証情報が必要）。
 

@@ -255,7 +255,11 @@ otp_expiry = 3600
 
 # メールの 6 桁コードでログインする。本番では Supabase の管理画面で、確認コードを本文に入れたテンプレート
 # （supabase/templates/otp.html）を Magic Link と Confirm signup に設定する。
-# Docker なしの実行方式（experimental stack）は content_path によるテンプレート指定に未対応のため、手元では既定のテンプレート（コードを含む）を使う。
+# Docker なしの実行方式（experimental stack）は content_path によるテンプレート指定に未対応のため、
+# 手元ではメール送信フックで 6 桁コード入りのメールを送る（関数は supabase/seed.sql の local_dev.send_auth_email）。
+[auth.hook.send_email]
+enabled = true
+uri = "pg-functions://postgres/local_dev/send_auth_email"
 
 [auth.sms]
 # Allow/disallow new user signups via SMS to your project.
