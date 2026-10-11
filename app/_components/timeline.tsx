@@ -1,22 +1,17 @@
 import { UsersIcon } from "lucide-react";
 import Link from "next/link";
 import { PostList } from "@/components/post/post-list";
-import { SERVICE_DESCRIPTION, SERVICE_NAME } from "@/lib/config";
 import { getPostsByUsers } from "@/lib/data/post";
 import { getFolloweeIds } from "@/lib/data/social";
 import { getMyProfile } from "@/lib/data/user";
 
-/** ログイン後はタイムライン（自分とフォロー中の人の投稿）、未ログインはサービスの紹介 */
-export default async function HomePage({ searchParams }: PageProps<"/">) {
+/** タイムライン（自分とフォロー中の人の投稿） */
+export async function Timeline({ before }: { before: string | null }) {
   const profile = await getMyProfile();
-  if (!profile) return <Landing />;
+  if (!profile) return null;
 
-  const { before } = await searchParams;
   const followeeIds = await getFolloweeIds(profile.id);
-  const page = await getPostsByUsers(
-    [profile.id, ...followeeIds],
-    typeof before === "string" ? before : null,
-  );
+  const page = await getPostsByUsers([profile.id, ...followeeIds], before);
 
   return (
     <div className="space-y-2">
@@ -49,22 +44,5 @@ export default async function HomePage({ searchParams }: PageProps<"/">) {
         <PostList page={page} viewerId={profile.id} basePath="/" />
       )}
     </div>
-  );
-}
-
-function Landing() {
-  return (
-    <section className="flex flex-col items-center gap-6 py-16 text-center">
-      <h1 className="text-3xl font-bold">{SERVICE_NAME}</h1>
-      <p className="max-w-xs text-muted">
-        {SERVICE_DESCRIPTION}。使っている音楽サービスが違っても、すぐ試聴できます。
-      </p>
-      <Link
-        href="/login"
-        className="rounded-full bg-accent px-6 py-3 font-medium text-accent-foreground"
-      >
-        はじめる
-      </Link>
-    </section>
   );
 }

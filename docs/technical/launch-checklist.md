@@ -21,6 +21,7 @@
 | 10 | ドメイン | 開発者 | Vercel にドメインを設定 | 配信・メール |
 | 11 | GitHub Actions | 開発者 | Variables: `SUPABASE_PROJECT_ID`、`SUPABASE_URL`、`SUPABASE_PUBLISHABLE_KEY`。Secrets: `SUPABASE_ACCESS_TOKEN`、`SUPABASE_DB_PASSWORD` | 自動マイグレーション・停止防止・バックアップ |
 | 12 | Vercel Analytics | 開発者 | Vercel の管理画面で Web Analytics と Speed Insights を有効化 | 計測 |
+| 12b | Google Search Console（任意） | 開発者 | ドメインを登録し、`https://<ドメイン>/sitemap.xml` を送信する。LP が検索に早く載る。`NEXT_PUBLIC_SITE_URL` が本番のドメインになっていること（robots.txt・sitemap・OGP の URL に使う） | 検索 |
 
 ## 2. 内容の確認・差し替え
 
@@ -28,6 +29,7 @@
 |---|---|---|---|
 | 13 | 問い合わせ先 | 開発者 → AI | メールアドレスを決め、`lib/config.ts` の `CONTACT_EMAIL` を差し替える |
 | 14 | 利用規約・プライバシーポリシー | 開発者 | 暫定版（`app/(legal)/`）を確認。法的な助言は受けていない |
+| 14b | LP の文言 | 開発者 | `components/landing/landing-page.tsx` の文言を確認（AI の起案） |
 | 15 | 音楽サービスのロゴ | 開発者 | 各社の公式素材（Apple Music のバッジ、Spotify・YouTube Music・LINE MUSIC のロゴ）を入手し、利用条件を確認したうえで AI に渡す。今は文字ボタンで代用（`components/post/service-buttons.tsx`） |
 | 16 | Spotify の照合精度 | 開発者 | よく聴く曲を投稿し、「Spotify」で正しい曲ページが開くか確かめる |
 | 17 | スマホ実機 | 開発者 | iPhone（Safari、LINE のアプリ内ブラウザ）と Android で、ログイン・試聴・ホーム画面への追加・招待リンクを確かめる |

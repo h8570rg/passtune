@@ -10,7 +10,7 @@ import { findSpotifyTrackId } from "@/lib/music/spotify";
 export async function GET(_request: Request, { params }: RouteContext<"/go/spotify/[postId]">) {
   const { postId } = await params;
   const post = await getPost(postId);
-  if (!post) return NextResponse.redirect("https://open.spotify.com/", 302);
+  if (!post) return new NextResponse("Not Found", { status: 404 });
 
   const { title, artistName, durationMs } = post.track;
   try {

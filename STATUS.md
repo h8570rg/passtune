@@ -21,6 +21,7 @@ Phase 11 完了間近: **手元（ローカル）でサービスが完成**（�
 - DB 設計（Supabase のベストプラクティス）・RLS テスト: PR #6（[database](docs/technical/database.md)）
 - UI 設計（モデルベース UI デザイン）: [ui-design](docs/technical/ui-design.md)
 - 手元の Supabase を Docker なしに（Supabase CLI のネイティブ実行、アルファ版）: [development](docs/technical/development.md)
+- 検索エンジンに載せるのは LP だけ（[009](docs/decisions/009-search-engine-indexing.md)）。LP を作成
 - テスト: Vitest 10 件、pgTAP 16 件、Playwright 9 件、CI（GitHub Actions）
 
 ## Key Findings（開発中に分かったこと）
@@ -31,6 +32,8 @@ Phase 11 完了間近: **手元（ローカル）でサービスが完成**（�
 
 ## Open Questions（開発者に確認したいこと）
 
+- [OPEN] LP の文言の確認（[ui-design](docs/technical/ui-design.md) の「LP」）
+- [OPEN] 招待リンクとユーザー ID の変更の扱い（ID を変えると古い招待リンクが使えなくなる）
 - [OPEN] 判断して進めた事項の確認（下記の一覧は、2026-10-11 の AI の報告を参照）
 - [OPEN] 問い合わせ先のメールアドレス
 - [OPEN] 音楽サービスの公式ロゴ素材の入手（今は文字ボタン）

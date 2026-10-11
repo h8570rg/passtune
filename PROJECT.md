@@ -101,6 +101,7 @@ Discovery・技術方針・ロードマップ（Phase 1〜10）を終え、2026-
 | [006](docs/decisions/006-hosting.md) | ホスティングは Vercel Hobby（収益化前に移行または Pro） | DECIDED |
 | [007](docs/decisions/007-baas-auth.md) | BaaS は Supabase、ログインはメールの 6 桁コード＋Google、メール送信は Resend、独自ドメイン取得 | DECIDED |
 | [008](docs/decisions/008-service-name.md) | サービス名は Passtune、コードネームは passtune | DECIDED |
+| [009](docs/decisions/009-search-engine-indexing.md) | 検索エンジンに載せるのは LP（未ログインの `/`）だけ | DECIDED |
 
 ## 8. Documentation Structure
 

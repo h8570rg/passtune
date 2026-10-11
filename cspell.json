@@ -31,6 +31,7 @@
     "multiplatform",
     "nickname",
     "oembed",
+    "opengraph",
     "oxfmt",
     "oxlint",
     "passtune",
@@ -44,6 +45,7 @@
     "upsert",
     "webp",
     "YOASOBI",
+    "yuki",
     "ＹＯＡＳＯＢＩ"
   ],
   "ignoreRegExpList": ["sb_(publishable|secret)_[A-Za-z0-9_-]+", "%2F\\w+"]
