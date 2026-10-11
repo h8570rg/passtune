@@ -1,0 +1,24 @@
+{
+  "$schema": "https://raw.githubusercontent.com/streetsidesoftware/cspell/main/cspell.schema.json",
+  "version": "0.2",
+  "ignorePaths": [
+    "docs/**",
+    "*.md",
+    "supabase/config.toml",
+    "supabase/migrations",
+    "lib/database.types.ts",
+    "package.json",
+    "pnpm-lock.yaml",
+    "pnpm-workspace.yaml"
+  ],
+  "words": [
+    "heroui",
+    "Inbucket",
+    "oxfmt",
+    "oxlint",
+    "passtune",
+    "Postgrest",
+    "supabase",
+    "turbopack"
+  ]
+}

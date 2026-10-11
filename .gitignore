@@ -1,1 +1,17 @@
 .DS_Store
+node_modules
+.next
+.env*
+!.env.example
+tsconfig.tsbuildinfo
+next-env.d.ts
+certificates
+
+.vercel
+
+# Supabase
+supabase/.branches/
+supabase/.temp/
+
+# Claude
+.agents/
