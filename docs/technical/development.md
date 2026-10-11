@@ -34,6 +34,15 @@ pnpm dev              # http://localhost:3000
 | メール確認（ログインの 6 桁コードを受け取る） | http://127.0.0.1:54424 |
 | DB | postgresql://postgres:postgres@127.0.0.1:54422/postgres |
 
+## 手元でのログイン
+
+- 手元の Supabase が送るメールは、メール確認ツール（http://127.0.0.1:54424）で受け取る。
+- Docker なしの実行方式は、メールテンプレートのファイル指定（`content_path`）に未対応。そのため手元のメールには 6 桁コードが入らず、**リンクだけ** が届く。
+  - ログインした同じブラウザでリンクを開けばログインできる（`/auth/callback` で処理）。
+  - 6 桁コードを試すときは、管理用 API でコードを発行する: `curl -X POST http://127.0.0.1:54421/auth/v1/admin/generate_link -H "apikey: <SECRET_KEY>" -H "Authorization: Bearer <SECRET_KEY>" -H "Content-Type: application/json" -d '{"type":"magiclink","email":"<メール>"}'` の `email_otp`。
+- 本番では、Supabase の管理画面で `supabase/templates/otp.html` の内容を「Magic Link」と「Confirm signup」のテンプレートに設定する（6 桁コードとリンクの両方を載せる）。
+- Google ログインは、手元では未設定（認証情報が必要）。
+
 ## DB の変更の流れ（宣言的スキーマ）
 
 1. `supabase/schemas/*.sql` を「あるべき姿」に書き換える（テーブル・RLS・関数・権限）。

@@ -1,2 +1,21 @@
 @import "tailwindcss";
 @import "@heroui/styles";
+
+/* Passtune のテーマ: アクセントはインディゴ 1 色。各音楽サービスのブランドカラーと競合しないようにする（docs/technical/ui-design.md） */
+:root {
+  --accent: #5b5bd6;
+  --accent-foreground: #ffffff;
+  --radius: 0.75rem;
+  --field-radius: 0.75rem;
+}
+
+.dark {
+  --accent: #8b8cf8;
+  --accent-foreground: #0b0b1a;
+}
+
+@layer components {
+  .avatar {
+    --radius: 9999px;
+  }
+}
