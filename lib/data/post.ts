@@ -3,6 +3,7 @@ import { cache } from "react";
 import { TIMELINE_PAGE_SIZE } from "@/lib/config";
 import { createClient } from "@/lib/supabase/server";
 import type { Post } from "@/lib/type";
+import { isUuid } from "@/lib/utils/uuid";
 import { getAuthUser, toProfile } from "./user";
 
 /**
@@ -70,7 +71,7 @@ async function baseQuery() {
 }
 
 export const getPost = cache(async (postId: string): Promise<Post | null> => {
-  if (!/^[0-9a-f-]{36}$/i.test(postId)) return null;
+  if (!isUuid(postId)) return null;
   const { data, error } = await (await baseQuery()).query.eq("id", postId).maybeSingle();
   if (error) throw error;
   return data ? toPost(data as unknown as PostRow) : null;

@@ -104,13 +104,14 @@
 | フォロー / フォロワー一覧 | `/u/[handle]/following`、`/u/[handle]/followers` | 任意 |
 | 反応 | `/activity` | 必須 |
 | プロフィール編集 | `/settings` | 必須 |
-| 招待リンク | `/i/[handle]` | 任意（招待者を Cookie に記録し、招待者のプロフィール `/u/[handle]?invited=1` へ転送） |
+| 招待リンク | `/i/[userId]`（利用者の UUID） | 任意（招待者の UUID を Cookie に記録し、招待者のプロフィール `/u/[handle]?invited=1` へ転送） |
 | Spotify への転送 | `/go/spotify/[postId]` | 任意 |
 | 利用規約 / プライバシーポリシー | `/terms`、`/privacy` | 不要 |
 | 検索エンジン・共有用 | `/robots.txt`、`/sitemap.xml`、`/opengraph-image` | ― |
 | PWA | `/manifest.webmanifest`、`/sw.js`、`/icons/[size]` | ― |
 
 - 一覧の続きは `?before=<日時>`（キーセット方式）。
+- 招待リンクは、ユーザー ID を変えても使えるよう、変わらない UUID を使う。プロフィールの URL（`/u/[handle]`）は ID を変えると変わる（X などと同じ。設定画面で注意書きを出す）。
 - プロフィールの URL は小文字の ID にそろえる（`/u/Alice` → `/u/alice` へ恒久的に転送）。
 - 存在しない投稿・利用者は 404。Spotify への転送も、存在しない投稿なら 404。
 - 検索エンジンに載せるのは `/` だけ（[009](../decisions/009-search-engine-indexing.md)）。ほかは noindex。

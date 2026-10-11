@@ -8,6 +8,7 @@ import { INVITE_COOKIE_NAME } from "@/lib/config";
 import { isOwnAvatarPath, removeUnusedAvatars } from "@/lib/data/profile-mutations";
 import { getAuthUser } from "@/lib/data/user";
 import { createClient } from "@/lib/supabase/server";
+import { isUuid } from "@/lib/utils/uuid";
 import { profileSchema } from "./schema";
 
 const HANDLE_TAKEN_MESSAGE = "このユーザー ID はすでに使われています";
@@ -25,16 +26,17 @@ export async function createProfile(_prevState: unknown, formData: FormData) {
 
   const supabase = await createClient();
   const cookieStore = await cookies();
-  const inviterHandle = cookieStore.get(INVITE_COOKIE_NAME)?.value;
+  // 招待リンクで記録した、招待した人の UUID（ユーザー ID は変わりうるので UUID で持つ）
+  const invitedBy = cookieStore.get(INVITE_COOKIE_NAME)?.value;
 
   let inviterId: string | null = null;
-  if (inviterHandle) {
+  if (isUuid(invitedBy) && invitedBy !== user.id) {
     const { data: inviter } = await supabase
       .from("profiles")
       .select("id")
-      .eq("handle", inviterHandle)
+      .eq("id", invitedBy)
       .maybeSingle();
-    inviterId = inviter && inviter.id !== user.id ? inviter.id : null;
+    inviterId = inviter?.id ?? null;
   }
 
   const avatarPath = isOwnAvatarPath(user.id, result.data.avatarPath)
