@@ -1,40 +1,73 @@
 import type { Metadata } from "next";
 import Link from "next/link";
 import { notFound } from "next/navigation";
-import { PostCard } from "@/components/post/post-card";
+import { PostList } from "@/components/post/post-list";
+import { FollowButton } from "@/components/social/follow-button";
 import { UserAvatar } from "@/components/user-avatar";
 import { getPostsByUser } from "@/lib/data/post";
+import { getFollowCounts, isFollowing } from "@/lib/data/social";
 import { getAuthUser, getProfileByHandle } from "@/lib/data/user";
 
 export async function generateMetadata({ params }: PageProps<"/u/[handle]">): Promise<Metadata> {
   const { handle } = await params;
-  const profile = await getProfileByHandle(handle);
+  const profile = await getProfileByHandle(decodeURIComponent(handle));
   return profile ? { title: `${profile.displayName}（@${profile.handle}）` } : {};
 }
 
-export default async function ProfilePage({ params }: PageProps<"/u/[handle]">) {
+export default async function ProfilePage({ params, searchParams }: PageProps<"/u/[handle]">) {
   const { handle } = await params;
+  const { before } = await searchParams;
   const profile = await getProfileByHandle(decodeURIComponent(handle));
   if (!profile) notFound();
-  const [user, page] = await Promise.all([getAuthUser(), getPostsByUser(profile.id)]);
+  const user = await getAuthUser();
   const isMe = user?.id === profile.id;
+  const [page, counts, following] = await Promise.all([
+    getPostsByUser(profile.id, typeof before === "string" ? before : null),
+    getFollowCounts(profile.id),
+    user && !isMe ? isFollowing(user.id, profile.id) : Promise.resolve(false),
+  ]);
 
   return (
-    <div className="space-y-4">
-      <section className="flex items-center gap-4 border-b border-border pb-4">
-        <UserAvatar avatarUrl={profile.avatarUrl} name={profile.displayName} className="size-16" />
-        <div className="min-w-0 flex-1">
-          <h1 className="truncate text-lg font-bold">{profile.displayName}</h1>
-          <p className="text-sm text-muted">@{profile.handle}</p>
+    <div className="space-y-2">
+      <section className="space-y-3 border-b border-border pb-4">
+        <div className="flex items-center gap-4">
+          <UserAvatar
+            avatarUrl={profile.avatarUrl}
+            name={profile.displayName}
+            className="size-16"
+          />
+          <div className="min-w-0 flex-1">
+            <h1 className="truncate text-lg font-bold">{profile.displayName}</h1>
+            <p className="text-sm text-muted">@{profile.handle}</p>
+          </div>
+          {isMe ? (
+            <Link
+              href="/settings"
+              className="rounded-full border border-border px-4 py-1.5 text-sm hover:bg-default"
+            >
+              編集
+            </Link>
+          ) : user ? (
+            <FollowButton userId={profile.id} following={following} />
+          ) : (
+            <Link
+              href={`/login?next=${encodeURIComponent(`/u/${profile.handle}`)}`}
+              className="rounded-full bg-accent px-4 py-1.5 text-sm text-accent-foreground"
+            >
+              フォローする
+            </Link>
+          )}
         </div>
-        {isMe ? (
-          <Link
-            href="/settings"
-            className="rounded-full border border-border px-4 py-1.5 text-sm hover:bg-default"
-          >
-            編集
+        <div className="flex gap-4 text-sm">
+          <Link href={`/u/${profile.handle}/following`} className="hover:underline">
+            <span className="font-bold">{counts.following}</span>{" "}
+            <span className="text-muted">フォロー中</span>
           </Link>
-        ) : null}
+          <Link href={`/u/${profile.handle}/followers`} className="hover:underline">
+            <span className="font-bold">{counts.followers}</span>{" "}
+            <span className="text-muted">フォロワー</span>
+          </Link>
+        </div>
       </section>
       {page.posts.length === 0 ? (
         <div className="space-y-3 py-12 text-center text-sm text-muted">
@@ -49,11 +82,7 @@ export default async function ProfilePage({ params }: PageProps<"/u/[handle]">) 
           ) : null}
         </div>
       ) : (
-        <div>
-          {page.posts.map((post) => (
-            <PostCard key={post.id} post={post} viewerId={user?.id ?? null} />
-          ))}
-        </div>
+        <PostList page={page} viewerId={user?.id ?? null} basePath={`/u/${profile.handle}`} />
       )}
     </div>
   );
