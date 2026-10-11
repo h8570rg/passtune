@@ -58,7 +58,9 @@ export function ProfileForm({ action, submitLabel, defaultValue }: ProfileFormPr
           />
         </InputGroup>
         <span className="text-xs text-muted">
-          半角英小文字・数字・_ で 3〜20 文字。あとから変更できます
+          {defaultValue
+            ? "半角英小文字・数字・_ で 3〜20 文字。変更すると、プロフィールの URL も変わります（招待リンクはそのまま使えます）"
+            : "半角英小文字・数字・_ で 3〜20 文字。あとから変更できます"}
         </span>
         <FieldError />
       </TextField>

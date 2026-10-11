@@ -40,6 +40,18 @@ export const getMyProfile = cache(async (): Promise<Profile | null> => {
   return data ? toProfile(data) : null;
 });
 
+/** 利用者の UUID からプロフィールを引く（招待リンク用）。 */
+export const getProfileById = cache(async (id: string): Promise<Profile | null> => {
+  const supabase = await createClient();
+  const { data, error } = await supabase
+    .from("profiles")
+    .select("id, handle, display_name, avatar_path")
+    .eq("id", id)
+    .maybeSingle();
+  if (error) throw error;
+  return data ? toProfile(data) : null;
+});
+
 /** ログイン必須の画面で使う。未ログインならログインへ、プロフィール未作成ならオンボーディングへ。 */
 export async function requireProfile(nextPath: string): Promise<Profile> {
   const user = await getAuthUser();

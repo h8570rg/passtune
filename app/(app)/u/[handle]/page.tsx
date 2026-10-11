@@ -94,7 +94,7 @@ export default async function ProfilePage({ params, searchParams }: PageProps<"/
           </Link>
           {isMe ? (
             <span className="ml-auto">
-              <InviteLinkButton handle={profile.handle} />
+              <InviteLinkButton userId={profile.id} />
             </span>
           ) : null}
         </div>

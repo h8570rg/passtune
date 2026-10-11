@@ -74,7 +74,7 @@
 
 ### 招待とログイン
 
-1. 招待リンクは `https://<ドメイン>/i/<招待した人のID>?openExternalBrowser=1`。
+1. 招待リンクは `https://<ドメイン>/i/<招待した人の UUID>?openExternalBrowser=1`。ユーザー ID（handle）は変更できるため、変わらない UUID を使う（ID を変えても、送ったあとの招待リンクが使える）。
    - `openExternalBrowser=1` で、LINE のアプリ内ブラウザではなく普段のブラウザで開かせる。
 2. メールの 6 桁コード、または Google でログインする。
 3. 初回ログイン時に、招待した人を自動でフォローする。

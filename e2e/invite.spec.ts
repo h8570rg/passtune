@@ -1,17 +1,31 @@
 import { expect, test } from "@playwright/test";
 import { login, signUp, uniqueEmail, uniqueHandle } from "./helpers";
 
-test("招待リンクから登録すると、招待した人を自動でフォローする", async ({ browser }) => {
-  const inviterPage = await (await browser.newContext()).newPage();
+test("招待リンクから登録すると、招待した人を自動でフォローする（招待した人が ID を変えても使える）", async ({
+  browser,
+}) => {
+  const inviterContext = await browser.newContext({
+    permissions: ["clipboard-read", "clipboard-write"],
+  });
+  const inviterPage = await inviterContext.newPage();
   const inviter = await signUp(inviterPage, "inviter");
   await inviterPage.goto(`/u/${inviter.handle}`);
-  await expect(inviterPage.getByRole("button", { name: "招待リンクをコピー" })).toBeVisible();
+  await inviterPage.getByRole("button", { name: "招待リンクをコピー" }).click();
+  const inviteUrl = await inviterPage.evaluate(() => navigator.clipboard.readText());
+  expect(inviteUrl).toMatch(/\/i\/[0-9a-f-]{36}\?openExternalBrowser=1$/);
 
-  // 招待された人が招待リンクを開く（LINE から開いた想定のパラメーター付き）
+  // 招待した人が、リンクを送ったあとにユーザー ID を変える
+  const newHandle = uniqueHandle("renamed");
+  await inviterPage.goto("/settings");
+  await inviterPage.getByLabel("ユーザー ID").fill(newHandle);
+  await inviterPage.getByRole("button", { name: "保存する" }).click();
+  await expect(inviterPage).toHaveURL(new RegExp(`/u/${newHandle}$`));
+
+  // 招待された人が、古いリンクを開く（LINE から開いた想定のパラメーター付き）
   const guestContext = await browser.newContext();
   const guestPage = await guestContext.newPage();
-  await guestPage.goto(`/i/${inviter.handle}?openExternalBrowser=1`);
-  await expect(guestPage).toHaveURL(new RegExp(`/u/${inviter.handle}\\?invited=1$`));
+  await guestPage.goto(new URL(inviteUrl).pathname + new URL(inviteUrl).search);
+  await expect(guestPage).toHaveURL(new RegExp(`/u/${newHandle}\\?invited=1$`));
   await expect(
     guestPage.getByText(`${inviter.displayName} さんから Passtune に招待されました`),
   ).toBeVisible();
@@ -26,7 +40,7 @@ test("招待リンクから登録すると、招待した人を自動でフォ�
   await expect(guestPage).toHaveURL(/\/$/);
 
   // 招待した人をフォローしている
-  await guestPage.goto(`/u/${inviter.handle}`);
+  await guestPage.goto(`/u/${newHandle}`);
   await expect(guestPage.getByRole("button", { name: "フォロー中" })).toBeVisible();
 });
 
