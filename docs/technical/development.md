@@ -34,6 +34,12 @@ pnpm dev              # http://localhost:3000
 | メール確認（ログインの 6 桁コードを受け取る） | http://127.0.0.1:54424 |
 | DB | postgresql://postgres:postgres@127.0.0.1:54422/postgres |
 
+## サンプルデータ
+
+- `pnpm supabase:reset` で `supabase/seed.sql` のサンプル（アリス @demo_alice・ボブ @demo_bob と投稿 4 件）が入る。
+- 自分のメールアドレスでログインし、@demo_alice か @demo_bob をフォローすると、タイムラインにサンプルの投稿が流れる。
+- `pnpm supabase:stop --all` で、全ブランチの手元の Supabase を止められる（ポートがぶつかったとき）。
+
 ## 手元でのログイン
 
 - 手元の Supabase が送るメールは、メール確認ツール（http://127.0.0.1:54424）で受け取る。
