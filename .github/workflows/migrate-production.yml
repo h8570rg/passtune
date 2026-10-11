@@ -1,0 +1,24 @@
+name: 本番 DB へのマイグレーション
+
+# main に supabase/migrations の変更が入ったら、本番の Supabase に適用する。
+# リポジトリの Variables に SUPABASE_PROJECT_ID、Secrets に SUPABASE_ACCESS_TOKEN と SUPABASE_DB_PASSWORD を設定するまでは何もしない。
+on:
+  push:
+    branches: [main]
+    paths: ["supabase/migrations/**"]
+  workflow_dispatch:
+
+jobs:
+  migrate:
+    if: ${{ vars.SUPABASE_PROJECT_ID != '' }}
+    runs-on: ubuntu-latest
+    env:
+      SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+      SUPABASE_DB_PASSWORD: ${{ secrets.SUPABASE_DB_PASSWORD }}
+    steps:
+      - uses: actions/checkout@v5
+      - uses: supabase/setup-cli@v1
+        with:
+          version: latest
+      - run: supabase link --project-ref "${{ vars.SUPABASE_PROJECT_ID }}"
+      - run: supabase db push

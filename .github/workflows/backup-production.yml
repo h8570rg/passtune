@@ -1,0 +1,30 @@
+name: 本番 DB のバックアップ
+
+# Supabase の無料プランには自動バックアップがないため、週 1 回 DB を書き出して Artifacts に保存する（90 日保持）。
+on:
+  schedule:
+    - cron: "0 18 * * 0"
+  workflow_dispatch:
+
+jobs:
+  backup:
+    if: ${{ vars.SUPABASE_PROJECT_ID != '' }}
+    runs-on: ubuntu-latest
+    env:
+      SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
+      SUPABASE_DB_PASSWORD: ${{ secrets.SUPABASE_DB_PASSWORD }}
+    steps:
+      - uses: actions/checkout@v5
+      - uses: supabase/setup-cli@v1
+        with:
+          version: latest
+      - run: supabase link --project-ref "${{ vars.SUPABASE_PROJECT_ID }}"
+      - run: |
+          supabase db dump --linked -f backup/schema.sql
+          supabase db dump --linked --data-only -f backup/data.sql
+          supabase db dump --linked --role-only -f backup/roles.sql
+      - uses: actions/upload-artifact@v4
+        with:
+          name: supabase-backup-${{ github.run_id }}
+          path: backup/
+          retention-days: 90

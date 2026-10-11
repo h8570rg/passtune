@@ -19,29 +19,28 @@ import { createSubmitHandler } from "@/lib/utils/form";
 export function Compose() {
   const [term, setTerm] = useState("");
   const [debouncedTerm] = useDebounce(term, 400);
-  const [results, setResults] = useState<Track[]>([]);
-  const [status, setStatus] = useState<"idle" | "loading" | "error">("idle");
+  const [result, setResult] = useState<{ term: string; tracks: Track[]; error: boolean } | null>(
+    null,
+  );
   const [selected, setSelected] = useState<Track | null>(null);
+  const query = debouncedTerm.trim();
 
   useEffect(() => {
-    if (!debouncedTerm.trim()) {
-      setResults([]);
-      setStatus("idle");
-      return;
-    }
+    if (!query) return;
     const controller = new AbortController();
-    setStatus("loading");
-    searchTracks(debouncedTerm, controller.signal)
-      .then((tracks) => {
-        setResults(tracks);
-        setStatus("idle");
-      })
+    searchTracks(query, controller.signal)
+      .then((tracks) => setResult({ term: query, tracks, error: false }))
       .catch((error: unknown) => {
         if (error instanceof DOMException && error.name === "AbortError") return;
-        setStatus("error");
+        setResult({ term: query, tracks: [], error: true });
       });
     return () => controller.abort();
-  }, [debouncedTerm]);
+  }, [query]);
+
+  // 検索中・結果・エラーは、今の検索語と結果の検索語の一致から導く
+  const isCurrent = result?.term === query;
+  const status = !query ? "empty" : !isCurrent ? "loading" : result.error ? "error" : "done";
+  const results = query && isCurrent ? result.tracks : [];
 
   if (selected) {
     return <ComposeForm track={selected} onChangeTrack={() => setSelected(null)} />;
@@ -66,11 +65,11 @@ export function Compose() {
         <p className="py-8 text-center text-sm text-danger">
           検索できませんでした。時間をおいて試してください。
         </p>
-      ) : debouncedTerm.trim() && results.length === 0 ? (
+      ) : status === "done" && results.length === 0 ? (
         <p className="py-8 text-center text-sm text-muted">
           見つかりませんでした。曲名とアーティスト名を両方入れて試してください。
         </p>
-      ) : !debouncedTerm.trim() ? (
+      ) : status === "empty" ? (
         <p className="py-8 text-center text-sm text-muted">友人に届けたい 1 曲を探しましょう</p>
       ) : (
         <ul className="divide-y divide-border" aria-label="検索結果">

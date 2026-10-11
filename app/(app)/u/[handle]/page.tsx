@@ -3,6 +3,7 @@ import Link from "next/link";
 import { notFound } from "next/navigation";
 import { PostList } from "@/components/post/post-list";
 import { FollowButton } from "@/components/social/follow-button";
+import { InviteLinkButton } from "@/components/social/invite-link-button";
 import { UserAvatar } from "@/components/user-avatar";
 import { getPostsByUser } from "@/lib/data/post";
 import { getFollowCounts, isFollowing } from "@/lib/data/social";
@@ -16,7 +17,7 @@ export async function generateMetadata({ params }: PageProps<"/u/[handle]">): Pr
 
 export default async function ProfilePage({ params, searchParams }: PageProps<"/u/[handle]">) {
   const { handle } = await params;
-  const { before } = await searchParams;
+  const { before, invited } = await searchParams;
   const profile = await getProfileByHandle(decodeURIComponent(handle));
   if (!profile) notFound();
   const user = await getAuthUser();
@@ -29,6 +30,21 @@ export default async function ProfilePage({ params, searchParams }: PageProps<"/
 
   return (
     <div className="space-y-2">
+      {invited && !user ? (
+        <div className="rounded-2xl bg-accent/10 p-4 text-sm">
+          <p className="font-medium">{profile.displayName} さんから Passtune に招待されました</p>
+          <p className="mt-1 text-muted">
+            登録すると {profile.displayName}{" "}
+            さんを自動でフォローし、おすすめの曲がタイムラインに届きます。
+          </p>
+          <Link
+            href={`/login?next=${encodeURIComponent("/")}`}
+            className="mt-3 inline-block rounded-full bg-accent px-4 py-2 font-medium text-accent-foreground"
+          >
+            登録してはじめる
+          </Link>
+        </div>
+      ) : null}
       <section className="space-y-3 border-b border-border pb-4">
         <div className="flex items-center gap-4">
           <UserAvatar
@@ -58,7 +74,7 @@ export default async function ProfilePage({ params, searchParams }: PageProps<"/
             </Link>
           )}
         </div>
-        <div className="flex gap-4 text-sm">
+        <div className="flex flex-wrap items-center gap-4 text-sm">
           <Link href={`/u/${profile.handle}/following`} className="hover:underline">
             <span className="font-bold">{counts.following}</span>{" "}
             <span className="text-muted">フォロー中</span>
@@ -67,6 +83,11 @@ export default async function ProfilePage({ params, searchParams }: PageProps<"/
             <span className="font-bold">{counts.followers}</span>{" "}
             <span className="text-muted">フォロワー</span>
           </Link>
+          {isMe ? (
+            <span className="ml-auto">
+              <InviteLinkButton handle={profile.handle} />
+            </span>
+          ) : null}
         </div>
       </section>
       {page.posts.length === 0 ? (

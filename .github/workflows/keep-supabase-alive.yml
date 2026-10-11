@@ -1,0 +1,16 @@
+name: Supabase の停止防止
+
+# Supabase の無料プランは 1 週間アクセスがないと停止するため、毎日 1 回アクセスする（jankiroku と同じ方法）。
+on:
+  schedule:
+    - cron: "0 8 * * *"
+  workflow_dispatch:
+
+jobs:
+  ping:
+    if: ${{ vars.SUPABASE_URL != '' }}
+    runs-on: ubuntu-latest
+    steps:
+      - run: |
+          curl --fail -sS "${{ vars.SUPABASE_URL }}/rest/v1/profiles?select=id&limit=1" \
+            -H "apikey: ${{ vars.SUPABASE_PUBLISHABLE_KEY }}" > /dev/null
