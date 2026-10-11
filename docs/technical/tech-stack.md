@@ -23,12 +23,13 @@
 | フォームと入力チェック | Conform ＋ Zod | 同じ |
 | データの取得・更新 | Server Components から `lib/data/` の関数（`server-only`）で取得。更新は Server Actions | 同じ |
 | DB アクセス・型 | `@supabase/supabase-js` ＋ `@supabase/ssr`。型は `supabase gen types` で自動生成 | 同じ |
-| マイグレーション | Supabase CLI（`supabase/migrations`、`schema.sql`、`db diff`） | 同じ |
+| マイグレーション | Supabase CLI。宣言的スキーマ（`supabase/schemas/`）から `db schema declarative sync` で生成。RLS は pgTAP でテスト（[database](database.md)） | **異なる**: Supabase 公式のベストプラクティスに従う（開発者の指示、2026-10-11） |
 | 日付・その他 | dayjs、use-debounce（曲の検索の入力に使える） | recharts は不要 |
 | アクセス解析 | Vercel Analytics・Speed Insights | 同じ。外部送信規律の公表対象としてプライバシーポリシーに記載する |
 | リンター・フォーマッター | oxlint（＋ oxlint-tailwindcss）、oxfmt、cspell | 同じ |
 | Git フック | lefthook（コミット前にチェック・型・テスト・スペル） | 同じ |
 | テスト | Vitest（単体）、Playwright（E2E、スマホ端末のエミュレーション） | 同じ |
+| 手元の Supabase | Docker なしのネイティブ実行（Supabase CLI 2.120、アルファ版）（[development](development.md)） | **異なる**: jankiroku は Docker |
 | CI / CD | GitHub Actions: main への push で本番 DB にマイグレーションを適用。Supabase の停止を防ぐ定期アクセス | **本番の Supabase のみ**（開発用のクラウドプロジェクトは持たない。開発は手元の Supabase） |
 | 依存関係の更新 | Renovate（マイナー更新は自動マージ） | 同じ |
 

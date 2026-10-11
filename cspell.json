@@ -12,13 +12,24 @@
     "pnpm-workspace.yaml"
   ],
   "words": [
+    "btrim",
+    "followee",
+    "followees",
     "heroui",
     "Inbucket",
+    "itunes",
+    "Mailpit",
+    "oembed",
     "oxfmt",
     "oxlint",
     "passtune",
+    "pgtap",
+    "plpgsql",
     "Postgrest",
+    "signin",
     "supabase",
-    "turbopack"
+    "turbopack",
+    "upsert",
+    "YOASOBI"
   ]
 }
