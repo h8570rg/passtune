@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 import { PostList } from "@/components/post/post-list";
 import { FollowButton } from "@/components/social/follow-button";
 import { InviteLinkButton } from "@/components/social/invite-link-button";
@@ -20,6 +20,15 @@ export default async function ProfilePage({ params, searchParams }: PageProps<"/
   const { before, invited } = await searchParams;
   const profile = await getProfileByHandle(decodeURIComponent(handle));
   if (!profile) notFound();
+  // 大文字を含む URL などは、正しい表記の URL にそろえる
+  if (decodeURIComponent(handle) !== profile.handle) {
+    const query = new URLSearchParams(
+      Object.entries(await searchParams).filter(
+        (entry): entry is [string, string] => typeof entry[1] === "string",
+      ),
+    ).toString();
+    permanentRedirect(`/u/${profile.handle}${query ? `?${query}` : ""}`);
+  }
   const user = await getAuthUser();
   const isMe = user?.id === profile.id;
   const [page, counts, following] = await Promise.all([

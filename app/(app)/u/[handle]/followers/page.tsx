@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import Link from "next/link";
-import { notFound } from "next/navigation";
+import { notFound, permanentRedirect } from "next/navigation";
 import { UserList } from "@/components/social/user-list";
 import { getFollowers } from "@/lib/data/social";
 import { getProfileByHandle } from "@/lib/data/user";
@@ -11,6 +11,8 @@ export default async function Page({ params }: PageProps<"/u/[handle]/followers"
   const { handle } = await params;
   const profile = await getProfileByHandle(decodeURIComponent(handle));
   if (!profile) notFound();
+  if (decodeURIComponent(handle) !== profile.handle)
+    permanentRedirect(`/u/${profile.handle}/followers`);
   const users = await getFollowers(profile.id);
   return (
     <div className="space-y-2">
