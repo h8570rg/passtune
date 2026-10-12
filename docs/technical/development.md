@@ -49,7 +49,31 @@ pnpm dev              # http://localhost:3000
   - メールが届かないときは、関数があるか（`pnpm supabase:reset` を実行したか）を確認する。
   - E2E テストも、メール確認ツールの API から確認コードを読んでログインする（`e2e/helpers.ts`）。
 - 本番では、Supabase の管理画面で `supabase/templates/otp.html` の内容を「Magic Link」と「Confirm signup」のテンプレートに設定する（6 桁コードとリンクの両方を載せる）。
-- Google ログインは、手元では未設定（認証情報が必要）。
+
+## 手元で Google ログインと Spotify を動かす（任意）
+
+どちらも、値を入れなくてもほかの機能は動く。値はプロジェクト直下の `.env.local` に書く（Next.js と Supabase CLI の両方が読む。リポジトリには入らない）。
+
+### Google ログイン
+
+1. [Google Cloud Console](https://console.cloud.google.com/) でプロジェクトを作る。
+2. 「Google Auth Platform」（旧 OAuth 同意画面）を設定する: アプリ名 Passtune、対象は「外部」。公開ステータスが「テスト」の間は、「テストユーザー」に追加した Google アカウントだけがログインできる（自分のアカウントを追加する）。
+3. 「クライアント」で OAuth クライアント ID を作る: 種類は「ウェブ アプリケーション」、承認済みのリダイレクト URI に `http://127.0.0.1:54421/auth/v1/callback`（手元の Supabase。Supabase の公式手順と同じ形）。本番用の `https://<Supabase の Project URL>/auth/v1/callback` も同じクライアントに追加してよい。
+4. クライアント ID とシークレットを `.env.local` の `SUPABASE_AUTH_EXTERNAL_GOOGLE_CLIENT_ID` / `SUPABASE_AUTH_EXTERNAL_GOOGLE_SECRET` に書く。
+5. `pnpm supabase:stop` → `pnpm supabase:start`（Auth の設定は起動時に読む）。
+
+- 設定は `supabase/config.toml` の `[auth.external.google]`。値が空のときは、Google のボタンを押すと Google のエラー画面になる（メールのログインには影響しない）。
+
+### Spotify（「Spotify で開く」を曲ページへ直接飛ばす）
+
+1. [Spotify for Developers](https://developer.spotify.com/dashboard) に Premium のアカウントでログインし、「Create app」。
+   - Redirect URI は入力必須だが使わない。`http://127.0.0.1:3000` を入れておく（Spotify は `localhost` を受け付けない）。
+   - 使う API は「Web API」。
+2. 「Settings」の Client ID と Client secret を `.env.local` の `SPOTIFY_CLIENT_ID` / `SPOTIFY_CLIENT_SECRET` に書く。
+3. `pnpm dev` を再起動する。
+
+- 値が空のときは、Spotify の検索結果へ飛ぶ（`app/go/spotify/[postId]/route.ts`）。
+- 同じアプリを本番でも使える（本番は Vercel の環境変数に同じ値を入れる）。
 
 ## DB の変更の流れ（宣言的スキーマ）
 

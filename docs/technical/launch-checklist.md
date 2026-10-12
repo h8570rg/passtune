@@ -15,7 +15,7 @@
 | 4 | メールテンプレート | 開発者 | Supabase 管理画面の Authentication → Email Templates の「Magic Link」と「Confirm signup」に `supabase/templates/otp.html` の内容を設定（件名: Passtune の確認コード） | ログイン |
 | 5 | URL 設定 | 開発者 | Authentication → URL Configuration: Site URL を `https://<ドメイン>`、Redirect URLs に `https://<ドメイン>/auth/callback` と Vercel のプレビュー URL（`https://*-<アカウント>.vercel.app/auth/callback`） | ログイン |
 | 6 | Resend | 開発者 | アカウント作成、独自ドメインの DNS 認証、API キー発行 → Supabase の Authentication → SMTP Settings に設定（送信元: `noreply@<ドメイン>`）。レート制限（既定 30 通/時）を確認 | 確認コードのメール |
-| 7 | Google ログイン | 開発者 | Google Cloud で OAuth クライアント（ウェブ）を作成。承認済みのリダイレクト URI に `https://<Supabase の Project URL>/auth/v1/callback`。Client ID / Secret を Supabase の Authentication → Providers → Google に設定 | ログイン |
+| 7 | Google ログイン | 開発者 | Google Cloud で OAuth クライアント（ウェブ）を作成。承認済みのリダイレクト URI に `https://<Supabase の Project URL>/auth/v1/callback`。Client ID / Secret を Supabase の Authentication → Providers → Google に設定。手元でも使うなら `http://127.0.0.1:54421/auth/v1/callback` も追加（[development](development.md)）。公開前に Google Auth Platform の公開ステータスを「本番」にする（「テスト」のままだとテストユーザーしかログインできない） | ログイン |
 | 8 | Spotify | 開発者 → AI | Spotify for Developers でアプリを登録（Premium のアカウントで）。Client ID / Secret を Vercel の環境変数 `SPOTIFY_CLIENT_ID` / `SPOTIFY_CLIENT_SECRET` に設定 | Spotify の曲ページへの転送 |
 | 9 | Vercel | 開発者 | プロジェクトを作成して GitHub と連携。環境変数: `NEXT_PUBLIC_SUPABASE_URL`、`NEXT_PUBLIC_SUPABASE_PUBLISHABLE_KEY`、`NEXT_PUBLIC_SITE_URL`（本番のみ `https://<ドメイン>`）、`SPOTIFY_CLIENT_ID`、`SPOTIFY_CLIENT_SECRET` | 配信 |
 | 10 | ドメイン | 開発者 | Vercel にドメインを設定 | 配信・メール |

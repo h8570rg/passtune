@@ -326,6 +326,14 @@ max_frequency = "5s"
 # Use an external OAuth provider. The full list of providers are: `apple`, `azure`, `bitbucket`,
 # `discord`, `facebook`, `github`, `gitlab`, `google`, `keycloak`, `linkedin_oidc`, `notion`, `twitch`,
 # `twitter`, `x`, `slack`, `spotify`, `workos`, `zoom`.
+# Google ログイン。値はプロジェクト直下の .env.local に書く（Supabase CLI も読む。リポジトリには書かない）。
+# 値が空のままでも起動でき、その場合は Google ログインだけが失敗する。手順は docs/technical/development.md。
+[auth.external.google]
+enabled = true
+client_id = "env(SUPABASE_AUTH_EXTERNAL_GOOGLE_CLIENT_ID)"
+secret = "env(SUPABASE_AUTH_EXTERNAL_GOOGLE_SECRET)"
+skip_nonce_check = false
+
 [auth.external.apple]
 enabled = false
 client_id = ""
