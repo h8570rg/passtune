@@ -19,7 +19,10 @@ const DURATION_TOLERANCE_MS = 3000;
 
 /**
  * Apple の曲に最も合う Spotify の候補を選ぶ。
- * 曲名とアーティスト名の一致を優先し、曲の長さが近いもの（±3 秒）でライブ版などの別バージョンを除く。
+ * 曲名の一致を前提に、アーティスト名の一致と曲の長さの近さ（±3 秒）で点数を付ける。
+ * Spotify の API は邦楽のアーティスト名を英語表記で返す（Official髭男dism → OFFICIAL HIGE DANDISM、
+ * あいみょん → Aimyon）ため、アーティスト名が違っても「曲名が完全に一致し、長さも一致する」なら同じ曲とみなす。
+ * 検索の時点で、日本語のアーティスト名で絞り込めている（artist: の指定は Spotify 側で別表記も含めて照合される）。
  */
 export function pickBestSpotifyTrack(
   target: { title: string; artistName: string; durationMs: number | null },
@@ -31,16 +34,16 @@ export function pickBestSpotifyTrack(
   let best: { candidate: SpotifyTrackCandidate; score: number } | null = null;
   for (const candidate of candidates) {
     const candidateTitle = normalizeForMatch(candidate.name);
-    const artistMatches = candidate.artistNames.some((name) => {
-      const normalized = normalizeForMatch(name);
-      return normalized === artist || normalized.includes(artist) || artist.includes(normalized);
-    });
-    if (!artistMatches) continue;
-
     let score = 0;
     if (candidateTitle === title) score += 3;
     else if (candidateTitle.includes(title) || title.includes(candidateTitle)) score += 1;
     else continue;
+
+    const artistMatches = candidate.artistNames.some((name) => {
+      const normalized = normalizeForMatch(name);
+      return normalized === artist || normalized.includes(artist) || artist.includes(normalized);
+    });
+    if (artistMatches) score += 2;
 
     if (target.durationMs !== null) {
       const diff = Math.abs(candidate.durationMs - target.durationMs);
@@ -49,5 +52,6 @@ export function pickBestSpotifyTrack(
     }
     if (!best || score > best.score) best = { candidate, score };
   }
-  return best && best.score >= 3 ? best.candidate : null;
+  // 曲名が完全一致＋（アーティスト一致 または 長さ一致）、または曲名の部分一致＋アーティスト一致＋長さ一致
+  return best && best.score >= 5 ? best.candidate : null;
 }

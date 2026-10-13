@@ -20,10 +20,52 @@ describe("pickBestSpotifyTrack", () => {
     expect(result?.id).toBe("original");
   });
 
-  it("アーティストが違う候補しかなければ null", () => {
+  it("アーティストが一致する候補を、表記の違う候補より優先する", () => {
+    const result = pickBestSpotifyTrack(target, [
+      { id: "cover", name: "夜に駆ける", durationMs: 261000, artistNames: ["Piano Echoes"] },
+      { id: "original", name: "夜に駆ける", durationMs: 261500, artistNames: ["YOASOBI"] },
+    ]);
+    expect(result?.id).toBe("original");
+  });
+
+  it("アーティスト名が英語表記でも、曲名と長さが一致すれば選ぶ", () => {
+    const result = pickBestSpotifyTrack(
+      { title: "Pretender", artistName: "Official髭男dism", durationMs: 326843 },
+      [
+        {
+          id: "live",
+          name: "Pretender - Live",
+          durationMs: 344813,
+          artistNames: ["OFFICIAL HIGE DANDISM"],
+        },
+        {
+          id: "original",
+          name: "Pretender",
+          durationMs: 326842,
+          artistNames: ["OFFICIAL HIGE DANDISM"],
+        },
+      ],
+    );
+    expect(result?.id).toBe("original");
+  });
+
+  it("アーティストが違い、長さも違えば null", () => {
     expect(
       pickBestSpotifyTrack(target, [
-        { id: "cover", name: "夜に駆ける", durationMs: 261000, artistNames: ["Piano Echoes"] },
+        { id: "cover", name: "夜に駆ける", durationMs: 240000, artistNames: ["Piano Echoes"] },
+      ]),
+    ).toBeNull();
+  });
+
+  it("アーティストが違い、曲名も部分一致だけなら null", () => {
+    expect(
+      pickBestSpotifyTrack(target, [
+        {
+          id: "inst",
+          name: "夜に駆ける - Instrumental",
+          durationMs: 261013,
+          artistNames: ["Ayase"],
+        },
       ]),
     ).toBeNull();
   });
