@@ -24,8 +24,8 @@
     "test:e2e": "playwright test"
   },
   "dependencies": {
-    "@conform-to/react": "1.21.1",
-    "@conform-to/zod": "1.21.1",
+    "@conform-to/react": "1.21.2",
+    "@conform-to/zod": "1.21.2",
     "@heroui/react": "3.2.6",
     "@heroui/styles": "3.2.6",
     "@iconify/react": "6.0.2",
