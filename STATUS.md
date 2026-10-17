@@ -10,7 +10,9 @@ Phase 11 完了間近: **手元（ローカル）でサービスが完成**（�
 
 ## Current Goal
 
-開発者が PC で MVP を評価し、公開に必要な認証情報・設定をそろえる（[launch-checklist](docs/technical/launch-checklist.md)）。
+本番化して、身内（リンクを知っている人）だけで使い始める。検索エンジンにはまだ載せない（[009](docs/decisions/009-search-engine-indexing.md)）。進み具合は [launch-checklist](docs/technical/launch-checklist.md)。
+
+- 2026-10-17: Supabase 本番・DB・GitHub Actions・問い合わせ先（contact@passtune.com）まで完了。次は Resend → Supabase のログイン設定 → Google → Vercel
 
 ## Recently Done（2026-10-11、AI が開発者の指示で一気に実装）
 
