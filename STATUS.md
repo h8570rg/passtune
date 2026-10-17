@@ -23,6 +23,7 @@ Phase 11 完了間近: **手元（ローカル）でサービスが完成**（�
 - DB 設計（Supabase のベストプラクティス）・RLS テスト: PR #6（[database](docs/technical/database.md)）
 - UI 設計（モデルベース UI デザイン）: [ui-design](docs/technical/ui-design.md)
 - 手元の Supabase を Docker なしに（Supabase CLI のネイティブ実行、アルファ版）: [development](docs/technical/development.md)
+- 2026-10-17: アイコンを開発者作成のものに差し替え（PR #35）、友だち検索（`/search`）を追加
 - 検索エンジンに載せるのは LP だけ（[009](docs/decisions/009-search-engine-indexing.md)）。LP を作成
 - テスト: Vitest 10 件、pgTAP 16 件、Playwright 9 件、CI（GitHub Actions）
 

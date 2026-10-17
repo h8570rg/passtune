@@ -1,7 +1,7 @@
 "use client";
 
 import { cn } from "@heroui/react";
-import { BellIcon, HomeIcon, PlusIcon, UserIcon } from "lucide-react";
+import { BellIcon, HomeIcon, PlusIcon, SearchIcon, UserIcon } from "lucide-react";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
 
@@ -15,6 +15,7 @@ type NavItem = {
 function navItems(handle: string): NavItem[] {
   return [
     { href: "/", label: "ホーム", icon: HomeIcon, match: (path) => path === "/" },
+    { href: "/search", label: "さがす", icon: SearchIcon, match: (path) => path === "/search" },
     { href: "/new", label: "投稿", icon: PlusIcon, match: (path) => path === "/new" },
     { href: "/activity", label: "反応", icon: BellIcon, match: (path) => path === "/activity" },
     {
