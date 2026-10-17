@@ -2,7 +2,7 @@
 
 > 今の状態だけを書く。過去の経緯は Git 履歴と Decision Log に任せる。目安 60 行以内。
 
-Last updated: 2026-10-11
+Last updated: 2026-10-17
 
 ## Current Phase
 
@@ -32,6 +32,7 @@ Phase 11 完了間近: **手元（ローカル）でサービスが完成**（�
 
 ## Open Questions（開発者に確認したいこと）
 
+- [OPEN] 試聴で聴かせたいところ（サビなど）が流せない。対応案の選択（[listening-highlight](docs/research/2026-10-17-listening-highlight.md)）
 - [OPEN] LP の文言の確認（[ui-design](docs/technical/ui-design.md) の「LP」）
 - [OPEN] 判断して進めた事項の確認（下記の一覧は、2026-10-11 の AI の報告を参照）
 - [OPEN] 問い合わせ先のメールアドレス
