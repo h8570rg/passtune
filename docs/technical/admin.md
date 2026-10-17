@@ -3,6 +3,7 @@
 ## 本番環境
 
 - Supabase: プロジェクト `passtune`（Project ID `nwetbbinfrsuslapdpmz`、東京）。URL `https://nwetbbinfrsuslapdpmz.supabase.co`。2026-10-17 作成。
+- Vercel: プロジェクト `passtune`、ドメイン `passtune.com`（`www` は `passtune.com` へ転送）。DNS は Cloudflare（Vercel 向けの CNAME は「DNS のみ」）。サーバーの処理は東京（`hnd1`。`vercel.json`）で動かす（Supabase が東京のため）。
 - GitHub Actions: Variables（`SUPABASE_PROJECT_ID`・`SUPABASE_URL`・`SUPABASE_PUBLISHABLE_KEY`）と Secrets（`SUPABASE_ACCESS_TOKEN`・`SUPABASE_DB_PASSWORD`）を登録済み。
   - `SUPABASE_ACCESS_TOKEN` は開発者の判断で Full access・有効期限なし（2026-10-17）。アカウントのすべてのプロジェクトを操作できるので、GitHub の Secrets 以外に保存しない。不要になったら Supabase のアカウントのトークン画面で削除する。
 
