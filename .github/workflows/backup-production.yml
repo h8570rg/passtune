@@ -20,6 +20,7 @@ jobs:
           version: latest
       - run: supabase link --project-ref "${{ vars.SUPABASE_PROJECT_ID }}"
       - run: |
+          mkdir -p backup
           supabase db dump --linked -f backup/schema.sql
           supabase db dump --linked --data-only -f backup/data.sql
           supabase db dump --linked --role-only -f backup/roles.sql
