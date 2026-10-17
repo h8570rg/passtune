@@ -21,7 +21,8 @@
 | 10 | ドメイン | 開発者 | Vercel にドメインを設定 | 配信・メール |
 | 11 | GitHub Actions | 開発者 | Variables: `SUPABASE_PROJECT_ID`、`SUPABASE_URL`、`SUPABASE_PUBLISHABLE_KEY`。Secrets: `SUPABASE_ACCESS_TOKEN`、`SUPABASE_DB_PASSWORD` | 自動マイグレーション・停止防止・バックアップ |
 | 12 | Vercel Analytics | 開発者 | Vercel の管理画面で Web Analytics と Speed Insights を有効化 | 計測 |
-| 12b | Google Search Console（任意） | 開発者 | ドメインを登録し、`https://<ドメイン>/sitemap.xml` を送信する。LP が検索に早く載る。`NEXT_PUBLIC_SITE_URL` が本番のドメインになっていること（robots.txt・sitemap・OGP の URL に使う） | 検索 |
+| 12a | 検索エンジン | 開発者 | **身内だけで使う間は何もしない**（全ページ noindex）。公開すると決めたら、Vercel の本番の環境変数に `SEARCH_INDEXING=enabled` を入れて再デプロイ（[009](../decisions/009-search-engine-indexing.md)） | 検索 |
+| 12b | Google Search Console（公開時・任意） | 開発者 | ドメインを登録し、`https://<ドメイン>/sitemap.xml` を送信する。LP が検索に早く載る。`NEXT_PUBLIC_SITE_URL` が本番のドメインになっていること（robots.txt・sitemap・OGP の URL に使う） | 検索 |
 
 ## 2. 内容の確認・差し替え
 
