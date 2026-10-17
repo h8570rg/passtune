@@ -16,9 +16,8 @@ jobs:
       SUPABASE_ACCESS_TOKEN: ${{ secrets.SUPABASE_ACCESS_TOKEN }}
       SUPABASE_DB_PASSWORD: ${{ secrets.SUPABASE_DB_PASSWORD }}
     steps:
-      - uses: actions/checkout@v5
-      - uses: supabase/setup-cli@v1
-        with:
-          version: latest
+      - uses: actions/checkout@3d3c42e5aac5ba805825da76410c181273ba90b1 # v7.0.1
+      # CLI のバージョンは pnpm-lock.yaml の supabase から決まる（手元と同じバージョンを使う）
+      - uses: supabase/setup-cli@45a513f8c64c0bc8e0e3dfe572b5c95be85f6359 # v3.0.1
       - run: supabase link --project-ref "${{ vars.SUPABASE_PROJECT_ID }}"
       - run: supabase db push
