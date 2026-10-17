@@ -35,7 +35,6 @@ Phase 11 完了間近: **手元（ローカル）でサービスが完成**（�
 - [OPEN] YouTube での投稿（聴きどころから聴かせる）: 投稿の主役・再生の方式・Shorts・試作の可否（[youtube-posting](docs/product/youtube-posting.md)）
 - [OPEN] LP の文言の確認（[ui-design](docs/technical/ui-design.md) の「LP」）
 - [OPEN] 判断して進めた事項の確認（下記の一覧は、2026-10-11 の AI の報告を参照）
-- [OPEN] 問い合わせ先のメールアドレス
 - [OPEN] 音楽サービスの公式ロゴ素材の入手（今は文字ボタン）
 - [OPEN] Spotify の開発モードで、ログイン不要の方式がユーザー数の上限に数えられないか（アプリ登録後に確認）
 - [OPEN] YouTube Music を曲ページへ直接飛ばす改善（YouTube Data API）の可否

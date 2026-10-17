@@ -28,7 +28,7 @@
 
 | # | 項目 | 担当 | やること |
 |---|---|---|---|
-| 13 | 問い合わせ先 | 開発者 → AI | メールアドレスを決め、`lib/config.ts` の `CONTACT_EMAIL` を差し替える |
+| 13 | 問い合わせ先 | 開発者 | `contact@passtune.com`（2026-10-17 決定。`lib/config.ts` は差し替え済み）。Cloudflare の Email → Email Routing で、開発者の普段のアドレスへの転送を設定する |
 | 14 | 利用規約・プライバシーポリシー | 開発者 | 暫定版（`app/(legal)/`）を確認。法的な助言は受けていない |
 | 14b | LP の文言 | 開発者 | `components/landing/landing-page.tsx` の文言を確認（AI の起案） |
 | 15 | 音楽サービスのロゴ | 開発者 | 各社の公式素材（Apple Music のバッジ、Spotify・YouTube Music・LINE MUSIC のロゴ）を入手し、利用条件を確認したうえで AI に渡す。今は文字ボタンで代用（`components/post/service-buttons.tsx`） |

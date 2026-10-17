@@ -21,7 +21,7 @@ delete from auth.users where id = '<ユーザー ID>';
 ```
 
 - 投稿 ID は URL（`/posts/<投稿 ID>`）から分かる。ユーザー ID は `select id from public.profiles where handle = '<ID>';` で調べる。
-- 問い合わせ先は利用規約に載せる（`lib/config.ts` の `CONTACT_EMAIL`）。
+- 問い合わせ先は `contact@passtune.com`。利用規約とプライバシーポリシーに載せている（`lib/config.ts` の `CONTACT_EMAIL`）。Cloudflare の Email Routing で開発者の普段のアドレスに転送する。返信は普段のアドレスから送る。
 
 ## 計測（公開後に確かめること）
 
