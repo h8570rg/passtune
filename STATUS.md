@@ -26,6 +26,7 @@ Phase 12〜13: **本番（https://passtune.com）が稼働**。身内（リン�
 - 本番化: 身内だけの間は LP も noindex（#30）、問い合わせ先（#31）、バックアップ修正（#32）、Vercel を東京に（#34）
 - アイコンを開発者作成のものに差し替え（#35）、友だち検索 `/search`（#36）
 - テスト: Vitest 22 件、pgTAP 16 件、Playwright 10 件、CI
+- 依存・Node.js・pnpm・GitHub Actions を最新にしてハッシュで固定、Renovate で conform-to をグループ化（#38。next 16.4.1 の重大なセキュリティ修正を含む）
 
 ## Key Findings
 
@@ -48,4 +49,4 @@ Phase 12〜13: **本番（https://passtune.com）が稼働**。身内（リン�
 1. 開発者: 本番で未確認の機能（招待リンク・アイコン画像・フォロー・いいね・コメント）とスマホ実機（iPhone の Safari・LINE のアプリ内ブラウザ、Android、ホーム画面に追加）を確かめる
 2. 開発者: 友人に招待リンクを送る（プロフィールの「招待リンクをコピー」）
 3. 任意: Supabase の Redirect URLs に `https://*-h8570rgs-projects.vercel.app/**`（プレビューでのログイン用）、Vercel の Analytics / Speed Insights を有効化
-4. Renovate の依存更新 PR（10 件）の確認とマージ
+4. 開発者: GitHub Actions の「本番 DB のバックアップ」を手動実行し、setup-cli v3（CLI を pnpm-lock.yaml のバージョンに固定）で動くことを確かめる
