@@ -12,7 +12,7 @@ Phase 11 完了間近: **手元（ローカル）でサービスが完成**（�
 
 本番化して、身内（リンクを知っている人）だけで使い始める。検索エンジンにはまだ載せない（[009](docs/decisions/009-search-engine-indexing.md)）。進み具合は [launch-checklist](docs/technical/launch-checklist.md)。
 
-- 2026-10-17: Supabase 本番・DB・GitHub Actions・問い合わせ先（contact@passtune.com）まで完了。次は Resend → Supabase のログイン設定 → Google → Vercel
+- 2026-10-17: https://passtune.com で本番が動いた（Supabase・Resend・Google・Vercel・Cloudflare の DNS とメール転送）。次は本番での動作確認（ログイン・投稿・Spotify・招待）
 
 ## Recently Done（2026-10-11、AI が開発者の指示で一気に実装）
 
