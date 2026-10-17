@@ -13,7 +13,7 @@
 | 1 | ✅ Supabase 本番プロジェクト | 開発者 | 既存プロジェクトを 1 つ一時停止してから、新規作成（リージョンは東京） | 全体 |
 | 2 | ✅ Supabase の値 | 開発者 → AI | Project URL、Publishable key、Project ID、DB パスワード、Access Token | Vercel の環境変数、GitHub Actions |
 | 3 | ✅ マイグレーションの適用 | AI | `supabase link` → `supabase db push`（以降は GitHub Actions が自動で適用） | 本番 DB |
-| 4 | ✅ メールテンプレート | 開発者 | Supabase 管理画面の Authentication → Email Templates の「Magic Link」と「Confirm signup」に `supabase/templates/otp.html` の内容を設定（件名: Passtune の確認コード） | ログイン |
+| 4 | ✅ メールテンプレート | 開発者 | Supabase 管理画面の Authentication → Email Templates の「Magic Link」と「Confirm signup」に `supabase/templates/otp.html` の内容を設定（件名: Passtune の確認コード）。あわせて Authentication → Sign In / Providers → Email の「Email OTP length」を 6 にして Save（新しいプロジェクトの初期値は 8 桁。保存し忘れると 8 桁のコードが届き、アプリで入力できない。2026-10-17 に発生） | ログイン |
 | 5 | ✅ URL 設定 | 開発者 | Authentication → URL Configuration: Site URL を `https://<ドメイン>`、Redirect URLs に `https://<ドメイン>/auth/callback` と Vercel のプレビュー URL（`https://*-<アカウント>.vercel.app/auth/callback`） | ログイン |
 | 6 | ✅ Resend | 開発者 | アカウント作成、独自ドメインの DNS 認証、API キー発行 → Supabase の Authentication → SMTP Settings に設定（送信元: `noreply@<ドメイン>`）。レート制限（既定 30 通/時）を確認 | 確認コードのメール |
 | 7 | ✅ Google ログイン | 開発者 | Google Cloud で OAuth クライアント（ウェブ）を作成。承認済みのリダイレクト URI に `https://<Supabase の Project URL>/auth/v1/callback`。Client ID / Secret を Supabase の Authentication → Providers → Google に設定。手元でも使うなら `http://127.0.0.1:54421/auth/v1/callback` も追加（[development](development.md)）。公開前に Google Auth Platform の公開ステータスを「本番」にする（「テスト」のままだとテストユーザーしかログインできない） | ログイン |
