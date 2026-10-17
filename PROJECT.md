@@ -6,7 +6,7 @@
 ## 1. Overview
 
 友人間でお互いに好きな音楽を共有するための SNS を個人開発する。最初は友人約 20 人から始め、不特定多数にも公開する。
-Discovery・技術方針・ロードマップ（Phase 1〜10）を終え、2026-10-11 に手元（ローカル）でサービスが完成。公開準備中。技術構成は Web のみ（PWA）・Next.js・Vercel・Supabase（[architecture](docs/technical/architecture.md)）。
+Discovery・技術方針・ロードマップ（Phase 1〜10）を終え、2026-10-11 に手元でサービスが完成、2026-10-17 に本番（https://passtune.com）が稼働。身内（リンクを知っている人）だけで使う段階。技術構成は Web のみ（PWA）・Next.js・Vercel・Supabase（[architecture](docs/technical/architecture.md)）。
 
 ## 2. Vision / Problem
 

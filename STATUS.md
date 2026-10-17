@@ -6,48 +6,46 @@ Last updated: 2026-10-17
 
 ## Current Phase
 
-Phase 11 完了間近: **手元（ローカル）でサービスが完成**（環境変数・外部サービスの認証情報を除く）。次は開発者の MVP 評価（Phase 12）と公開準備（M7 / Phase 13）。
+Phase 12〜13: **本番（https://passtune.com）が稼働**。身内（リンクを知っている人）だけで使う段階。検索エンジンにはまだ載せない（[009](docs/decisions/009-search-engine-indexing.md)）。
 
 ## Current Goal
 
-本番化して、身内（リンクを知っている人）だけで使い始める。検索エンジンにはまだ載せない（[009](docs/decisions/009-search-engine-indexing.md)）。進み具合は [launch-checklist](docs/technical/launch-checklist.md)。
+友人に招待リンクを送って使い始め、使ってみた気づきから改修する（改修は次のセッションから）。
 
-- 2026-10-17: https://passtune.com で本番が動いた（Supabase・Resend・Google・Vercel・Cloudflare の DNS とメール転送）。次は本番での動作確認（ログイン・投稿・Spotify・招待）
+## 本番環境（詳細は [admin](docs/technical/admin.md)）
 
-## Recently Done（2026-10-11、AI が開発者の指示で一気に実装）
+- Vercel（東京 `hnd1`）＋ Supabase（東京）＋ Resend（`noreply@passtune.com`）＋ Cloudflare（DNS・`contact@passtune.com` の転送）
+- ログイン: メールの 6 桁コード / Google（公開ステータスは本番）。Spotify は曲ページへ直接転送
+- GitHub Actions: main のマイグレーションを本番に自動適用、毎日の停止防止、週 1 回のバックアップ（すべて動作確認済み）
+- 本番で確認済み: メール・Google のログイン、投稿、試聴、Spotify の転送。未確認: 招待リンク、アイコン画像、フォロー・いいね・コメント、スマホ実機
 
-- M1 ログイン（メールの 6 桁コード / Google）とプロフィール（アイコン画像つき）: PR #7
-- M2・M3 投稿・試聴・再生回数・各サービスで開く・Spotify への転送: PR #8
-- M4 フォロー・タイムライン・いいね・コメント・反応: PR #9
-- M5・M6 招待リンク・PWA・ホーム画面追加の案内・規約・CI / バックアップ: PR #12、サンプルデータ: PR #13
-- DB 設計（Supabase のベストプラクティス）・RLS テスト: PR #6（[database](docs/technical/database.md)）
-- UI 設計（モデルベース UI デザイン）: [ui-design](docs/technical/ui-design.md)
-- 手元の Supabase を Docker なしに（Supabase CLI のネイティブ実行、アルファ版）: [development](docs/technical/development.md)
-- 2026-10-17: アイコンを開発者作成のものに差し替え（PR #35）、友だち検索（`/search`）を追加
-- 検索エンジンに載せるのは LP だけ（[009](docs/decisions/009-search-engine-indexing.md)）。LP を作成
-- テスト: Vitest 10 件、pgTAP 16 件、Playwright 9 件、CI（GitHub Actions）
+## Recently Done（2026-10-11〜17）
 
-## Key Findings（開発中に分かったこと）
+- 手元でサービス完成（PR #6〜#13）、手元のメールに 6 桁コード（#14）、LP（#17）、招待リンクを UUID に（#20）
+- 手元で Google・Spotify も動作（#21）、Spotify の英語表記のアーティスト名に対応（#24）
+- 本番化: 身内だけの間は LP も noindex（#30）、問い合わせ先（#31）、バックアップ修正（#32）、Vercel を東京に（#34）
+- アイコンを開発者作成のものに差し替え（#35）、友だち検索 `/search`（#36）
+- テスト: Vitest 22 件、pgTAP 16 件、Playwright 10 件、CI
 
-- Docker なしの手元 Supabase はメールテンプレートのファイル指定に未対応 → メール送信フックで、手元でも 6 桁コード入りのメールを送るようにした（[development](docs/technical/development.md)）
+## Key Findings
+
+- Docker なしの手元 Supabase はメールテンプレート未対応 → メール送信フックで代替（[development](docs/technical/development.md)）
 - 手元の Supabase は git ブランチごとに別スタック。切り替え時は `pnpm supabase:stop --all`
-- GitHub のシークレット検知が手元 Supabase の既定キーも止める → E2E はキーを `supabase status` から読む
+- 新しい Supabase プロジェクトは確認コードが 8 桁が初期値（6 桁に変更済み。[launch-checklist](docs/technical/launch-checklist.md)）
+- Spotify の API は邦楽のアーティスト名を英語表記で返す（照合で吸収済み）
 
 ## Open Questions（開発者に確認したいこと）
 
-- [OPEN] YouTube での投稿（聴きどころから聴かせる）: 投稿の主役・再生の方式・Shorts・試作の可否（[youtube-posting](docs/product/youtube-posting.md)）
+- [OPEN] YouTube での投稿（聴きどころから聴かせる）。後で検討（[youtube-posting](docs/product/youtube-posting.md)）
 - [OPEN] LP の文言の確認（[ui-design](docs/technical/ui-design.md) の「LP」）
-- [OPEN] 判断して進めた事項の確認（下記の一覧は、2026-10-11 の AI の報告を参照）
-- [OPEN] 音楽サービスの公式ロゴ素材の入手（今は文字ボタン）
-- [OPEN] Spotify の開発モードで、ログイン不要の方式がユーザー数の上限に数えられないか（アプリ登録後に確認）
-- [OPEN] YouTube Music を曲ページへ直接飛ばす改善（YouTube Data API）の可否
-
-## Blockers
-
-なし（公開には開発者の認証情報・設定が必要）
+- [OPEN] 利用規約・プライバシーポリシーの暫定版の確認（`app/(legal)/`。法的な助言は受けていない）
+- [OPEN] 音楽サービスの公式ロゴ素材（今は文字ボタン）
+- [OPEN] Spotify の開発モード（5 人まで）が、ログイン不要の検索にもかかるか（今は問題なく動いている）
+- [OPEN] AI の判断で進めた事項の確認（再生回数の数え方、成功基準の代替指標、文字数など。2026-10-11 の報告）
 
 ## Next Actions
 
-1. 開発者: 手元で MVP を触って評価する（`pnpm dev` → http://localhost:3000、[development](docs/technical/development.md)）
-2. 開発者: [launch-checklist](docs/technical/launch-checklist.md) の認証情報・設定をそろえ、AI に値を渡す
-3. AI: 受け取った値で本番環境を設定し、公開前の確認を手伝う
+1. 開発者: 本番で未確認の機能（招待リンク・アイコン画像・フォロー・いいね・コメント）とスマホ実機（iPhone の Safari・LINE のアプリ内ブラウザ、Android、ホーム画面に追加）を確かめる
+2. 開発者: 友人に招待リンクを送る（プロフィールの「招待リンクをコピー」）
+3. 任意: Supabase の Redirect URLs に `https://*-h8570rgs-projects.vercel.app/**`（プレビューでのログイン用）、Vercel の Analytics / Speed Insights を有効化
+4. Renovate の依存更新 PR（10 件）の確認とマージ
