@@ -2,9 +2,9 @@ import Link from "next/link";
 import { redirect } from "next/navigation";
 import { after } from "next/server";
 import { AppNav } from "@/components/app-nav";
+import { BrandLogo } from "@/components/brand-logo";
 import { AddToHomeScreenHint } from "@/components/pwa";
 import { UserAvatar } from "@/components/user-avatar";
-import { SERVICE_NAME } from "@/lib/config";
 import { getAuthUser, getMyProfile } from "@/lib/data/user";
 import { createClient } from "@/lib/supabase/server";
 
@@ -29,8 +29,8 @@ export async function AppShell({ children }: { children: React.ReactNode }) {
     <div className="min-h-dvh">
       <header className="sticky top-0 z-30 border-b border-border bg-background/80 backdrop-blur">
         <div className="mx-auto flex h-14 max-w-4xl items-center justify-between px-4">
-          <Link href="/" className="text-lg font-bold tracking-tight">
-            {SERVICE_NAME}
+          <Link href="/">
+            <BrandLogo />
           </Link>
           {profile ? (
             <Link href="/settings" aria-label="設定">
