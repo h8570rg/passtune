@@ -2,6 +2,7 @@ import "server-only";
 import { cache } from "react";
 import { createClient } from "@/lib/supabase/server";
 import type { Profile } from "@/lib/type";
+import { containsPattern } from "@/lib/utils/search";
 import { toProfile } from "./user";
 
 const PROFILE_COLUMNS = "id, handle, display_name, avatar_path";
@@ -63,6 +64,55 @@ export async function getFollowers(userId: string): Promise<Profile[]> {
 }
 
 export type Comment = { id: string; body: string; createdAt: string; author: Profile };
+
+const USER_SEARCH_LIMIT = 20;
+
+/**
+ * 友だち検索。ユーザー ID か表示名の部分一致（大文字小文字は区別しない）。自分は除く。
+ * ID が完全に一致する人 → ID が前方一致する人 → それ以外 の順に並べる。
+ */
+export async function searchProfiles(query: string, excludeUserId: string): Promise<Profile[]> {
+  if (!query) return [];
+  const supabase = await createClient();
+  const pattern = containsPattern(query);
+  const [byHandle, byName] = await Promise.all([
+    supabase
+      .from("profiles")
+      .select(PROFILE_COLUMNS)
+      .ilike("handle", pattern)
+      .neq("id", excludeUserId)
+      .limit(USER_SEARCH_LIMIT),
+    supabase
+      .from("profiles")
+      .select(PROFILE_COLUMNS)
+      .ilike("display_name", pattern)
+      .neq("id", excludeUserId)
+      .limit(USER_SEARCH_LIMIT),
+  ]);
+  if (byHandle.error) throw byHandle.error;
+  if (byName.error) throw byName.error;
+
+  const lower = query.toLowerCase();
+  const rank = (handle: string) => (handle === lower ? 0 : handle.startsWith(lower) ? 1 : 2);
+  const unique = new Map([...byHandle.data, ...byName.data].map((row) => [row.id, row]));
+  return [...unique.values()]
+    .sort((a, b) => rank(a.handle) - rank(b.handle) || a.handle.localeCompare(b.handle))
+    .slice(0, USER_SEARCH_LIMIT)
+    .map(toProfile);
+}
+
+/** 最近はじめた人（友だち検索で、まだ何も入力していないときに出す）。自分は除く */
+export async function getRecentProfiles(excludeUserId: string, limit = 10): Promise<Profile[]> {
+  const supabase = await createClient();
+  const { data, error } = await supabase
+    .from("profiles")
+    .select(PROFILE_COLUMNS)
+    .neq("id", excludeUserId)
+    .order("created_at", { ascending: false })
+    .limit(limit);
+  if (error) throw error;
+  return data.map(toProfile);
+}
 
 export async function getComments(postId: string): Promise<Comment[]> {
   const supabase = await createClient();

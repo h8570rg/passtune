@@ -24,7 +24,8 @@ test("フォローするとタイムラインに投稿が流れ、いいね・�
   await expect(bobPage.getByText("まだ誰もフォローしていません")).toBeVisible();
   await bobPage.goto(`/u/${alice.handle}`);
   await bobPage.getByRole("button", { name: "フォローする" }).click();
-  await expect(bobPage.getByRole("button", { name: "フォロー中" })).toBeVisible();
+  // 表示は押した直後に切り替わる（楽観的更新）。保存が終わってボタンが押せる状態に戻るまで待つ
+  await expect(bobPage.getByRole("button", { name: "フォロー中" })).toBeEnabled();
 
   // bob のタイムラインに alice の投稿が出る
   await bobPage.goto("/");
@@ -72,4 +73,30 @@ test("未ログインでいいねしようとするとログインへ移動す�
   await page.goto(posterPage.url());
   await page.getByRole("link", { name: "ログインしていいねする" }).click();
   await expect(page).toHaveURL(/\/login\?next=/);
+});
+
+test("友だちを ID や表示名で検索してフォローできる", async ({ browser }) => {
+  const carolPage = await (await browser.newContext()).newPage();
+  const davePage = await (await browser.newContext()).newPage();
+  const carol = await signUp(carolPage, "carol");
+  await signUp(davePage, "dave");
+
+  await davePage.getByRole("link", { name: "友だちを探す" }).click();
+  await expect(davePage).toHaveURL(/\/search$/);
+
+  // ID の一部で探す（先頭の @ は無視される）
+  await davePage
+    .getByRole("searchbox", { name: "友だちを探す" })
+    .fill(`@${carol.handle.slice(0, 12)}`);
+  await expect(davePage).toHaveURL(/\/search\?q=/);
+  const row = davePage.getByRole("listitem").filter({ hasText: `@${carol.handle}` });
+  await expect(row).toBeVisible();
+
+  // 結果からそのままフォローする
+  await row.getByRole("button", { name: "フォローする" }).click();
+  await expect(row.getByRole("button", { name: "フォロー中" })).toBeEnabled();
+
+  // 見つからないとき
+  await davePage.getByRole("searchbox", { name: "友だちを探す" }).fill("no_such_user_zzz");
+  await expect(davePage.getByText("見つかりませんでした")).toBeVisible();
 });

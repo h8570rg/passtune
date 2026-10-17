@@ -22,11 +22,16 @@ export async function Timeline({ before }: { before: string | null }) {
           <div className="space-y-1">
             <p className="font-medium">まだ誰もフォローしていません</p>
             <p className="text-muted">
-              プロフィールの「招待リンクをコピー」から友人を誘うと、友人が登録したときに自動でつながります。
+              すでに使っている友人は「さがす」から見つけられます。まだの友人は、プロフィールの「招待リンクをコピー」から誘うと、登録したときに自動でつながります。
             </p>
-            <Link href={`/u/${profile.handle}`} className="text-accent underline">
-              プロフィールへ
-            </Link>
+            <div className="flex gap-4">
+              <Link href="/search" className="text-accent underline">
+                友だちを探す
+              </Link>
+              <Link href={`/u/${profile.handle}`} className="text-accent underline">
+                プロフィールへ
+              </Link>
+            </div>
           </div>
         </div>
       ) : null}
