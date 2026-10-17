@@ -10,6 +10,7 @@ import {
   SendIcon,
 } from "lucide-react";
 import Link from "next/link";
+import { BrandLogo } from "@/components/brand-logo";
 import { OPERATOR_NAME, SERVICE_DESCRIPTION, SERVICE_NAME, SERVICE_NAME_KANA } from "@/lib/config";
 import { getURL } from "@/lib/utils/url";
 
@@ -105,8 +106,8 @@ export function LandingPage() {
       />
       <header className="sticky top-0 z-30 border-b border-border bg-background/80 backdrop-blur">
         <div className="mx-auto flex h-14 max-w-5xl items-center justify-between px-4">
-          <Link href="/" className="text-lg font-bold tracking-tight">
-            {SERVICE_NAME}
+          <Link href="/">
+            <BrandLogo />
           </Link>
           <Link
             href="/login"

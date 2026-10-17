@@ -15,6 +15,14 @@ export const metadata: Metadata = {
   },
   description: SERVICE_DESCRIPTION,
   applicationName: SERVICE_NAME,
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/brand/icon.svg", type: "image/svg+xml" },
+    ],
+    // iOS はホーム画面のアイコンを自動で角丸にするため、四角の画像を渡す
+    apple: "/brand/apple-touch-icon.png",
+  },
   appleWebApp: { capable: true, title: SERVICE_NAME, statusBarStyle: "default" },
   robots: {
     index: false,
