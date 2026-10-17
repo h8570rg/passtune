@@ -53,9 +53,9 @@
     "@types/react-dom": "19.3.0",
     "cspell": "10.3.6",
     "lefthook": "2.1.14",
-    "oxfmt": "0.70.0",
-    "oxlint": "1.85.0",
-    "oxlint-tailwindcss": "1.13.0",
+    "oxfmt": "0.73.0",
+    "oxlint": "1.88.0",
+    "oxlint-tailwindcss": "1.16.0",
     "supabase": "2.120.0",
     "typescript": "7.0.2",
     "vitest": "5.0.4"
