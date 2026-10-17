@@ -4,6 +4,10 @@
   "labels": ["renovate"],
   "packageRules": [
     {
+      "groupName": "conform-to",
+      "matchPackageNames": ["@conform-to/react", "@conform-to/zod"]
+    },
+    {
       "groupName": "heroui",
       "matchPackageNames": ["@heroui/react", "@heroui/styles"]
     },
@@ -14,6 +18,11 @@
     {
       "groupName": "oxc",
       "matchPackageNames": ["oxlint", "oxfmt", "oxlint-tailwindcss"]
+    },
+    {
+      "description": "Node.js の実行環境（.mise.toml・engines）に合わせて 24 系に留める",
+      "matchPackageNames": ["@types/node"],
+      "allowedVersions": "24.x"
     }
   ]
 }
