@@ -272,6 +272,7 @@ export function LandingPage() {
       <footer className="border-t border-border">
         <div className="mx-auto flex max-w-5xl flex-col items-center justify-between gap-3 px-4 py-8 text-xs text-muted md:flex-row">
           <p>
+            {/* oxlint-disable-next-line react/purity -- サーバーでリクエストごとに 1 回描画するだけで、再描画による不安定さはない */}
             © {new Date().getFullYear()} {SERVICE_NAME}（運営: {OPERATOR_NAME}）
           </p>
           <nav className="flex gap-4">
