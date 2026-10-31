@@ -26,8 +26,8 @@
   "dependencies": {
     "@conform-to/react": "1.21.2",
     "@conform-to/zod": "1.21.2",
-    "@heroui/react": "3.2.6",
-    "@heroui/styles": "3.2.6",
+    "@heroui/react": "3.2.7",
+    "@heroui/styles": "3.2.7",
     "@iconify/react": "6.0.3",
     "@supabase/ssr": "0.12.7",
     "@supabase/supabase-js": "2.118.0",
