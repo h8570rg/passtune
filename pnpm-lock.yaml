@@ -179,8 +179,8 @@ importers:
         specifier: 3.2.7
         version: 3.2.7(tailwindcss@4.3.3)
       '@iconify/react':
-        specifier: 6.0.3
-        version: 6.0.3(react@19.3.1)
+        specifier: 6.0.4
+        version: 6.0.4(react@19.3.1)
       '@supabase/ssr':
         specifier: 0.12.7
         version: 0.12.7(@supabase/supabase-js@2.118.0)
@@ -569,8 +569,8 @@ packages:
     peerDependencies:
       tailwindcss: '>=4.0.0'
 
-  '@iconify/react@6.0.3':
-    resolution: {integrity: sha512-2x7gVs+tpUG75aXYo/0c5wPOqrFy75YSGKmuJZyuHyrHMydzXpI/+i9/USIzWXJL9WWc2BCgPVnGY2FhbeiiDQ==}
+  '@iconify/react@6.0.4':
+    resolution: {integrity: sha512-7nKd1eF52E1QGIl46eDWfMNPuTQHUxsXoK2Evgtu5jr386jCWTuWFLHM9vfsTNbUcKp+uq6ao+3skNUalDhH/w==}
     peerDependencies:
       react: '>=18.0.0'
 
@@ -2822,7 +2822,7 @@ snapshots:
     transitivePeerDependencies:
       - tailwind-merge
 
-  '@iconify/react@6.0.3(react@19.3.1)':
+  '@iconify/react@6.0.4(react@19.3.1)':
     dependencies:
       '@iconify/types': 2.0.0
       react: 19.3.1
