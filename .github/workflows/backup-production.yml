@@ -20,9 +20,9 @@ jobs:
       - run: supabase link --project-ref "${{ vars.SUPABASE_PROJECT_ID }}"
       - run: |
           mkdir -p backup
-          supabase db dump --linked -f backup/schema.sql
-          supabase db dump --linked --data-only -f backup/data.sql
-          supabase db dump --linked --role-only -f backup/roles.sql
+          supabase db dump -f backup/schema.sql --yes --remote
+          supabase db dump --data-only -f backup/data.sql --yes --remote
+          supabase db dump --role-only -f backup/roles.sql --yes --remote
       - uses: actions/upload-artifact@cf430e030ddbb5b0abf93d22962f4752f3646cd9 # v7.0.2
         with:
           name: supabase-backup-${{ github.run_id }}
