@@ -79,7 +79,7 @@ pnpm dev              # http://localhost:3000
 
 1. `supabase/schemas/*.sql` を「あるべき姿」に書き換える（テーブル・RLS・関数・権限）。
 2. `pnpm supabase:sync <名前>` でマイグレーションを生成し、手元の DB に当てる。
-   - Supabase CLI 2.120 では、宣言的スキーマからの生成は `supabase db schema declarative sync`（`db diff` は使わない）。
+   - Supabase CLI v3 でも、宣言的スキーマからの生成は `supabase db schema declarative sync`（`db diff` は使わない）。
 3. `pnpm supabase:type` で `lib/database.types.ts` を更新する。
 4. `pnpm supabase:test` で RLS のテスト（`supabase/tests/*.sql`、pgTAP）を実行する。
 
