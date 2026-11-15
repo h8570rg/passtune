@@ -12,64 +12,52 @@
 
 ```bash
 pnpm install          # lefthook のコミット前フックも入る
-cp .env.example .env.local
-pnpm supabase:start   # 手元の Supabase を起動（初回はダウンロードに数分）
-pnpm supabase:reset   # マイグレーションを当てる
-pnpm dev              # http://localhost:3000
+pnpm supabase:start   # 手元の Supabase を起動（初回はダウンロードに数分）。接続先を .env.local に書き出す
+pnpm dev              # 起動時に表示される URL（通常は http://localhost:3000）
 ```
 
 ## 手元の Supabase（Docker なし）
 
 - `supabase/config.toml` の `[experimental] stack = true` と `supabase start --runtime native` で、Docker なしで動かす。2026-10 時点でアルファ版（[Supabase Select 2026 Recap](https://supabase.com/blog/supabase-select-2026-recap)、[CLI config](https://supabase.com/docs/guides/local-development/cli/config)）。2026-10-11 に macOS（Apple silicon）で、DB・API・Auth・Storage・Studio・メールが動くことを確認した。
 - Realtime・Edge Functions・Analytics・Pooler は使わないので起動しない（`-x` で除外）。
-- **スタックは「ディレクトリ＋ git ブランチ」ごとに別になる。** ブランチを切り替えると、DB は空の別スタックになる。
-  - 切り替える前に `pnpm supabase:stop` で止める（ポートを固定しているため、2 つ同時には起動できない）。
-  - 切り替えた先で `pnpm supabase:start` と `pnpm supabase:reset` を実行する。
-- jankiroku（Docker、543xx 番台）と同時に起動できるよう、ポートは 544xx 番台に固定している。
-
-| 用途 | URL |
-|---|---|
-| API | http://127.0.0.1:54421 |
-| 管理画面（Studio） | http://127.0.0.1:54423 |
-| メール確認（ログインの 6 桁コードを受け取る） | http://127.0.0.1:54424 |
-| DB | postgresql://postgres:postgres@127.0.0.1:54422/postgres |
+- **スタックは「ディレクトリ＋ git ブランチ」ごと（worktree ごと）に別になる。** ポートは固定せず、CLI が空きを自動で割り当てるので、worktree ごとのスタックを同時に起動できる。
+  - 接続先は `pnpm supabase:start` が `.env.local` に書き出す（`pnpm supabase:env` で書き直せる）。手で設定する必要はない。
+  - 各サービスの URL（Studio・メール確認ツールなど）は `pnpm exec supabase status` で確認する。
+  - 残っているスタックは `pnpm exec supabase stack list` で確認し、`pnpm supabase:destroy`（この worktree）または `pnpm exec supabase stack destroy --yes --stack-id <id>` で消す。
+- Claude Code のセッションが終わると、その worktree のスタックは削除される（`.claude/settings.json` の `SessionEnd` フック）。次の作業は `pnpm supabase:start` から始める。
+- 同じ worktree で `pnpm dev` が動いていると、E2E は起動できない。
 
 ## サンプルデータ
 
 - `pnpm supabase:reset` で `supabase/seed.sql` のサンプル（アリス @demo_alice・ボブ @demo_bob と投稿 4 件）が入る。
 - 自分のメールアドレスでログインし、@demo_alice か @demo_bob をフォローすると、タイムラインにサンプルの投稿が流れる。
-- `pnpm supabase:stop --all` で、全ブランチの手元の Supabase を止められる（ポートがぶつかったとき）。
 
 ## 手元でのログイン
 
-- 手元の Supabase が送るメールは、メール確認ツール（http://127.0.0.1:54424）で受け取る。
-- 届くメールには 6 桁コードとリンクの両方が入っている。コードをログイン画面に入力するか、ログインした同じブラウザでリンクを開く（`/auth/callback` で処理）。
+- 手元の Supabase が送るメールは、メール確認ツール（`pnpm exec supabase status` の `MAILPIT_URL`）で受け取る。
+- 届くメールには 6 桁コードだけが入っている。コードをログイン画面に入力する。手元ではメールのリンクでのログインは使えない（`site_url` が `http://127.0.0.1:3000` で、アプリの `localhost` とクッキーが別になるため）。
 - 仕組み: Docker なしの実行方式は、メールテンプレートのファイル指定（`content_path`）に未対応（CLI 2.120 で確認。テンプレートは Docker 版の中継サーバー経由で Auth に渡すため）。そこで手元では、Auth のメール送信フック（Send Email Hook。`config.toml` の `[auth.hook.send_email]`）から DB の関数 `local_dev.send_auth_email` を呼び、pg_net でメール確認ツールの送信 API に渡している。
-  - 関数は `supabase/seed.sql` にある（手元専用。マイグレーションに入れないので本番には入らない）。`pnpm supabase:reset` で作られる。
-  - メールが届かないときは、関数があるか（`pnpm supabase:reset` を実行したか）を確認する。
+  - 関数は `supabase/mailpit.sql` にある（手元専用。マイグレーションに入れないので本番には入らない）。`pnpm supabase:reset` で作られ、送り先の URL は `supabase/mailpit.sh`（`pnpm supabase:start` / `pnpm supabase:reset` から呼ばれる）が入れる。
+  - メールが届かないときは、`pnpm supabase:start` を実行したかを確認する。
   - E2E テストも、メール確認ツールの API から確認コードを読んでログインする（`e2e/helpers.ts`）。
-- 本番では、Supabase の管理画面で `supabase/templates/otp.html` の内容を「Magic Link」と「Confirm signup」のテンプレートに設定する（6 桁コードとリンクの両方を載せる）。
+- 本番のログインコードの有効期限は 10 分（`config.toml` の `otp_expiry = 600`）。本番では、Supabase の管理画面（Authentication → Email）で、有効期限（Email OTP Expiration）を 600 秒にし、`supabase/templates/otp.html` の内容を「Magic Link」と「Confirm signup」のテンプレートに設定する（6 桁コードとリンクの両方を載せる。リンクでのログインは本番だけ）。
 
-## 手元で Google ログインと Spotify を動かす（任意）
+## 手元で Google ログインは使えない
 
-どちらも、値を入れなくてもほかの機能は動く。値はプロジェクト直下の `.env.local` に書く（Next.js と Supabase CLI の両方が読む。リポジトリには入らない）。
+- 手元の Supabase の API ポートは worktree ごとに変わる（並列で作業するため固定しない）。Google のリダイレクト URI は完全一致で登録する必要があり、ポートが変わると登録できないので、`config.toml` に Google の設定は入れていない。
+- 手元ではメールの 6 桁コードでログインする。Google ログインは、本番の Supabase（管理画面の Authentication → Providers → Google）で確認する。
+- 手元で Google ログインのコードを頻繁に触るようになったら、空きポートを探して決まった範囲（例: 54421〜54440）の URI を Google に登録する方法を検討する（`SUPABASE_API_PORT` で API ポートを指定できる）。
 
-### Google ログイン
+## 手元で Spotify を動かす（任意）
 
-1. [Google Cloud Console](https://console.cloud.google.com/) でプロジェクトを作る。
-2. 「Google Auth Platform」（旧 OAuth 同意画面）を設定する: アプリ名 Passtune、対象は「外部」。公開ステータスが「テスト」の間は、「テストユーザー」に追加した Google アカウントだけがログインできる（自分のアカウントを追加する）。
-3. 「クライアント」で OAuth クライアント ID を作る: 種類は「ウェブ アプリケーション」、承認済みのリダイレクト URI に `http://127.0.0.1:54421/auth/v1/callback`（手元の Supabase。Supabase の公式手順と同じ形）。本番用の `https://<Supabase の Project URL>/auth/v1/callback` も同じクライアントに追加してよい。
-4. クライアント ID とシークレットを `.env.local` の `SUPABASE_AUTH_EXTERNAL_GOOGLE_CLIENT_ID` / `SUPABASE_AUTH_EXTERNAL_GOOGLE_SECRET` に書く。
-5. `pnpm supabase:stop` → `pnpm supabase:start`（Auth の設定は起動時に読む）。
-
-- 設定は `supabase/config.toml` の `[auth.external.google]`。値が空のときは、Google のボタンを押すと Google のエラー画面になる（メールのログインには影響しない）。
+値を入れなくてもほかの機能は動く。値はプロジェクト直下の `.env` に書く（Next.js が読む。リポジトリには入らない）。`.env.local` は `pnpm supabase:start` が上書きするので、ここには書かない。
 
 ### Spotify（「Spotify で開く」を曲ページへ直接飛ばす）
 
 1. [Spotify for Developers](https://developer.spotify.com/dashboard) に Premium のアカウントでログインし、「Create app」。
    - Redirect URI は入力必須だが使わない。`http://127.0.0.1:3000` を入れておく（Spotify は `localhost` を受け付けない）。
    - 使う API は「Web API」。
-2. 「Settings」の Client ID と Client secret を `.env.local` の `SPOTIFY_CLIENT_ID` / `SPOTIFY_CLIENT_SECRET` に書く。
+2. 「Settings」の Client ID と Client secret を `.env` の `SPOTIFY_CLIENT_ID` / `SPOTIFY_CLIENT_SECRET` に書く。
 3. `pnpm dev` を再起動する。
 
 - 値が空のときは、Spotify の検索結果へ飛ぶ（`app/go/spotify/[postId]/route.ts`）。
@@ -95,11 +83,14 @@ pnpm dev              # http://localhost:3000
 | `pnpm test` | Vitest |
 | `pnpm spell` | cspell |
 | `pnpm test:e2e` | Playwright（手元の Supabase と開発サーバーを使う） |
-| `pnpm supabase:start` / `stop` | 手元の Supabase の起動・停止 |
+| `pnpm supabase:start` / `stop` | 手元の Supabase の起動・停止（`start` は `.env.local` も書き出す） |
+| `pnpm supabase:destroy` | この worktree のスタックを削除する（データも消える） |
+| `pnpm supabase:env` | `.env.local` を書き直す |
 | `pnpm supabase:reset` | 手元の DB を作り直す（マイグレーションを全部当て直し、`seed.sql` を投入） |
 | `pnpm supabase:sync <名前>` | 宣言的スキーマからマイグレーションを生成して当てる |
 | `pnpm supabase:type` | DB の型を `lib/database.types.ts` に生成する |
 | `pnpm supabase:test` | RLS のテスト（pgTAP） |
+| `pnpm supabase:push` | リンクした本番へマイグレーションを適用する |
 
 コミット時には lefthook が `check`・`type`・`test`・`spell` を実行する。
 
