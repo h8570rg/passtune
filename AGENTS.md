@@ -55,6 +55,13 @@ AI Agent（Claude ほか）がこのリポジトリで作業するときの最�
 - 将来必要かもしれないだけの設計・抽象化・スケーラビリティ対策
 - AI 自身の記憶機能をプロジェクト知識の保存先にすること（正本はこのリポジトリ）
 
+## ローカル Supabase
+
+- worktree ごとに別の DB が動く。作業の初めに `pnpm run supabase:start` を実行する（接続先は `.env.local` に書き出される）
+- セッションが終わると、その worktree の DB は削除される
+- 同じ worktree で `pnpm run dev` が動いていると E2E は起動できない。その dev サーバーは止めず、ユーザーに伝える
+- 詳しくは docs/technical/development.md の「手元の Supabase」
+
 <!-- BEGIN:nextjs-agent-rules -->
 
 ## This is NOT the Next.js you know

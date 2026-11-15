@@ -1,5 +1,18 @@
 {
   "enabledPlugins": {
     "supabase@claude-plugins-official": true
+  },
+  "hooks": {
+    "SessionEnd": [
+      {
+        "hooks": [
+          {
+            "type": "command",
+            "command": "cwd=$(jq -r .cwd) && cd \"$cwd\" && pnpm exec supabase stack list --output-format json | jq -r --arg c \"$cwd\" '.stacks[] | select(.project_root == $c) | .id' | xargs -I{} pnpm exec supabase stack destroy --stack-id {} --yes",
+            "timeout": 30
+          }
+        ]
+      }
+    ]
   }
 }

@@ -1,6 +1,6 @@
 import { expect, type Page } from "@playwright/test";
 
-const MAILPIT_URL = "http://127.0.0.1:54424";
+const MAILPIT_URL = process.env.MAILPIT_URL;
 
 export function uniqueEmail(prefix: string) {
   return `${prefix}-${Date.now()}-${Math.floor(Math.random() * 1000)}@example.com`;
