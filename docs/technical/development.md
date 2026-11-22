@@ -22,7 +22,7 @@ pnpm dev              # 起動時に表示される URL（通常は http://local
 - Realtime・Edge Functions・Analytics・Pooler は使わないので起動しない（`-x` で除外）。
 - **スタックは「ディレクトリ＋ git ブランチ」ごと（worktree ごと）に別になる。** ポートは固定せず、CLI が空きを自動で割り当てるので、worktree ごとのスタックを同時に起動できる。
   - 接続先は `pnpm supabase:start` が `.env.local` に書き出す（`pnpm supabase:env` で書き直せる）。手で設定する必要はない。
-  - 各サービスの URL（Studio・メール確認ツールなど）は `pnpm exec supabase status` で確認する。
+  - 各サービスの URL（Studio・メール確認ツールなど）は `pnpm run supabase:status` で確認する。
   - 残っているスタックは `pnpm exec supabase stack list` で確認し、`pnpm supabase:destroy`（この worktree）または `pnpm exec supabase stack destroy --yes --stack-id <id>` で消す。
 - Claude Code のセッションが終わると、その worktree のスタックは削除される（`.claude/settings.json` の `SessionEnd` フック）。次の作業は `pnpm supabase:start` から始める。
 - 同じ worktree で `pnpm dev` が動いていると、E2E は起動できない。
@@ -34,7 +34,7 @@ pnpm dev              # 起動時に表示される URL（通常は http://local
 
 ## 手元でのログイン
 
-- 手元の Supabase が送るメールは、メール確認ツール（`pnpm exec supabase status` の `MAILPIT_URL`）で受け取る。
+- 手元の Supabase が送るメールは、メール確認ツール（`pnpm run supabase:status` の `MAILPIT_URL`）で受け取る。
 - 届くメールには 6 桁コードだけが入っている。コードをログイン画面に入力する。手元ではメールのリンクでのログインは使えない（`site_url` が `http://127.0.0.1:3000` で、アプリの `localhost` とクッキーが別になるため）。
 - 仕組み: Docker なしの実行方式は、メールテンプレートのファイル指定（`content_path`）に未対応（CLI 2.120 で確認。テンプレートは Docker 版の中継サーバー経由で Auth に渡すため）。そこで手元では、Auth のメール送信フック（Send Email Hook。`config.toml` の `[auth.hook.send_email]`）から DB の関数 `local_dev.send_auth_email` を呼び、pg_net でメール確認ツールの送信 API に渡している。
   - 関数は `supabase/mailpit.sql` にある（手元専用。マイグレーションに入れないので本番には入らない）。`pnpm supabase:reset` で作られ、送り先の URL は `supabase/mailpit.sh`（`pnpm supabase:start` / `pnpm supabase:reset` から呼ばれる）が入れる。

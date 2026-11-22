@@ -11,7 +11,7 @@
 - Last updated: 2026-10-11
 - 根拠: [mvp](../product/mvp.md)（管理者による削除手段・計測）、[database](database.md)
 
-管理画面は作らない。Supabase の管理画面（Studio）の SQL Editor で、service role（RLS を通らない）として操作する。手元では `pnpm exec supabase status` の `STUDIO_URL` 。
+管理画面は作らない。Supabase の管理画面（Studio）の SQL Editor で、service role（RLS を通らない）として操作する。手元では `pnpm run supabase:status` の `STUDIO_URL` 。
 
 ## 不適切な投稿・コメント・ユーザーの削除
 
