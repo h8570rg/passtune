@@ -64,7 +64,7 @@
     "oxfmt": "0.79.0",
     "oxlint": "1.94.0",
     "oxlint-tailwindcss": "1.17.2",
-    "supabase": "3.2.0",
+    "supabase": "3.3.0",
     "typescript": "7.0.2",
     "vitest": "5.1.1"
   },
