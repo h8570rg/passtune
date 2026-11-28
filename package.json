@@ -57,7 +57,7 @@
     "@next/env": "16.4.6",
     "@playwright/test": "1.65.1",
     "@types/node": "24.19.2",
-    "@types/react": "19.3.0",
+    "@types/react": "19.3.1",
     "@types/react-dom": "19.3.0",
     "cspell": "10.5.2",
     "lefthook": "2.2.2",
